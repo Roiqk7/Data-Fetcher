@@ -1,7 +1,7 @@
 /*
 Date: 12/06/2024
 
-Description:
+Description: This file contains the definitions of the functions used to fetch data from an API.
 
 Notes: x
 */

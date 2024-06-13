@@ -1,7 +1,7 @@
 /* 
 Date: 12/06/2024
 
-Description:
+Description: This file contains the constants used in the Fetcher module.
 
 Notes: x
 */

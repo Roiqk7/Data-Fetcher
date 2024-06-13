@@ -1,7 +1,7 @@
 /* 
 Date: 13/06/2024
 
-Description:
+Description: This file contains the implementation of the helper functions used in the Fetcher module.
 
 Notes: x
 */
