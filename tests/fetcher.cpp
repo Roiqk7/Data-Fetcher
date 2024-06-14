@@ -21,7 +21,7 @@ namespace Fetcher
                 std::string readBuffer;
 
                 // Hide the API key in the log
-                std::string hiddenApiKey = Tools::hide_api_key(url);
+                Constants::URL hiddenApiKey = Tools::hide_api_key(url);
                 spdlog::info("URL: {}", hiddenApiKey);
 
                 // Initialize libcurl and set the necessary options
