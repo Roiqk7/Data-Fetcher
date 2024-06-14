@@ -36,10 +36,10 @@ brew install spdlog
 After installing the dependencies, you can clone the repository:
 
 ```bash
-git clone https://github.com/Roiqk7/Data-Fetcher/tree/main
+git clone https://github.com/Roiqk7/Data-Fetcher.git
 ```
 
-Then, you can build the project:
+Then, you can build the project by navigating to the project directory and running the following commands:
 
 ```bash
 mkdir build &&
