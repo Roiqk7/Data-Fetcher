@@ -44,5 +44,18 @@ namespace Fetcher
                         buffer << file.rdbuf();
                         return buffer.str();
                 }
+
+                // Write contents to a file
+                void writeFileContents(const std::string& filePath, const std::string& contents)
+                {
+                        std::ofstream file(filePath);
+                        if (!file.is_open())
+                        {
+                                spdlog::error("Failed to open file at: {}", filePath);
+                                return;
+                        }
+
+                        file << contents;
+                }
         }
 }

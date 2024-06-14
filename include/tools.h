@@ -21,6 +21,9 @@ namespace Fetcher
 
                 // Read contents of a file
                 std::string readFileContents(const std::string& filePath);
+
+                // Write contents to a file
+                void writeFileContents(const std::string& filePath, const std::string& contents);
         }
 }
 
