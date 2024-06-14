@@ -1,2 +1,2 @@
 - Add more tests
-- After implementing Data Processor, improve the easy of use with it
+- Add data.txt file in which the output data will be written to and other programs can read from
