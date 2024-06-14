@@ -8,6 +8,7 @@ Notes: x
 
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
+#include "../include/fetcher.h"
 #include "../include/parser.h"
 
 /*
@@ -54,7 +55,8 @@ int main(int argc, char **argv)
                 // Example of using the parsed arguments
                 spdlog::info("Fetching data from {} to {} with timeframe {}", from_date, to_date, timeframe);
 
-                // TODO: Add the logic to fetch data based on the provided arguments
+                // Fetch the requested data and write them into the ../data/data.json file
+                Fetcher::fetchRequestedData(from_date, to_date, timeframe);
         }
         else
         {

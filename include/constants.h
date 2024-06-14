@@ -26,13 +26,11 @@ namespace Fetcher
                 const URL ETF_URL_ENDPOINT = "etf/"; // Add the ticker symbol at the end
                 const URL HISTORICAL_DATA_ENDPOINT = "historical-chart/"; // Add time frame and time period at the end
 
-                // Time Frame Constants
-                const URL FOUR_HOUR = "4hour/"; // 4-hour time frame
-
                 // Ticker Symbols
                 const URL SPY = "SPY"; // SPDR S&P 500 ETF Trust
 
                 // Connectors
+                const URL SLASH = "/"; // Used to separate the URL components
                 const URL QUESTION_MARK = "?"; // Used to begin the query string
                 const URL AND = "&"; // Used to separate the URL components
 

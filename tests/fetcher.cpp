@@ -29,7 +29,7 @@ namespace Fetcher
                 spdlog::info("{} test started. Fetching SPY ETF data...", testName);
 
                 // URL for fetching SPY ETF data
-                Constants::URL url = Fetcher::Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + Constants::FOUR_HOUR
+                Constants::URL url = Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + "4hour/"
                         + Constants::SPY + Constants::QUESTION_MARK + "from=2023-08-10&to=2023-09-10" + Constants::AND
                         + Constants::API_KEY_PARAM + Constants::API_KEY;
                 std::string readBuffer; // Buffer to store the fetched data

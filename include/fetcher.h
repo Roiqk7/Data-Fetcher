@@ -16,6 +16,7 @@ Notes: x
 
 namespace Fetcher
 {
+        void fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe);
         size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
         CURL* init_curl(Constants::URL url, std::string& readBuffer);
         CURLcode perform_request(CURL* curl);
