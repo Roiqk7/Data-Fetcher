@@ -45,7 +45,7 @@ int main(int argc, char **argv)
         }
 
         // Check if the required arguments are provided
-        if (vm.count("from") || vm.count("f") && vm.count("to") || vm.count("t") && vm.count("timeframe") || vm.count("tf"))
+        if ((vm.count("from") || vm.count("f")) && (vm.count("to") || vm.count("t")) && (vm.count("timeframe") || vm.count("tf")))
         {
                 std::string from_date = vm.count("from") ? vm["from"].as<std::string>() : vm["f"].as<std::string>();
                 std::string to_date = vm.count("to") ? vm["to"].as<std::string>() : vm["t"].as<std::string>();
