@@ -8,6 +8,7 @@ This code is part of Project Mencator. This particular module is responsible for
   - [Dependencies](#dependencies)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [Example usage](#example-usage)
   - [Project structure](#project-structure)
 
 ## Dependencies
@@ -55,26 +56,40 @@ The usage is rather simple. User can run the application with the following comm
 ./main
 ```
 
-as you would expect. The application has five major command line arguments:
+The application has five major command line arguments:
 * `--help`: Displays the help message.
 * `--test`: Runs the tests.
-* `--from`: Specifies the start date for the data fetching.
-* `--to`: Specifies the end date for the data fetching.
-* `timeframe`: Specifies the timeframe for the data fetching.
+* `--from`: Specifies the start date for the data fetching. (YYYY-MM-DD)
+* `--to`: Specifies the end date for the data fetching. (YYYY-MM-DD)
+* `timeframe`: Specifies the timeframe for the data fetching. (1min, 5min, 15min, 30min, 1hour, 4hour, 1day)
 
-Example usage:
+If you want to rebuild the project, you can run the following commands:
+
+```bash
+cd build &&
+cmake .. &&
+make
+```
+
+### Example usage
+
+This command will display the help message:
+
+```bash
+./main --help
+```
+
+This command will run all the tests:
 
 ```bash
 ./main --tests
 ```
 
-This command will run all the tests.
+This command will fetch the data from 2023-08-10 to 2023-09-01 with a 4-hour timeframe and automatically save the data to data/data.json file.
 
 ```bash
 ./main --from=2023-08-10 --to=2023-09-01 --timeframe=4hour
 ```
-
-This command will fetch the data from 2023-08-10 to 2023-09-01 with a 4-hour timeframe and save the data to data/data.json file.
 
 **Note**: This application is only designed for fetching the SPY data. It is not designed to fetch any other data but can easily be modified to do so.
 
