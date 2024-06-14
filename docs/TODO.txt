@@ -1,2 +1,2 @@
-- Add more tests
 - Add data.txt file in which the output data will be written to and other programs can read from
+        - Then make sure that the fetched data get written into the file and other programmes can read from it
