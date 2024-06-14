@@ -11,7 +11,7 @@ This code is part of Project Mencator. This particular module is responsible for
 * [JSON CPP](https://github.com/open-source-parsers/jsoncpp)
 * [spdlog](https://github.com/gabime/spdlog)
 
-Installing the dependencies on MacOS:
+Installing the dependencies on MacOS using Homebrew:
 
 ```bash
 brew install cmake &&
@@ -23,7 +23,13 @@ brew install spdlog
 
 ## Installation
 
-After installing the dependencies and cloning the project, go into the project directory and run the following commands:
+After installing the dependencies, you can clone the repository:
+
+```bash
+git clone https://github.com/Roiqk7/Data-Fetcher/tree/main
+```
+
+Then, you can build the project:
 
 ```bash
 mkdir build &&
