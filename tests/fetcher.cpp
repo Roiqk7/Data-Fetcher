@@ -8,6 +8,7 @@ Notes: x
 
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
+#include "../include/constants.h"
 #include "../src/fetcher.cpp"
 #include "../src/tools.cpp"
 
@@ -17,7 +18,7 @@ namespace Fetcher
         TEST(FetcherTest, FetchData)
         {
                 // URL for fetching SPY ETF data
-                URL url = Fetcher::Constants::API_URL + Constants::ETF_URL_ENDPOINT + Constants::SPY + Constants::API_KEY_PARAM + Constants::API_KEY;
+                Constants::URL url = Fetcher::Constants::API_URL + Constants::ETF_URL_ENDPOINT + Constants::SPY + Constants::API_KEY_PARAM + Constants::API_KEY;
                 std::string readBuffer;
 
                 // Hide the API key in the log
