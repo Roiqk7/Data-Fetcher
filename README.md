@@ -19,7 +19,7 @@ This code is part of Project Mencator. This particular module is responsible for
 * [JSON CPP](https://github.com/open-source-parsers/jsoncpp)
 * [spdlog](https://github.com/gabime/spdlog)
 
-Installing the dependencies on MacOS using Homebrew:
+Installation of the dependencies on MacOS using Homebrew:
 
 ```bash
 brew install boost &&
