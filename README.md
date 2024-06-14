@@ -63,7 +63,7 @@ The application has five major command line arguments:
 * `--to`: Specifies the end date for the data fetching. (YYYY-MM-DD)
 * `timeframe`: Specifies the timeframe for the data fetching. (1min, 5min, 15min, 30min, 1hour, 4hour, 1day)
 
-If you want to rebuild the project, you can run the following commands:
+If you want to rebuild the project, navigate to the project directory and run the following commands:
 
 ```bash
 cd build &&
