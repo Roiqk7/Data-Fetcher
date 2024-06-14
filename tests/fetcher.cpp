@@ -25,6 +25,9 @@ namespace Fetcher
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
                 std::string filePath = "../tests/" + testName + ".txt";
 
+                // Log
+                spdlog::info("{} test started. Fetching SPY ETF data...", testName);
+
                 // URL for fetching SPY ETF data
                 Constants::URL url = Fetcher::Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + Constants::FOUR_HOUR
                         + Constants::SPY + Constants::QUESTION_MARK + "from=2023-08-10&to=2023-09-10" + Constants::AND

@@ -22,6 +22,9 @@ namespace Fetcher
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
                         std::string filePath = "../tests/" + testName + ".txt";
 
+                        // Log
+                        spdlog::info("{} test started. Reading contents of the file...", testName);
+
                         // Expected contents of the file
                         std::string expectedContents = "Hello world!";
 
@@ -41,6 +44,9 @@ namespace Fetcher
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
                         std::string filePath = "../tests/" + testName + ".txt";
+
+                        // Log
+                        spdlog::info("{} test started. Hiding the API key in the URL...", testName);
 
                         // URL for fetching SPY ETF data
                         Constants::URL url = Fetcher::Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + Constants::FOUR_HOUR
@@ -67,6 +73,9 @@ namespace Fetcher
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
                         std::string filePath = "../tests/" + testName + ".txt";
+
+                        // Log
+                        spdlog::info("{} test started. Writing contents to the file...", testName);
 
                         // Contents to write to the file
                         std::string contents = "Hello world!";
