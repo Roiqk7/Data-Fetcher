@@ -10,13 +10,17 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Add the library
 add_library(Fetcher src/fetcher.cpp)
+add_library(Tools src/tools.cpp)
 
 # Add the executables
 add_executable(Main src/main.cpp)
+add_executable(ToolsTests tests/tools.cpp)
 add_executable(FetcherTests tests/fetcher.cpp)
 
 # Link the libraries
 target_link_libraries(Main Fetcher)
+target_link_libraries(ToolsTests Tools)
+target_link_libraries(FetcherTests Fetcher)
 
 # Find and include the CURL library
 find_package(CURL REQUIRED)
@@ -27,6 +31,7 @@ target_link_libraries(FetcherTests ${CURL_LIBRARIES})
 # Find and include the Google Test package
 find_package(GTest REQUIRED)
 target_link_libraries(Main GTest::GTest GTest::Main)
+target_link_libraries(ToolsTests GTest::GTest GTest::Main)
 target_link_libraries(FetcherTests GTest::GTest GTest::Main)
 
 # Find and include the Jsoncpp library
@@ -38,4 +43,5 @@ target_link_libraries(FetcherTests ${JSONCPP_LIBRARY})
 
 # Find and include the spdlog library
 find_package(spdlog REQUIRED)
+target_link_libraries(ToolsTests spdlog::spdlog)
 target_link_libraries(FetcherTests spdlog::spdlog)
