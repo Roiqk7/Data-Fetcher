@@ -10,7 +10,9 @@ Notes: x
 #include <iostream>
 #include <json/json.h>
 #include <sstream>
-#include "constants.h"
+#include "../include/constants.h"
+#include "../include/fetcher.h"
+#include "../include/tools.h"
 
 namespace Fetcher
 {

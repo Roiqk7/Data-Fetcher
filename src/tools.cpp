@@ -17,7 +17,13 @@ namespace Fetcher
 {
         namespace Tools
         {
-                // Function to hide the API key in the URL
+                /*
+                Function to hide the API key in the URL
+
+                @param url: The URL containing the API key
+
+                @return: The URL with the API key replaced by asterisks
+                */
                 Constants::URL hideApiKey(const Constants::URL& url)
                 {
                         Constants::URL hiddenApiKey = url;
@@ -30,7 +36,13 @@ namespace Fetcher
                         return hiddenApiKey;
                 }
 
-                // Read contents of a file
+                /*
+                Read contents of a file
+
+                @param filePath: The path to the file
+
+                @return: The contents of the file
+                */
                 std::string readFileContents(const std::string& filePath)
                 {
                         std::ifstream file(filePath);
@@ -45,7 +57,12 @@ namespace Fetcher
                         return buffer.str();
                 }
 
-                // Write contents to a file
+                /*
+                Write contents to a file
+
+                @param filePath: The path to the file
+                @param contents: The contents to be written
+                */
                 void writeFileContents(const std::string& filePath, const std::string& contents)
                 {
                         std::ofstream file(filePath);
