@@ -3,7 +3,7 @@ Date: 12/06/2024
 
 Description: This file contains the constants used in the Fetcher module.
 
-Notes: x
+Notes: Changes may be made to the data types. Just simple renaming to URL and Ticker perhaps...
 */
 
 #include <string>
@@ -20,7 +20,7 @@ namespace Fetcher
 
                 const std::string STOCK_URL_ENDPOINT = "stock/"; // Add the ticker symbol at the end
                 const std::string ETF_URL_ENDPOINT = "etf/"; // Add the ticker symbol at the end
-                const std::string SPY = "SPY"; // S&P 500 ETF
+                const std::string SPY = "SPY"; // SPDR S&P 500 ETF Trust
 
                 // Add the API key at the end of the URL
                 const std::string API_KEY_PARAM = "?apikey=";
