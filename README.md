@@ -2,6 +2,14 @@
 
 This code is part of Project Mencator. This particular module is responsible for gathering input data using the [FMP API](https://site.financialmodelingprep.com).
 
+## Table of contents
+- [Data Fetcher](#data-fetcher)
+  - [Table of contents](#table-of-contents)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Project structure](#project-structure)
+
 ## Dependencies
 
 * [C++17](https://en.cppreference.com/w/cpp/17)
