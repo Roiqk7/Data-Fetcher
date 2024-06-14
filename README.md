@@ -14,6 +14,7 @@ This code is part of Project Mencator. This particular module is responsible for
 Installing the dependencies on MacOS using Homebrew:
 
 ```bash
+brew install boost &&
 brew install cmake &&
 brew install curl &&
 brew install googletest &&

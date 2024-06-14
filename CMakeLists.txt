@@ -45,3 +45,8 @@ target_link_libraries(FetcherTests ${JSONCPP_LIBRARY})
 find_package(spdlog REQUIRED)
 target_link_libraries(ToolsTests spdlog::spdlog)
 target_link_libraries(FetcherTests spdlog::spdlog)
+
+# Find and include the Boost library (specify required components if necessary)
+find_package(Boost REQUIRED COMPONENTS program_options)
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(Main ${Boost_LIBRARIES})
