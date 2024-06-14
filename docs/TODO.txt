@@ -1,2 +1,4 @@
 - Add data.txt file in which the output data will be written to and other programs can read from
         - Then make sure that the fetched data get written into the file and other programmes can read from it
+- Improve main to be more minimalistic
+- Finish input pipeline (from command line arguments to fetcher and then written into data.txt)
