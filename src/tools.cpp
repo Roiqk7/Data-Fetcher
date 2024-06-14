@@ -6,6 +6,10 @@ Description: This file contains the implementation of the helper functions used 
 Notes: x
 */
 
+#include <fstream>
+#include <spdlog/spdlog.h>
+#include <sstream>
+#include <string>
 #include "../include/constants.h"
 #include "../include/tools.h"
 
@@ -14,7 +18,7 @@ namespace Fetcher
         namespace Tools
         {
                 // Function to hide the API key in the URL
-                Constants::URL hide_api_key(const Constants::URL& url)
+                Constants::URL hideApiKey(const Constants::URL& url)
                 {
                         Constants::URL hiddenApiKey = url;
                         size_t pos = hiddenApiKey.find(Constants::API_KEY);
@@ -24,6 +28,21 @@ namespace Fetcher
                         }
 
                         return hiddenApiKey;
+                }
+
+                // Read contents of a file
+                std::string readFileContents(const std::string& filePath)
+                {
+                        std::ifstream file(filePath);
+                        if (!file.is_open())
+                        {
+                                spdlog::error("Failed to open file at: {}", filePath);
+                                return "";
+                        }
+
+                        std::stringstream buffer;
+                        buffer << file.rdbuf();
+                        return buffer.str();
                 }
         }
 }

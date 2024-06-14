@@ -17,7 +17,10 @@ namespace Fetcher
         namespace Tools
         {
                 // Function to hide the API key in the URL
-                Constants::URL hide_api_key(const Constants::URL& url);
+                Constants::URL hideApiKey(const Constants::URL& url);
+
+                // Read contents of a file
+                std::string readFileContents(const std::string& filePath);
         }
 }
 
