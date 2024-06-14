@@ -19,8 +19,8 @@ namespace Fetcher
         /*
         Fetches the requested data from the API and writes them into the ../data/data.json file.
 
-        @param fromDate: The start date in YYYY-DD-MM format.
-        @param toDate: The end date in YYYY-DD-MM format.
+        @param fromDate: The start date in YYYY-MM-DD format.
+        @param toDate: The end date in YYYY-MM-DD format.
         @param timeframe: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
         */
         void fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe)

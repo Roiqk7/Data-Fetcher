@@ -42,8 +42,8 @@ namespace Fetcher
                         boost::program_options::options_description desc("Allowed options");
                         desc.add_options()
                                 ("help,h", "Produce help message.")
-                                ("from,f", boost::program_options::value<std::string>(), "Start date in YYYY-DD-MM format.")
-                                ("to,t", boost::program_options::value<std::string>(), "End date in YYYY-DD-MM format.")
+                                ("from,f", boost::program_options::value<std::string>(), "Start date in YYYY-MM-DD format.")
+                                ("to,t", boost::program_options::value<std::string>(), "End date in YYYY-MM-DD format.")
                                 ("timeframe,tf", boost::program_options::value<std::string>(), "Time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).")
                                 ("test", "Run unit tests. Use this option without a value.");
                         return desc;
