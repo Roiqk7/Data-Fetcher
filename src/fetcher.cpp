@@ -35,7 +35,7 @@ namespace Fetcher
 
         @return CURL*: The initialized CURL handle
         */
-        CURL* init_curl(std::string url, std::string& readBuffer)
+        CURL* init_curl(Constants::URL url, std::string& readBuffer)
         {
                 CURL* curl = curl_easy_init();
                 if(curl)

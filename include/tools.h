@@ -10,13 +10,14 @@ Notes: x
 #define TOOLS_H
 
 #include <string>
+#include "constants.h"
 
 namespace Fetcher
 {
         namespace Tools
         {
                 // Function to hide the API key in the URL
-                std::string hide_api_key(const std::string& url);
+                Constants::URL hide_api_key(const Constants::URL& url);
         }
 }
 

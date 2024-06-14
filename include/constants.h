@@ -1,4 +1,4 @@
-/* 
+/*
 Date: 12/06/2024
 
 Description: This file contains the constants used in the Fetcher module.
@@ -15,16 +15,19 @@ namespace Fetcher
 {
         namespace Constants
         {
-                // API URL Constants - sorted based on the order of use
-                const std::string API_URL = "https://financialmodelingprep.com/api/v3/"; // Add the endpoint and the ticker symbol at the end
+                // Used for easier readability
+                using URL = std::string; // URL data type used in communication with the API
 
-                const std::string STOCK_URL_ENDPOINT = "stock/"; // Add the ticker symbol at the end
-                const std::string ETF_URL_ENDPOINT = "etf/"; // Add the ticker symbol at the end
-                const std::string SPY = "SPY"; // SPDR S&P 500 ETF Trust
+                // API URL Constants - sorted based on the order of use
+                const URL API_URL = "https://financialmodelingprep.com/api/v3/"; // Add the endpoint and the ticker symbol at the end
+
+                const URL STOCK_URL_ENDPOINT = "stock/"; // Add the ticker symbol at the end
+                const URL ETF_URL_ENDPOINT = "etf/"; // Add the ticker symbol at the end
+                const URL SPY = "SPY"; // SPDR S&P 500 ETF Trust
 
                 // Add the API key at the end of the URL
-                const std::string API_KEY_PARAM = "?apikey=";
-                const std::string API_KEY = "x"; // NOTE: DO NOT SHARE THIS KEY
+                const URL API_KEY_PARAM = "?apikey=";
+                const URL API_KEY = "x"; // NOTE: DO NOT SHARE THIS KEY
         }
 }
 

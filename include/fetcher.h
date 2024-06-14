@@ -12,11 +12,12 @@ Notes: x
 #include <curl/curl.h>
 #include <json/json.h>
 #include <string>
+#include "constants.h"
 
 namespace Fetcher
 {
         size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
-        CURL* init_curl(std::string url, std::string& readBuffer);
+        CURL* init_curl(Constants::URL url, std::string& readBuffer);
         CURLcode perform_request(CURL* curl);
 }
 

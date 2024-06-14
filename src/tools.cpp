@@ -14,11 +14,11 @@ namespace Fetcher
         namespace Tools
         {
                 // Function to hide the API key in the URL
-                std::string hide_api_key(const std::string& url)
+                Constants::URL hide_api_key(const Constants::URL& url)
                 {
-                        std::string hiddenApiKey = url;
+                        Constants::URL hiddenApiKey = url;
                         size_t pos = hiddenApiKey.find(Constants::API_KEY);
-                        if (pos != std::string::npos)
+                        if (pos != Constants::URL::npos)
                         {
                                 hiddenApiKey.replace(pos, Constants::API_KEY.length(), "********");
                         }

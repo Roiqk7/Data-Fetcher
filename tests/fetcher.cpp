@@ -17,7 +17,7 @@ namespace Fetcher
         TEST(FetcherTest, FetchData)
         {
                 // URL for fetching SPY ETF data
-                std::string url = Fetcher::Constants::API_URL + Constants::ETF_URL_ENDPOINT + Constants::SPY + Constants::API_KEY_PARAM + Constants::API_KEY;
+                URL url = Fetcher::Constants::API_URL + Constants::ETF_URL_ENDPOINT + Constants::SPY + Constants::API_KEY_PARAM + Constants::API_KEY;
                 std::string readBuffer;
 
                 // Hide the API key in the log
