@@ -23,7 +23,7 @@ namespace Fetcher
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                std::string filePath = "../tests/" + testName + ".txt";
+                std::string filePath = "../test/" + testName + ".txt";
 
                 // Log
                 spdlog::info("{} test started. Fetching SPY ETF data...", testName);

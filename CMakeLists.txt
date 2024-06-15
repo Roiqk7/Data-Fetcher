@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Add the executables
-add_executable(Main src/main.cpp src/parser.cpp tests/fetcher.cpp tests/tools.cpp)
+add_executable(Main src/main.cpp src/parser.cpp test/fetcher.cpp test/tools.cpp)
 
 # Include external libraries
 # Find and include the Boost library (specify required components if necessary)

@@ -20,7 +20,7 @@ namespace Fetcher
                 {
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../tests/" + testName + ".txt";
+                        std::string filePath = "../test/" + testName + ".txt";
 
                         // Log
                         spdlog::info("{} test started. Reading contents of the file...", testName);
@@ -43,7 +43,7 @@ namespace Fetcher
                 {
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../tests/" + testName + ".txt";
+                        std::string filePath = "../test/" + testName + ".txt";
 
                         // Log
                         spdlog::info("{} test started. Hiding the API key in the URL...", testName);
@@ -72,7 +72,7 @@ namespace Fetcher
                 {
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../tests/" + testName + ".txt";
+                        std::string filePath = "../test/" + testName + ".txt";
 
                         // Log
                         spdlog::info("{} test started. Writing contents to the file...", testName);
