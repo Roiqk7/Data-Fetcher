@@ -58,6 +58,7 @@ The usage is rather simple. User can run the application with the following comm
 
 The application has these command line arguments:
 * `--help`: Displays the help message.
+* `--URL`: Specifies the URL for the data fetching. May result in undefined behavior so be warned.
 * `--test`: Runs the tests.
 * `--from`: Specifies the start date for the data fetching. (YYYY-MM-DD)
 * `--to`: Specifies the end date for the data fetching. (YYYY-MM-DD)
@@ -90,6 +91,12 @@ This command will fetch the data from 2023-08-10 to 2023-09-01 with a 4-hour tim
 
 ```bash
 ./main --from=2023-08-10 --to=2023-09-01 --timeframe=4hour --output=data/data.json
+```
+
+This command will fetch the data from [specific URL](https://financialmodelingprep.com/api/v3/historical-price-full/SPY).
+
+```bash
+./main --URL=https://financialmodelingprep.com/api/v3/historical-price-full/SPY // Will not work (missing API key)
 ```
 
 **Note**: This application is only designed for fetching the SPY data. It is not designed to fetch any other data but can easily be modified to do so.

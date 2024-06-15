@@ -27,12 +27,8 @@ namespace Fetcher
 
         @return: A unique pointer to the Json::Value object containing the fetched data.
         */
-        std::unique_ptr<Json::Value> fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe)
+        std::unique_ptr<Json::Value> fetchRequestedData(const Tools::URL& url)
         {
-                // Create the URL
-                Tools::URL url = Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + timeframe + Constants::SLASH
-                        + Constants::SPY + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND
-                        + "to=" + toDate + Constants::AND + Constants::API_KEY_PARAM + Constants::API_KEY;
                 std::string readBuffer; // Buffer to store the fetched data
 
                 // Hide the API key in the log

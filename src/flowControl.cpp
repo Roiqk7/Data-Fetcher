@@ -12,6 +12,7 @@ Notes: x
 #include "../include/fetcher.h"
 #include "../include/flowControl.h"
 #include "../include/parser.h"
+#include "../include/tools.h"
 
 namespace Fetcher
 {
@@ -45,7 +46,7 @@ namespace Fetcher
                         }
 
                         // Check if the required arguments for running the program are provided
-                        if (checkProgramArguments(vm))
+                        if (Tools::checkProgramArguments(vm))
                         {
                                 flag = runProgram(vm);
                                 if (!checkFlag(flag))
@@ -86,18 +87,18 @@ namespace Fetcher
                 */
                 Tools::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm)
                 {
-                        // Get the start date, end date, and timeframe
-                        std::string from_date = vm->count("from") ? (*vm)["from"].as<std::string>() : (*vm)["f"].as<std::string>();
-                        std::string to_date = vm->count("to") ? (*vm)["to"].as<std::string>() : (*vm)["t"].as<std::string>();
-                        std::string timeframe = vm->count("timeframe") ? (*vm)["timeframe"].as<std::string>() : (*vm)["tf"].as<std::string>();
-                        Tools::FilePath output = vm->count("output") ? (*vm)["output"].as<std::string>()
-                                : (vm->count("o") ? (*vm)["o"].as<std::string>() : Constants::DEFAULT_DATA_FILE_PATH);
+                        Tools::URL url = Tools::getURL(vm);
 
-                        // Example of using the parsed arguments
-                        spdlog::info("Fetching data from {} to {} with timeframe {}. Data will be stored to {}", from_date, to_date, timeframe, output);
+                        // Check if the URL is valid
+                        if (url == "")
+                        {
+                                // There is no reason to continue if the URL is missing
+                                spdlog::error("Could not get the URL. Program will terminate.");
+                                return Constants::FAILURE_END;
+                        }
 
                         // Fetch the requested data
-                        auto data = Fetcher::fetchRequestedData(from_date, to_date, timeframe);
+                        auto data = Fetcher::fetchRequestedData(Tools::getURL(vm));
 
                         // Check if the data was fetched successfully
                         if (data == nullptr)
@@ -106,7 +107,7 @@ namespace Fetcher
                         }
 
                         // Write the fetched data to a file
-                        Fetcher::writeRequestedData(data, output);
+                        Fetcher::writeRequestedData(data, Tools::getOutputFilePath(vm));
 
                         return Constants::SUCCESS;
                 }
@@ -146,19 +147,6 @@ namespace Fetcher
                 bool checkFlag(const Tools::Flag& flag)
                 {
                         return flag == Constants::SUCCESS;
-                }
-
-                /*
-                Check if the required arguments for running the programme are provided.
-
-                @param vm: The variables map.
-
-                @return: True if the required arguments are provided, false otherwise.
-                */
-                bool checkProgramArguments(const std::unique_ptr<boost::program_options::variables_map>& vm)
-                {
-                        // Note: The program requires the --from, --to, and --timeframe arguments to be provided all at the same time
-                        return (vm->count("from") || vm->count("f")) && (vm->count("to") || vm->count("t")) && (vm->count("timeframe") || vm->count("tf"));
                 }
         }
 }

@@ -17,7 +17,7 @@ Notes: x
 
 namespace Fetcher
 {
-        std::unique_ptr<Json::Value> fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe);
+        std::unique_ptr<Json::Value> fetchRequestedData(const Tools::URL& url);
         void writeRequestedData(const std::unique_ptr<Json::Value>& root, const Tools::FilePath& filePath);
         size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
         CURL* init_curl(Tools::URL url, std::string& readBuffer);
