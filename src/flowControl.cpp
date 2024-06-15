@@ -97,6 +97,9 @@ namespace Fetcher
                         {
                                 // There is no reason to continue if the URL is missing
                                 spdlog::error("Invalid URL: {}. The programme must be terminated.", url);
+
+                                // Note: Update if the criteria for a valid URL changes
+                                spdlog::info("Note: Valid URL is considered to contain: {}", Constants::FMP_API_URL);
                                 return Constants::FAILURE_END;
                         }
 

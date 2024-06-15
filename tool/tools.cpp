@@ -119,7 +119,6 @@ namespace Fetcher
                 bool checkValidURL(const URL& url)
                 {
                         // Note: Change the criteria if necessary
-                        spdlog::info("Note: Valid URL is considered to contain: {}", Constants::FMP_API_URL);
                         return url.find(Constants::FMP_API_URL) != std::string::npos;
                 }
 
