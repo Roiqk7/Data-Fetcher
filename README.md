@@ -99,4 +99,4 @@ This command will fetch the data from 2023-08-10 to 2023-09-01 with a 4-hour tim
 * `docs/`: Contains the documentation files.
 * `include/`: Contains the header files.
 * `src/`: Contains the source files for the main application.
-* `tests/`: Contains the test files.
+* `test/`: Contains the test files.
