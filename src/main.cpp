@@ -24,7 +24,7 @@ Main function for the module.
 int main(int argc, char **argv)
 {
         // Runs the program based on the command line arguments
-        const Fetcher::Constants::Flag flag = Fetcher::FlowControl::controlFlow(argc, argv);
+        const Fetcher::Tools::Flag flag = Fetcher::FlowControl::controlFlow(argc, argv);
 
         return flag;
 }

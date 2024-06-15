@@ -17,11 +17,10 @@ namespace Fetcher
         namespace Constants
         {
         // Program flags
-                using Flag = int; // Used for easier readability
-                const Flag SUCCESS = 0; // Used to indicate a successful operation
-                const Flag FAILURE = 1; // Used to indicate a failed operation
-                const Flag SUCCESS_END = 2; // Program must be terminated on purpose
-                const Flag FAILURE_END = 3; // Fatal error, program must be terminated
+                const Tools::Flag SUCCESS = 0; // Used to indicate a successful operation
+                const Tools::Flag FAILURE = 1; // Used to indicate a failed operation
+                const Tools::Flag SUCCESS_END = 2; // Program must be terminated on purpose
+                const Tools::Flag FAILURE_END = 3; // Fatal error, program must be terminated
         // File paths
                 const Tools::FilePath DEFAULT_DATA_FILE_PATH = "../data/data.json"; // Default file path for the fetched data
         // URL

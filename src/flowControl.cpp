@@ -25,10 +25,10 @@ namespace Fetcher
 
                 @return: True if the programme finished successfully, false otherwise.
                 */
-                Constants::Flag controlFlow(int argc, char **argv)
+                Tools::Flag controlFlow(int argc, char **argv)
                 {
                         // Initialize the flag
-                        Constants::Flag flag(Constants::SUCCESS);
+                        Tools::Flag flag(Constants::SUCCESS);
 
                         // Parse the command line arguments
                         auto vm = Parser::parseArguments(argc, argv, flag);
@@ -67,7 +67,7 @@ namespace Fetcher
 
                 @return: The flag to determine if the tests ran successfully.
                 */
-                Constants::Flag runTests(int argc, char **argv)
+                Tools::Flag runTests(int argc, char **argv)
                 {
                         // Initialize Google Test
                         ::testing::InitGoogleTest(&argc, argv);
@@ -84,7 +84,7 @@ namespace Fetcher
 
                 @return: The flag to determine if the programme ran successfully.
                 */
-                Constants::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm)
+                Tools::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm)
                 {
                         // Get the start date, end date, and timeframe
                         std::string from_date = vm->count("from") ? (*vm)["from"].as<std::string>() : (*vm)["f"].as<std::string>();
@@ -114,7 +114,7 @@ namespace Fetcher
 
                 @param flag: The flag to determine if the programme finished successfully.
                 */
-                Constants::Flag endProgram(const Constants::Flag flag)
+                Tools::Flag endProgram(const Tools::Flag flag)
                 {
                         if (flag == Constants::FAILURE)
                         {
@@ -141,7 +141,7 @@ namespace Fetcher
 
                 @return: True if the flag is successful, false otherwise.
                 */
-                bool checkFlag(const Constants::Flag& flag)
+                bool checkFlag(const Tools::Flag& flag)
                 {
                         return flag == Constants::SUCCESS;
                 }

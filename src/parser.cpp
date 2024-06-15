@@ -26,7 +26,7 @@ namespace Fetcher
 
                 @return: The variables map containing the parsed arguments.
                 */
-                std::unique_ptr<boost::program_options::variables_map> parseArguments(int argc, char **argv, Constants::Flag& flag)
+                std::unique_ptr<boost::program_options::variables_map> parseArguments(int argc, char **argv, Tools::Flag& flag)
                 {
                         auto desc = createOptionsDescription();
                         auto vm = std::make_unique<boost::program_options::variables_map>();

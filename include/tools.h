@@ -16,7 +16,8 @@ namespace Fetcher
         namespace Tools
         {
         // Typedefs
-                using FilePath = std::string; // Used for easier readability
+                using Flag = int; // Defines the flag data type
+                using FilePath = std::string; // File path data type
                 using URL = std::string; // URL data type used in communication with the API
         // Functions
                 URL hideApiKey(const URL& url);
