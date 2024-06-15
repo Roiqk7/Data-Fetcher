@@ -56,7 +56,7 @@ The usage is rather simple. User can run the application with the following comm
 ./main
 ```
 
-The application has five major command line arguments:
+The application has these command line arguments:
 * `--help`: Displays the help message.
 * `--test`: Runs the tests.
 * `--from`: Specifies the start date for the data fetching. (YYYY-MM-DD)
