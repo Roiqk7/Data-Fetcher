@@ -58,7 +58,8 @@ The usage is rather simple. User can run the application with the following comm
 
 The application has these command line arguments:
 * `--help`: Displays the help message.
-* `--URL`: Specifies the URL for the data fetching. May result in undefined behavior so be warned.
+* `--url`: Specifies the URL for the data fetching. May result in undefined behavior so be warned.
+* `--apikey`: Specifies the API key for the data fetching.
 * `--test`: Runs the tests.
 * `--from`: Specifies the start date for the data fetching. (YYYY-MM-DD)
 * `--to`: Specifies the end date for the data fetching. (YYYY-MM-DD)
