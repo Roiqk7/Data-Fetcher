@@ -10,15 +10,18 @@ Notes: x
 #define TOOLS_H
 
 #include <string>
-#include "constants.h"
 
 namespace Fetcher
 {
         namespace Tools
         {
-                Constants::URL hideApiKey(const Constants::URL& url);
-                std::string readFileContents(const std::string& filePath);
-                void writeFileContents(const std::string& filePath, const std::string& contents);
+        // Typedefs
+                using FilePath = std::string; // Used for easier readability
+                using URL = std::string; // URL data type used in communication with the API
+        // Functions
+                URL hideApiKey(const URL& url);
+                std::string readFileContents(const FilePath& filePath);
+                void writeFileContents(const FilePath& filePath, const std::string& contents);
         }
 }
 

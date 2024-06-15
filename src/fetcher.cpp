@@ -30,13 +30,13 @@ namespace Fetcher
         std::unique_ptr<Json::Value> fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe)
         {
                 // Create the URL
-                Constants::URL url = Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + timeframe + Constants::SLASH
+                Tools::URL url = Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + timeframe + Constants::SLASH
                         + Constants::SPY + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND
                         + "to=" + toDate + Constants::AND + Constants::API_KEY_PARAM + Constants::API_KEY;
                 std::string readBuffer; // Buffer to store the fetched data
 
                 // Hide the API key in the log
-                Constants::URL hiddenApiKey = Tools::hideApiKey(url);
+                Tools::URL hiddenApiKey = Tools::hideApiKey(url);
                 spdlog::info("URL: {}", hiddenApiKey);
 
                 // Initialize libcurl
@@ -75,7 +75,7 @@ namespace Fetcher
         @param root: The Json::Value object containing the data
         @param filePath: The path to the file
         */
-        void writeRequestedData(const std::unique_ptr<Json::Value>& root, const Constants::FilePath& filePath)
+        void writeRequestedData(const std::unique_ptr<Json::Value>& root, const Tools::FilePath& filePath)
         {
                 std::ofstream file(filePath);
                 if(file.is_open())
@@ -114,7 +114,7 @@ namespace Fetcher
 
         @return CURL*: The initialized CURL handle
         */
-        CURL* init_curl(Constants::URL url, std::string& readBuffer)
+        CURL* init_curl(Tools::URL url, std::string& readBuffer)
         {
                 CURL* curl = curl_easy_init();
                 if(curl)

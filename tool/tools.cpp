@@ -1,4 +1,4 @@
-/* 
+/*
 Date: 13/06/2024
 
 Description: This file contains the implementation of the helper functions used in the Fetcher module.
@@ -24,11 +24,11 @@ namespace Fetcher
 
                 @return: The URL with the API key replaced by asterisks
                 */
-                Constants::URL hideApiKey(const Constants::URL& url)
+                Tools::URL hideApiKey(const Tools::URL& url)
                 {
-                        Constants::URL hiddenApiKey = url;
+                        Tools::URL hiddenApiKey = url;
                         size_t pos = hiddenApiKey.find(Constants::API_KEY);
-                        if (pos != Constants::URL::npos)
+                        if (pos != Tools::URL::npos)
                         {
                                 hiddenApiKey.replace(pos, Constants::API_KEY.length(), "********");
                         }
@@ -43,7 +43,7 @@ namespace Fetcher
 
                 @return: The contents of the file
                 */
-                std::string readFileContents(const std::string& filePath)
+                std::string readFileContents(const FilePath& filePath)
                 {
                         std::ifstream file(filePath);
                         if (!file.is_open())
@@ -63,7 +63,7 @@ namespace Fetcher
                 @param filePath: The path to the file
                 @param contents: The contents to be written
                 */
-                void writeFileContents(const std::string& filePath, const std::string& contents)
+                void writeFileContents(const FilePath& filePath, const std::string& contents)
                 {
                         std::ofstream file(filePath);
                         if (!file.is_open())

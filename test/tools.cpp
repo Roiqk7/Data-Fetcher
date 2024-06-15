@@ -49,16 +49,16 @@ namespace Fetcher
                         spdlog::info("{} test started. Hiding the API key in the URL...", testName);
 
                         // URL for fetching SPY ETF data
-                        Constants::URL url = Fetcher::Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + "4hour/"
+                        Tools::URL url = Fetcher::Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + "4hour/"
                                 + Constants::SPY + Constants::QUESTION_MARK + "from=2023-08-10&to=2023-09-10" + Constants::AND
                                 + Constants::API_KEY_PARAM + Constants::API_KEY;
 
                         // Hide the API key in the log
-                        Constants::URL hiddenApiKey = Tools::hideApiKey(url);
+                        Tools::URL hiddenApiKey = Tools::hideApiKey(url);
                         spdlog::info("URL: {}", hiddenApiKey);
 
                         // Expected URL with hidden API key
-                        Constants::URL expectedUrl = readFileContents(filePath);
+                        Tools::URL expectedUrl = readFileContents(filePath);
 
                         // Assert that the API key is hidden
                         ASSERT_EQ(hiddenApiKey, expectedUrl);
