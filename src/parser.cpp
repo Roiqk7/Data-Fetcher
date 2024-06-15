@@ -10,6 +10,7 @@ Notes: x
 #include <iostream>
 #include <memory>
 #include <spdlog/spdlog.h>
+#include <sstream>
 #include "../include/constants.h"
 #include "../include/parser.h"
 
@@ -92,7 +93,9 @@ namespace Fetcher
                 {
                         if (vm->count("help"))
                         {
-                                std::cout << desc << "\n";
+                                std::ostringstream descStream;
+                                descStream << desc;
+                                spdlog::info("{}", descStream.str());
                                 exit(Constants::SUCCESS);
                         }
 

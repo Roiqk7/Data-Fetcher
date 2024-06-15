@@ -43,7 +43,7 @@ namespace Fetcher
                                 flag = runTests(argc, argv);
                                 if (!checkSuccessFlag(flag))
                                 {
-                                        // Check if the tests failed
+                                        // Handle failed tests
                                         return checkFlag(flag);
                                 }
                         }
@@ -54,7 +54,7 @@ namespace Fetcher
                                 flag = runProgram(vm);
                                 if (!checkSuccessFlag(flag))
                                 {
-                                        // End the programme if the program failed
+                                        // Handle failed programme
                                         return checkFlag(flag);
                                 }
                         }
@@ -123,7 +123,8 @@ namespace Fetcher
                 }
 
                 /*
-                End the programme.
+                Check the flag and log the outcome of the programme.
+                Exits the programme if the flag indicates that the programme must be terminated.
 
                 @param flag: The flag to determine if the programme finished successfully.
                 */
