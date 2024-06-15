@@ -149,23 +149,25 @@ namespace Fetcher
                 */
                 Tools::Flag checkFlag(const Tools::Flag flag)
                 {
-                        if (flag == Constants::FAILURE)
+                        switch (flag)
                         {
-                                spdlog::error("The programme failed.");
-                        }
-                        else if (flag == Constants::FAILURE_END)
-                        {
-                                spdlog::error("The programme failed and must be terminated.");
-                                exit(Constants::FAILURE);
-                        }
-                        else if (flag == Constants::SUCCESS_END)
-                        {
-                                spdlog::info("The programme finished successfully and must be terminated.");
-                                exit(Constants::SUCCESS);
-                        }
-                        else if (flag == Constants::SUCCESS)
-                        {
-                                spdlog::info("The programme finished successfully.");
+                                case Constants::SUCCESS:
+                                        spdlog::info("The programme finished successfully.");
+                                        break;
+                                case Constants::FAILURE:
+                                        spdlog::error("The programme failed.");
+                                        break;
+                                case Constants::SUCCESS_END:
+                                        spdlog::info("The programme finished successfully and must be terminated.");
+                                        exit(Constants::SUCCESS);
+                                        break;
+                                case Constants::FAILURE_END:
+                                        spdlog::error("The programme failed and must be terminated.");
+                                        exit(Constants::FAILURE);
+                                        break;
+                                default:
+                                        spdlog::error("Unknown flag: {}. The programme must be terminated.", flag);
+                                        checkFlag(Constants::FAILURE_END); // Cheeky way to exit the programme
                         }
 
                         return flag;
