@@ -89,7 +89,7 @@ This command will run all the tests:
 This command will fetch the data from 2023-08-10 to 2023-09-01 with a 4-hour timeframe and automatically save the data to data/data.json file.
 
 ```bash
-./main --from=2023-08-10 --to=2023-09-01 --timeframe=4hour
+./main --from=2023-08-10 --to=2023-09-01 --timeframe=4hour --output=data/data.json
 ```
 
 **Note**: This application is only designed for fetching the SPY data. It is not designed to fetch any other data but can easily be modified to do so.
