@@ -51,7 +51,7 @@ namespace Fetcher
                         }
 
                         // Check if the required arguments for running the program are provided
-                        if ((vm.count("from") || vm.count("f")) && (vm.count("to") || vm.count("t")) && (vm.count("timeframe") || vm.count("tf")))
+                        if (checkProgramArguments(vm))
                         {
                                 flag = runProgram(vm);
                                 if (!checkFlag(flag))
@@ -132,6 +132,18 @@ namespace Fetcher
                 bool checkFlag(const Constants::Flag& flag)
                 {
                         return flag == Constants::SUCCESS;
+                }
+
+                /*
+                Check if the required arguments for running the programme are provided.
+
+                @param vm: The variables map.
+
+                @return: True if the required arguments are provided, false otherwise.
+                */
+                bool checkProgramArguments(const boost::program_options::variables_map& vm)
+                {
+                        return (vm.count("from") || vm.count("f")) && (vm.count("to") || vm.count("t")) && (vm.count("timeframe") || vm.count("tf"));
                 }
         }
 }
