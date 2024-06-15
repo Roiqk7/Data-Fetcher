@@ -61,7 +61,7 @@ The application has five major command line arguments:
 * `--test`: Runs the tests.
 * `--from`: Specifies the start date for the data fetching. (YYYY-MM-DD)
 * `--to`: Specifies the end date for the data fetching. (YYYY-MM-DD)
-* `timeframe`: Specifies the timeframe for the data fetching. (1min, 5min, 15min, 30min, 1hour, 4hour, 1day)
+* `--timeframe`: Specifies the timeframe for the data fetching. (1min, 5min, 15min, 30min, 1hour, 4hour, 1day)
 
 If you want to rebuild the project, navigate to the project directory and run the following commands:
 
@@ -100,5 +100,5 @@ This command will fetch the data from 2023-08-10 to 2023-09-01 with a 4-hour tim
 * `include/`: Contains the header files.
 * `src/`: Contains the source files for the main application.
 * `test/`: Contains the test files.
-* `tools/`: Tools used, or offered, by the program.
+* `tool/`: Tools used, or offered, by the program.
 * `CMakeLists.txt`: CMake configuration file.

@@ -7,8 +7,10 @@ Notes: x
 */
 
 #include <curl/curl.h>
+#include <fstream>
 #include <iostream>
 #include <json/json.h>
+#include <spdlog/spdlog.h>
 #include <sstream>
 #include "../include/constants.h"
 #include "../include/fetcher.h"

@@ -44,8 +44,7 @@ namespace Fetcher
                                 ("help,h", "Produce help message.")
                                 ("from,f", boost::program_options::value<std::string>(), "Start date in YYYY-MM-DD format.")
                                 ("to,t", boost::program_options::value<std::string>(), "End date in YYYY-MM-DD format.")
-                                ("timeframe,tf", boost::program_options::value<std::string>(), "Time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).")
-                                ("test", "Run unit tests. Use this option without a value.");
+                                ("timeframe,f", boost::program_options::value<std::string>(), "Time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).")                                ("test", "Run unit tests. Use this option without a value.");
                         return desc;
                 }
 
