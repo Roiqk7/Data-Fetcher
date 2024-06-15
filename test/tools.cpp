@@ -6,6 +6,7 @@ Description: This file contains the tests for the tools.cpp module.
 Notes: x
 */
 
+#include <boost/program_options.hpp>
 #include <gtest/gtest.h>
 #include <json/json.h>
 #include <spdlog/spdlog.h>
@@ -124,6 +125,39 @@ namespace Fetcher
                         if (actualJsonData != *expectedJsonData)
                         {
                                 spdlog::error("Received Json data: {}", actualJsonData.toStyledString());
+                        }
+                }
+
+                // Test for creating the URL from the command line arguments from, to and timeFrame
+                TEST(ToolsTest, toolsTest5)
+                {
+                        // Construct the file path dynamically
+                        std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+                        std::string filePath = "../test/" + testName + ".txt";
+
+                        // Log
+                        spdlog::info("{} test started. Getting the URL from the command line arguments...", testName);
+
+                        // Command line arguments
+                        std::string from = "2023-08-10";
+                        std::string to = "2023-09-01";
+                        std::string timeFrame = "4hour";
+
+                        // Expected URL
+                        URL expectedUrl = readFileContents(filePath);
+
+                        // Create the URL
+                        URL url = createUrl(from, to, timeFrame);
+
+                        // Hide the API key
+                        URL actualUrl = hideApiKey(url);
+
+                        // Assert that the actual URL is equal to the expected URL
+                        ASSERT_EQ(actualUrl, expectedUrl);
+
+                        if (actualUrl != expectedUrl)
+                        {
+                                spdlog::error("Received URL: {}", actualUrl);
                         }
                 }
         }
