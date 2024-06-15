@@ -100,3 +100,5 @@ This command will fetch the data from 2023-08-10 to 2023-09-01 with a 4-hour tim
 * `include/`: Contains the header files.
 * `src/`: Contains the source files for the main application.
 * `test/`: Contains the test files.
+* `tools/`: Tools used, or offered, by the program.
+* `CMakeLists.txt`: CMake configuration file.
