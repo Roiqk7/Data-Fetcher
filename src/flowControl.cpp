@@ -93,7 +93,7 @@ namespace Fetcher
                         Tools::URL url = Tools::getURL(vm);
 
                         // Check if the URL is valid
-                        if (url == "")
+                        if (!Tools::checkValidURL(url))
                         {
                                 // There is no reason to continue if the URL is missing
                                 spdlog::error("Could not get the URL. Program will terminate.");

@@ -29,6 +29,7 @@ namespace Fetcher
                 URL hideApiKey(const URL& url);
                 URL createUrl(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame);
                 URL getURL(const std::unique_ptr<boost::program_options::variables_map>& vm);
+                bool checkValidURL(const URL& url);
                 FilePath getOutputFilePath(const std::unique_ptr<boost::program_options::variables_map>& vm);
                 std::string readFileContents(const FilePath& filePath);
                 Json::Value readJsonFileContents(const FilePath& filePath);

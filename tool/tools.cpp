@@ -109,6 +109,25 @@ namespace Fetcher
                         return url;
                 }
 
+                /*
+                Check if the URL is valid
+
+                @param url: The URL to be checked
+
+                @return: True if the URL is valid, false otherwise
+                */
+                bool checkValidURL(const URL& url)
+                {
+                        return url.find(Constants::FMP_API_URL) != std::string::npos;
+                }
+
+                /*
+                Get the output file path from the command line arguments
+
+                @param vm: The command line arguments
+
+                @return: The output file path
+                */
                 FilePath getOutputFilePath(const std::unique_ptr<boost::program_options::variables_map>& vm)
                 {
                         return vm->count("output") ? (*vm)["output"].as<std::string>() : Constants::DEFAULT_DATA_FILE_PATH;
