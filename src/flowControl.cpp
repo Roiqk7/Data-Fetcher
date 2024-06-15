@@ -101,8 +101,7 @@ namespace Fetcher
                 /*
                 Run the programme.
 
-                @param argc: The number of command line arguments.
-                @param argv: The command line arguments.
+                @param vm: The variables map containing the parsed arguments.
 
                 @return: The flag to determine if the programme ran successfully.
                 */
