@@ -27,7 +27,7 @@ namespace Fetcher
                 Constants::Flag controlFlow(int argc, char **argv)
                 {
                         // Initialize the flag
-                        Constants::Flag flag;
+                        Constants::Flag flag(Constants::SUCCESS);
 
                         // Parse the command line arguments
                         auto vm = Parser::parseArguments(argc, argv, flag);
