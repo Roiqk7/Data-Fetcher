@@ -6,8 +6,8 @@ Description: This file contains the main function for this module.
 Notes: x
 */
 
-#include "../include/constants.h"
 #include "../include/flowControl.h"
+#include "../include/tools.h"
 
 /*
 Main function for the module.
