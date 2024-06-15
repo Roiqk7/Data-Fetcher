@@ -90,9 +90,11 @@ namespace Fetcher
                         std::string from_date = vm->count("from") ? (*vm)["from"].as<std::string>() : (*vm)["f"].as<std::string>();
                         std::string to_date = vm->count("to") ? (*vm)["to"].as<std::string>() : (*vm)["t"].as<std::string>();
                         std::string timeframe = vm->count("timeframe") ? (*vm)["timeframe"].as<std::string>() : (*vm)["tf"].as<std::string>();
+                        Tools::FilePath output = vm->count("output") ? (*vm)["output"].as<std::string>()
+                                : (vm->count("o") ? (*vm)["o"].as<std::string>() : Constants::DEFAULT_DATA_FILE_PATH);
 
                         // Example of using the parsed arguments
-                        spdlog::info("Fetching data from {} to {} with timeframe {}", from_date, to_date, timeframe);
+                        spdlog::info("Fetching data from {} to {} with timeframe {}. Data will be stored to {}", from_date, to_date, timeframe, output);
 
                         // Fetch the requested data
                         auto data = Fetcher::fetchRequestedData(from_date, to_date, timeframe);
@@ -104,7 +106,7 @@ namespace Fetcher
                         }
 
                         // Write the fetched data to a file
-                        Fetcher::writeRequestedData(data, Constants::DEFAULT_DATA_FILE_PATH);
+                        Fetcher::writeRequestedData(data, output);
 
                         return Constants::SUCCESS;
                 }

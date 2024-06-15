@@ -47,7 +47,9 @@ namespace Fetcher
                                 ("help,h", "Produce help message.")
                                 ("from,f", boost::program_options::value<std::string>(), "Start date in YYYY-MM-DD format.")
                                 ("to,t", boost::program_options::value<std::string>(), "End date in YYYY-MM-DD format.")
-                                ("timeframe,f", boost::program_options::value<std::string>(), "Time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).")                                ("test", "Run unit tests. Use this option without a value.");
+                                ("timeframe,m", boost::program_options::value<std::string>(), "Time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).")
+                                ("output,o", boost::program_options::value<std::string>(), "File in which the fetched data will be stored. (../data/data.json by default)")
+                                ("test", "Run unit tests. Use this option without a value.");
                         return desc;
                 }
 

@@ -14,9 +14,10 @@ Main function for the module.
 
 @param argc: The number of command line arguments.
 @param argv: The command line arguments.
-        - from or f: The start date in YYYY-MM-DD format.
-        - to or t: The end date in YYYY-MM-DD format.
-        - timeframe or tf: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
+        - from: The start date in YYYY-MM-DD format.
+        - to: The end date in YYYY-MM-DD format.
+        - timeframe: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
+        - output: File in which the fetched data will be stored. (../data/data.json by default)
         - test: Run unit tests. Use this option without a value.
 
 @return: Returns a flag indicating the outcome of the operation.

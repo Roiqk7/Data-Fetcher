@@ -62,6 +62,7 @@ The application has five major command line arguments:
 * `--from`: Specifies the start date for the data fetching. (YYYY-MM-DD)
 * `--to`: Specifies the end date for the data fetching. (YYYY-MM-DD)
 * `--timeframe`: Specifies the timeframe for the data fetching. (1min, 5min, 15min, 30min, 1hour, 4hour, 1day)
+* `--output`: Specifies the output file for the fetched data. (../data/data.json by default)
 
 If you want to rebuild the project, navigate to the project directory and run the following commands:
 
