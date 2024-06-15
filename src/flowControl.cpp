@@ -37,6 +37,26 @@ namespace Fetcher
                         // Handle hardcoded API key
                         handleHardcodeAPIKey();
 
+                        // Handle the programme based on the command line arguments
+                        flag = handleProgramme(argc, argv, vm);
+
+                        // End the programme
+                        return checkFlag(flag);
+                }
+
+                /*
+                Handle the programme based on the command line arguments.
+
+                @param argc: The number of command line arguments.
+                @param argv: The command line arguments.
+                @param vm: The variables map containing the parsed arguments.
+
+                @return: The flag to determine if the programme ran successfully.
+                */
+                Tools::Flag handleProgramme(int argc, char **argv, const std::unique_ptr<boost::program_options::variables_map>& vm)
+                {
+                        Tools::Flag flag(Constants::SUCCESS);
+
                         // Check if the --test argument was provided
                         if (vm->count("test"))
                         {
@@ -59,8 +79,7 @@ namespace Fetcher
                                 }
                         }
 
-                        // End the programme
-                        return checkFlag(flag);
+                        return flag;
                 }
 
                 /*

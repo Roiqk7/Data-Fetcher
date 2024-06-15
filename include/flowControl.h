@@ -18,6 +18,7 @@ namespace Fetcher
         namespace FlowControl
         {
                 Tools::Flag controlFlow(int argc, char **argv);
+                Tools::Flag handleProgramme(int argc, char **argv, const std::unique_ptr<boost::program_options::variables_map>& vm);
                 Tools::Flag runTests(int argc, char **argv);
                 Tools::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm);
                 Tools::Flag checkFlag(const Tools::Flag flag);
