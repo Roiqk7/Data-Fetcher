@@ -15,6 +15,11 @@ namespace Fetcher
 {
         namespace Constants
         {
+                // Program flags
+                using Flag = int; // Used for easier readability
+                const Flag SUCCESS = 0; // Used to indicate a successful operation
+                const Flag FAILURE = 1; // Used to indicate a failed operation
+
                 // Used for easier readability
                 using URL = std::string; // URL data type used in communication with the API
 
