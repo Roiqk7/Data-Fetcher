@@ -3,7 +3,7 @@ Date: 12/06/2024
 
 Description: This file contains the constants used in the Fetcher module.
 
-Notes: Changes may be made to the data types. Just simple renaming to URL and Ticker perhaps...
+Notes: Global by nature. The difference between constants and globals is that globals are assigned by the user, while constants are predefined.
 */
 
 #include <string>
