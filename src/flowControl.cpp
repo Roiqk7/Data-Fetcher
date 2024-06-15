@@ -96,7 +96,7 @@ namespace Fetcher
                         if (!Tools::checkValidURL(url))
                         {
                                 // There is no reason to continue if the URL is missing
-                                spdlog::error("Could not get the URL. Program will terminate.");
+                                spdlog::error("Invalid URL: {}. The programme must be terminated.", url);
                                 return Constants::FAILURE_END;
                         }
 
