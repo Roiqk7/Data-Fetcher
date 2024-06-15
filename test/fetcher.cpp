@@ -13,8 +13,8 @@ Notes: x
 #include <sstream>
 #include <string>
 #include "../include/constants.h"
-#include "../src/fetcher.cpp"
-#include "../src/tools.cpp"
+#include "../include/fetcher.h"
+#include "../include/tools.h"
 
 namespace Fetcher
 {
