@@ -20,8 +20,8 @@ namespace Fetcher
                 Tools::Flag controlFlow(int argc, char **argv);
                 Tools::Flag runTests(int argc, char **argv);
                 Tools::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm);
-                Tools::Flag endProgram(const Tools::Flag flag);
-                bool checkFlag(const Tools::Flag& flag);
+                Tools::Flag checkFlag(const Tools::Flag flag);
+                bool checkSuccessFlag(const Tools::Flag& flag);
                 void handleHardcodeAPIKey();
         }
 }

@@ -28,7 +28,7 @@ namespace Fetcher
                 */
                 Tools::Flag controlFlow(int argc, char **argv)
                 {
-                        // Initialize the flag
+                        // Initialize the flag optimistically as success by default
                         Tools::Flag flag(Constants::SUCCESS);
 
                         // Parse the command line arguments
@@ -41,10 +41,10 @@ namespace Fetcher
                         if (vm->count("test"))
                         {
                                 flag = runTests(argc, argv);
-                                if (!checkFlag(flag))
+                                if (!checkSuccessFlag(flag))
                                 {
                                         // End the programme if the tests failed
-                                        return endProgram(flag);
+                                        return checkFlag(flag);
                                 }
                         }
 
@@ -52,15 +52,15 @@ namespace Fetcher
                         if (Tools::checkProgramArguments(vm))
                         {
                                 flag = runProgram(vm);
-                                if (!checkFlag(flag))
+                                if (!checkSuccessFlag(flag))
                                 {
                                         // End the programme if the program failed
-                                        return endProgram(flag);
+                                        return checkFlag(flag);
                                 }
                         }
 
                         // End the programme
-                        return endProgram(flag);
+                        return checkFlag(flag);
                 }
 
                 /*
@@ -76,7 +76,6 @@ namespace Fetcher
                         // Initialize Google Test
                         ::testing::InitGoogleTest(&argc, argv);
 
-                        // Run all the tests
                         return RUN_ALL_TESTS();
                 }
 
@@ -95,7 +94,7 @@ namespace Fetcher
                         // Check if the URL is valid
                         if (!Tools::checkValidURL(url))
                         {
-                                // There is no reason to continue if the URL is missing
+                                // There is no reason to continue if the URL is invalid
                                 spdlog::error("Invalid URL: {}. The programme must be terminated.", url);
 
                                 // Note: Update if the criteria for a valid URL changes
@@ -112,7 +111,7 @@ namespace Fetcher
                                 return Constants::FAILURE;
                         }
                         // Check if the response from FMP API is successful
-                        else if (!checkFlag(Fetcher::checkAPIResponse(data)))
+                        else if (!checkSuccessFlag(Fetcher::checkAPIResponse(data)))
                         {
                                 return Constants::FAILURE;
                         }
@@ -128,7 +127,7 @@ namespace Fetcher
 
                 @param flag: The flag to determine if the programme finished successfully.
                 */
-                Tools::Flag endProgram(const Tools::Flag flag)
+                Tools::Flag checkFlag(const Tools::Flag flag)
                 {
                         if (flag == Constants::FAILURE)
                         {
@@ -142,7 +141,6 @@ namespace Fetcher
                         {
                                 spdlog::info("The programme finished successfully and must be terminated.");
                         }
-                        else
                         spdlog::info("The programme finished successfully.");
 
                         return flag;
@@ -155,7 +153,7 @@ namespace Fetcher
 
                 @return: True if the flag is successful, false otherwise.
                 */
-                bool checkFlag(const Tools::Flag& flag)
+                bool checkSuccessFlag(const Tools::Flag& flag)
                 {
                         return flag == Constants::SUCCESS;
                 }

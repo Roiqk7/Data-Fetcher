@@ -96,7 +96,6 @@ namespace Fetcher
                                 exit(Constants::SUCCESS_END);
                         }
 
-                        // Add your logic here based on the parsed arguments
                         spdlog::info("Running with provided arguments.");
                 }
         }

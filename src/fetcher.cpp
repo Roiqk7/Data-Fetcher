@@ -39,7 +39,7 @@ namespace Fetcher
                 spdlog::info("URL: {}", hiddenApiKey);
 
                 // Fetch the data and check if the request was successful
-                if(!FlowControl::checkFlag(handleRequest(url, readBuffer)))
+                if(!FlowControl::checkSuccessFlag(handleRequest(url, readBuffer)))
                 {
                         return nullptr;
                 }
