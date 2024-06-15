@@ -6,6 +6,8 @@ Description: This file contains the implementation of the helper functions used 
 Notes: x
 */
 
+#include <algorithm>
+#include <cctype>
 #include <fstream>
 #include <json/json.h>
 #include <spdlog/spdlog.h>
@@ -28,10 +30,32 @@ namespace Fetcher
                 URL hideApiKey(const Tools::URL& url)
                 {
                         Tools::URL hiddenApiKey = url;
-                        size_t pos = hiddenApiKey.find(Constants::FMP_API_KEY);
-                        if (pos != Tools::URL::npos)
+                        std::string lowerCaseUrl = hiddenApiKey;
+                        // Convert URL to lowercase for case-insensitive search
+                        std::transform(lowerCaseUrl.begin(), lowerCaseUrl.end(), lowerCaseUrl.begin(),
+                                [](unsigned char c)
+                                {
+                                        return std::tolower(c);
+                                }
+                        );
+                        std::string apiKeyIndicator = Constants::API_KEY_PARAM;
+                        size_t pos = lowerCaseUrl.find(apiKeyIndicator);
+                        if (pos != std::string::npos)
                         {
-                                hiddenApiKey.replace(pos, Constants::FMP_API_KEY.length(), "********");
+                                size_t startOfApiKey = pos + apiKeyIndicator.length();
+                                size_t endOfApiKey = lowerCaseUrl.find("&", startOfApiKey);
+                                if (endOfApiKey == std::string::npos)
+                                {
+                                        // If the API key is the last parameter, erase until the end of the string
+                                        hiddenApiKey.erase(startOfApiKey);
+                                }
+                                else
+                                {
+                                        // Erase the API key, keeping subsequent parameters intact
+                                        hiddenApiKey.erase(startOfApiKey, endOfApiKey - startOfApiKey);
+                                }
+                                // Insert the mask at the API key's position
+                                hiddenApiKey.insert(startOfApiKey, "********");
                         }
 
                         return hiddenApiKey;
@@ -185,6 +209,15 @@ namespace Fetcher
                 {
                         // Note: The program requires the --from, --to, and --timeframe arguments to be provided all at the same time
                         return ((vm->count("from") || vm->count("f")) && (vm->count("to") || vm->count("t")) && (vm->count("timeframe") || vm->count("tf")));
+                }
+
+                /*
+                Checks if the API key is hardcoded in the code
+                */
+                bool checkHardcodedAPIKey()
+                {
+                        // Assuming that the API key is valid if it is longer than 5 characters
+                        return Constants::FMP_API_KEY.size() > 5;
                 }
         }
 }

@@ -34,6 +34,9 @@ namespace Fetcher
                         // Parse the command line arguments
                         auto vm = Parser::parseArguments(argc, argv, flag);
 
+                        // Handle hardcoded API key
+                        handleHardcodeAPIKey();
+
                         // Check if the --test argument was provided
                         if (vm->count("test"))
                         {
@@ -152,6 +155,22 @@ namespace Fetcher
                 bool checkFlag(const Tools::Flag& flag)
                 {
                         return flag == Constants::SUCCESS;
+                }
+
+                /*
+                Handle the hard-coded API key.
+                */
+                void handleHardcodeAPIKey()
+                {
+                        // Check if the API key is hard-coded
+                        if (Tools::checkHardcodedAPIKey())
+                        {
+                                spdlog::warn("The API key is hardcoded in the code. Don't forget to remove it before pushing on git or deploying.");
+                                return;
+                        }
+
+                        // The API key is not hard-coded
+                        spdlog::info("The API key is not present in the code.");
                 }
         }
 }

@@ -17,7 +17,7 @@ This code is part of Project Mencator. This particular module is responsible for
 * [CMake](https://cmake.org/)
 * [CURL](https://curl.se/)
 * [GTest](https://github.com/google/googletest)
-* [JSON CPP](https://github.com/open-source-parsers/jsoncpp)
+* [Json Cpp](https://github.com/open-source-parsers/jsoncpp)
 * [spdlog](https://github.com/gabime/spdlog)
 
 Installation of the dependencies on MacOS using Homebrew:

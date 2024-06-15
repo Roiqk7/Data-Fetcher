@@ -18,10 +18,12 @@ Notes: x
 namespace Fetcher
 {
         std::unique_ptr<Json::Value> fetchRequestedData(const Tools::URL& url);
+        Json::Value parseRequestedData(const std::string& readBuffer);
         void writeRequestedData(const std::unique_ptr<Json::Value>& root, const Tools::FilePath& filePath);
+        Tools::Flag handleRequest(const Tools::URL& url, std::string& readBuffer);
         size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
-        CURL* init_curl(Tools::URL url, std::string& readBuffer);
-        CURLcode perform_request(CURL* curl);
+        CURL* initCurl(Tools::URL url, std::string& readBuffer);
+        CURLcode performRequest(CURL* curl);
         Tools::Flag checkFMP_APIResponse(const std::unique_ptr<Json::Value>& root);
 }
 

@@ -22,6 +22,7 @@ namespace Fetcher
                 Tools::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm);
                 Tools::Flag endProgram(const Tools::Flag flag);
                 bool checkFlag(const Tools::Flag& flag);
+                void handleHardcodeAPIKey();
         }
 }
 

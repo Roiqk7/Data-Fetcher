@@ -10,10 +10,13 @@ Notes: x
 #include <fstream>
 #include <iostream>
 #include <json/json.h>
+#include <memory>
 #include <spdlog/spdlog.h>
 #include <sstream>
+#include <string>
 #include "../include/constants.h"
 #include "../include/fetcher.h"
+#include "../include/flowControl.h"
 #include "../include/tools.h"
 
 namespace Fetcher
@@ -35,34 +38,42 @@ namespace Fetcher
                 Tools::URL hiddenApiKey = Tools::hideApiKey(url);
                 spdlog::info("URL: {}", hiddenApiKey);
 
-                // Initialize libcurl
-                CURL* curl = init_curl(url, readBuffer);
-
-                // Perform the HTTP request
-                CURLcode res = perform_request(curl);
-
-                // Check if the request was successful
-                if(res != CURLE_OK)
+                // Fetch the data and check if the request was successful
+                if(!FlowControl::checkFlag(handleRequest(url, readBuffer)))
                 {
-                        spdlog::error("Failed to fetch data: {}", curl_easy_strerror(res));
                         return nullptr;
                 }
 
-                // Initialize the Json::Value object
-                std::unique_ptr<Json::Value> root(new Json::Value());
-                Json::Reader reader;
-
-                // Parse the received data
-                bool parsingSuccessful = reader.parse(readBuffer, *root);
-
-                // Check if the parsing was successful
-                if(!parsingSuccessful)
-                {
-                        spdlog::error("Failed to parse data: {}", reader.getFormattedErrorMessages());
-                        return nullptr;
-                }
+                // Parse the fetched data
+                std::unique_ptr<Json::Value> root(std::make_unique<Json::Value>(parseRequestedData(readBuffer)));
 
                 return root;
+        }
+
+        /*
+        Parses the requested data from the API.
+
+        @param readBuffer: The string containing the fetched data
+
+        @return: The Json::Value object containing the parsed data
+        */
+        Json::Value parseRequestedData(const std::string& readBuffer)
+        {
+                Json::Value root; // This will store the parsed JSON data
+                std::istringstream stream(readBuffer); // Convert string to stream for parsing
+                Json::CharReaderBuilder builder; // Use the builder to create a reader
+                JSONCPP_STRING errs; // This will store any parsing errors
+
+                bool parsingSuccessful = Json::parseFromStream(builder, stream, &root, &errs);
+
+                if (!parsingSuccessful)
+                {
+                        // If parsing fails, log the error and return an empty Json::Value
+                        spdlog::error("Failed to parse JSON: {}", errs);
+                        return Json::Value(); // Return an empty Json::Value object
+                }
+
+                return root; // Return the parsed JSON data
         }
 
         /*
@@ -90,6 +101,35 @@ namespace Fetcher
         }
 
         /*
+        Performs an HTTP request to a specified URL and appends the received data to a provided string.
+
+        @param url: The URL to which the HTTP request is to be made
+        @param readBuffer: The string to which the received data is to be appended
+
+        @return: The flag to determine if the request was successful
+        */
+        Tools::Flag handleRequest(const Tools::URL& url, std::string& readBuffer)
+        {
+                // Initialize libcurl
+                CURL* curl = initCurl(url, readBuffer);
+
+                // Perform the HTTP request
+                CURLcode res = performRequest(curl);
+
+                // Check if the request was successful
+                if(res != CURLE_OK)
+                {
+                        spdlog::error("Failed to fetch data: {}", curl_easy_strerror(res));
+                        return Constants::FAILURE_END;
+                }
+
+                // Log the raw response data
+                spdlog::trace("Raw response data: {}", readBuffer);
+
+                return Constants::SUCCESS;
+        }
+
+        /*
         Callback function to write received data to a string.
 
         @param contents: The received data
@@ -110,7 +150,7 @@ namespace Fetcher
 
         @return CURL*: The initialized CURL handle
         */
-        CURL* init_curl(Tools::URL url, std::string& readBuffer)
+        CURL* initCurl(Tools::URL url, std::string& readBuffer)
         {
                 CURL* curl = curl_easy_init();
                 if(curl)
@@ -130,7 +170,7 @@ namespace Fetcher
 
         @return CURLcode: The result of the HTTP request
         */
-        CURLcode perform_request(CURL* curl)
+        CURLcode performRequest(CURL* curl)
         {
                 CURLcode res = curl_easy_perform(curl);
                 curl_easy_cleanup(curl);
@@ -143,18 +183,31 @@ namespace Fetcher
         @param root: The Json::Value object containing the fetched data
 
         @return: The flag to determine if the response is successful
+
+        Note: Works only with array type JSON objects.
         */
         Tools::Flag checkFMP_APIResponse(const std::unique_ptr<Json::Value>& root)
         {
-                if(root->isMember("Error Message"))
+                // Check if root is an array
+                if (root && root->isArray())
                 {
-                        spdlog::error("Error Message: {}", (*root)["Error Message"].asString());
+                        // Iterate through each element in the array
+                        for (const Json::Value& item : *root)
+                        {
+                                // Check each object in the array for "Error Message"
+                                if (item.isMember("Error Message"))
+                                {
+                                        spdlog::error("Error Message: {}", item["Error Message"].asString());
+                                        return Constants::FAILURE;
+                                }
+                        }
+                        return Constants::SUCCESS;
+                }
+                else
+                {
+                        // Log an error or handle the case where root is not an array
+                        spdlog::error("Expected JSON array in API response.");
                         return Constants::FAILURE;
                 }
-                else if(root->isMember("Note"))
-                {
-                        spdlog::warn("Note: {}", (*root)["Note"].asString());
-                }
-                return Constants::SUCCESS;
         }
 }

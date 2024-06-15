@@ -33,6 +33,7 @@ namespace Fetcher
                 std::string readFileContents(const FilePath& filePath);
                 Json::Value readJsonFileContents(const FilePath& filePath);
                 void writeFileContents(const FilePath& filePath, const std::string& contents);
+                bool checkHardcodedAPIKey();
         }
 }
 
