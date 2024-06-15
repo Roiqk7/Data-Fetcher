@@ -24,7 +24,7 @@ namespace Fetcher
         size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
         CURL* initCurl(Tools::URL url, std::string& readBuffer);
         CURLcode performRequest(CURL* curl);
-        Tools::Flag checkFMP_APIResponse(const std::unique_ptr<Json::Value>& root);
+        Tools::Flag checkAPIResponse(const std::unique_ptr<Json::Value>& root);
 }
 
 #endif // FETCHER_H

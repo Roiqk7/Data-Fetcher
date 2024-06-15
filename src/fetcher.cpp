@@ -188,7 +188,7 @@ namespace Fetcher
 
         TODO: Separate the cases into smaller functions.
         */
-        Tools::Flag checkFMP_APIResponse(const std::unique_ptr<Json::Value>& root)
+        Tools::Flag checkAPIResponse(const std::unique_ptr<Json::Value>& root)
         {
                 // Check if root is an array
                 if (root && root->isArray())
