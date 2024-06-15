@@ -73,12 +73,12 @@ namespace Fetcher
                         catch(std::exception& e)
                         {
                                 spdlog::error("Error: {}", e.what());
-                                exit(Constants::FAILURE_END);
+                                exit(Constants::FAILURE);
                         }
                         catch(...)
                         {
                                 spdlog::error("Unknown error!");
-                                exit(Constants::FAILURE_END);
+                                exit(Constants::FAILURE);
                         }
                 }
 
@@ -93,7 +93,7 @@ namespace Fetcher
                         if (vm->count("help"))
                         {
                                 std::cout << desc << "\n";
-                                exit(Constants::SUCCESS_END);
+                                exit(Constants::SUCCESS);
                         }
 
                         spdlog::info("Running with provided arguments.");

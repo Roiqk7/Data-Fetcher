@@ -43,7 +43,7 @@ namespace Fetcher
                                 flag = runTests(argc, argv);
                                 if (!checkSuccessFlag(flag))
                                 {
-                                        // End the programme if the tests failed
+                                        // Check if the tests failed
                                         return checkFlag(flag);
                                 }
                         }
@@ -136,12 +136,17 @@ namespace Fetcher
                         else if (flag == Constants::FAILURE_END)
                         {
                                 spdlog::error("The programme failed and must be terminated.");
+                                exit(Constants::FAILURE);
                         }
                         else if (flag == Constants::SUCCESS_END)
                         {
                                 spdlog::info("The programme finished successfully and must be terminated.");
+                                exit(Constants::SUCCESS);
                         }
-                        spdlog::info("The programme finished successfully.");
+                        else if (flag == Constants::SUCCESS)
+                        {
+                                spdlog::info("The programme finished successfully.");
+                        }
 
                         return flag;
                 }
