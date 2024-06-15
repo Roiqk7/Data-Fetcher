@@ -7,6 +7,7 @@ Notes: x
 */
 
 #include <fstream>
+#include <json/json.h>
 #include <spdlog/spdlog.h>
 #include <sstream>
 #include <string>
@@ -49,7 +50,7 @@ namespace Fetcher
                 {
                         return Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH
                                 + Constants::SPY + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND
-                                + "to=" + toDate + Constants::AND + Constants::FMP_FMP_API_KEY_PARAM + Constants::FMP_API_KEY;
+                                + "to=" + toDate + Constants::AND + Constants::API_KEY_PARAM + Constants::FMP_API_KEY;
                 }
 
                 /*
@@ -108,6 +109,26 @@ namespace Fetcher
                         std::stringstream buffer;
                         buffer << file.rdbuf();
                         return buffer.str();
+                }
+
+                /*
+                Read contents of a JSON file
+
+                @param filePath: The path to the file
+
+                @return: The contents of the file
+                */
+                Json::Value readJsonFileContents(const FilePath& filePath)
+                {
+                        Json::Value root;
+                        Json::Reader reader;
+                        std::string contents = readFileContents(filePath);
+                        if (!reader.parse(contents, root))
+                        {
+                                spdlog::error("Failed to parse JSON file at: {}", filePath);
+                        }
+
+                        return root;
                 }
 
                 /*

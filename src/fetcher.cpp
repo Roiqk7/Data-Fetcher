@@ -115,8 +115,6 @@ namespace Fetcher
                 CURL* curl = curl_easy_init();
                 if(curl)
                 {
-                        // Append the API key to the URL
-                        url += Constants::FMP_API_KEY;
                         // Set the URL and callback function
                         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
                         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);

@@ -9,6 +9,7 @@ Notes: x
 #include <curl/curl.h>
 #include <fstream>
 #include <gtest/gtest.h>
+#include <json/json.h>
 #include <spdlog/spdlog.h>
 #include <sstream>
 #include <string>
@@ -29,30 +30,18 @@ namespace Fetcher
                 spdlog::info("{} test started. Fetching SPY ETF data...", testName);
 
                 // URL for fetching SPY ETF data
-                Tools::URL url = Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + "4hour/"
-                        + Constants::SPY + Constants::QUESTION_MARK + "from=2023-08-10&to=2023-09-10" + Constants::AND
-                        + Constants::FMP_FMP_API_KEY_PARAM + Constants::FMP_API_KEY;
-                std::string readBuffer; // Buffer to store the fetched data
+                Tools::URL url = "https://financialmodelingprep.com/api/v3/historical-chart/4hour/SPY?from=2023-08-10&to=2023-09-10&apikey=" + Constants::FMP_API_KEY;
 
-                // Hide the API key in the log
-                Tools::URL hiddenApiKey = Tools::hideApiKey(url);
-                spdlog::info("URL: {}", hiddenApiKey);
+                // Fetch the data
+                auto actualData = Fetcher::fetchRequestedData(url);
 
-                // Initialize libcurl and set the necessary options
-                CURL* curl = init_curl(url, readBuffer);
-                ASSERT_TRUE(curl != nullptr);
+                // Read the expected contents from fetcherTest1.json
+                Json::Value expectedData = Tools::readJsonFileContents("fetcherTest1.json");
 
-                // Perform the HTTP request
-                CURLcode res = perform_request(curl);
-                ASSERT_EQ(res, CURLE_OK);
+                // Assert that the fetched data is equal to the expected data
+                ASSERT_EQ(*actualData, expectedData);
 
-                // Read the expected contents from fetcherTest1.txt
-                std::string expectedContents = Tools::readFileContents(filePath);
-
-                // Assert that readBuffer is equal to the contents of fetcherTest1.txt
-                ASSERT_EQ(readBuffer, expectedContents);
-
-                if (readBuffer != expectedContents)
-                        spdlog::error("Received data: {}", readBuffer);
+                if (*actualData != expectedData)
+                        spdlog::error("Received data: {}", actualData->toStyledString());
         }
 }

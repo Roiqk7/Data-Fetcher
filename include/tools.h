@@ -10,6 +10,8 @@ Notes: x
 #define TOOLS_H
 
 #include <boost/program_options.hpp>
+#include <json/json.h>
+#include <memory>
 #include <string>
 
 namespace Fetcher
@@ -29,6 +31,7 @@ namespace Fetcher
                 URL getURL(const std::unique_ptr<boost::program_options::variables_map>& vm);
                 FilePath getOutputFilePath(const std::unique_ptr<boost::program_options::variables_map>& vm);
                 std::string readFileContents(const FilePath& filePath);
+                Json::Value readJsonFileContents(const FilePath& filePath);
                 void writeFileContents(const FilePath& filePath, const std::string& contents);
         }
 }

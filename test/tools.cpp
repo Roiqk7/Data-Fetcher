@@ -29,7 +29,7 @@ namespace Fetcher
                         std::string expectedContents = "Hello world!";
 
                         // Read the contents of the file
-                        std::string readContents = Tools::readFileContents(filePath);
+                        std::string readContents = readFileContents(filePath);
 
                         // Assert that the read contents are equal to the expected contents
                         ASSERT_EQ(readContents, expectedContents);
@@ -49,16 +49,14 @@ namespace Fetcher
                         spdlog::info("{} test started. Hiding the API key in the URL...", testName);
 
                         // URL for fetching SPY ETF data
-                        Tools::URL url = Fetcher::Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + "4hour/"
-                                + Constants::SPY + Constants::QUESTION_MARK + "from=2023-08-10&to=2023-09-10" + Constants::AND
-                                + Constants::FMP_FMP_API_KEY_PARAM + Constants::FMP_API_KEY;
+                        URL url = "https://financialmodelingprep.com/api/v3/historical-chart/4hour/SPY?from=2023-08-10&to=2023-09-10&apikey=" + Constants::FMP_API_KEY;
 
                         // Hide the API key in the log
-                        Tools::URL hiddenApiKey = Tools::hideApiKey(url);
+                        URL hiddenApiKey = Tools::hideApiKey(url);
                         spdlog::info("URL: {}", hiddenApiKey);
 
                         // Expected URL with hidden API key
-                        Tools::URL expectedUrl = readFileContents(filePath);
+                        URL expectedUrl = readFileContents(filePath);
 
                         // Assert that the API key is hidden
                         ASSERT_EQ(hiddenApiKey, expectedUrl);
@@ -81,10 +79,10 @@ namespace Fetcher
                         std::string contents = "Hello world!";
 
                         // Write the contents to the file
-                        Tools::writeFileContents(filePath, contents);
+                        writeFileContents(filePath, contents);
 
                         // Read the contents of the file
-                        std::string readContents = Tools::readFileContents(filePath);
+                        std::string readContents = readFileContents(filePath);
 
                         // Assert that the read contents are equal to the written contents
                         ASSERT_EQ(readContents, contents);
