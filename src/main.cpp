@@ -14,6 +14,7 @@ Main function for the module.
 
 @param argc: The number of command line arguments.
 @param argv: The command line arguments.
+        - help: Produce help message.
         - from: The start date in YYYY-MM-DD format.
         - to: The end date in YYYY-MM-DD format.
         - timeframe: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
