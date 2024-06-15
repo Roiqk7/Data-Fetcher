@@ -19,13 +19,15 @@ Notes: x
 namespace Fetcher
 {
         /*
-        Fetches the requested data from the API and writes them into the ../data/data.json file.
+        Fetches the requested data from the API and returns it
 
         @param fromDate: The start date in YYYY-MM-DD format.
         @param toDate: The end date in YYYY-MM-DD format.
         @param timeframe: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
+
+        @return: A unique pointer to the Json::Value object containing the fetched data.
         */
-        void fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe)
+        std::unique_ptr<Json::Value> fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe)
         {
                 // Create the URL
                 Constants::URL url = Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + timeframe + Constants::SLASH
@@ -47,25 +49,48 @@ namespace Fetcher
                 if(res != CURLE_OK)
                 {
                         spdlog::error("Failed to fetch data: {}", curl_easy_strerror(res));
-                        return;
+                        return nullptr;
                 }
 
-                // Parse the received data
-                Json::Value root;
+                // Initialize the Json::Value object
+                std::unique_ptr<Json::Value> root(new Json::Value());
                 Json::Reader reader;
-                bool parsingSuccessful = reader.parse(readBuffer, root);
+
+                // Parse the received data
+                bool parsingSuccessful = reader.parse(readBuffer, *root);
 
                 // Check if the parsing was successful
                 if(!parsingSuccessful)
                 {
-                        std::cerr << "Failed to parse the data" << std::endl;
-                        return;
+                        spdlog::error("Failed to parse data: {}", reader.getFormattedErrorMessages());
+                        return nullptr;
                 }
 
-                // Write the parsed data to the ../data/data.json file
-                std::ofstream ofs("../data/data.json");
-                ofs << root;
-                ofs.close();
+                return root;
+        }
+
+        /*
+        Writes the requested data to specified file.
+
+        @param root: The Json::Value object containing the data
+        @param filePath: The path to the file
+        */
+        void writeRequestedData(const std::unique_ptr<Json::Value>& root, const Constants::FilePath& filePath)
+        {
+                std::ofstream file(filePath);
+                if(file.is_open())
+                {
+                        Json::StreamWriterBuilder builder;
+                        const std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
+                        writer->write(*root, &file);
+                        file.close();
+                        spdlog::info("Data written to {}", filePath);
+                }
+                else
+                {
+                        spdlog::warn("Failed to open file: {}\nWriting data to ../data/data.json", filePath);
+                        writeRequestedData(root, Constants::DEFAULT_DATA_FILE_PATH);
+                }
         }
 
         /*

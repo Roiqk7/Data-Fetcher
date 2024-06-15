@@ -1,2 +1,3 @@
 - Improve the flag system
+- Add more tests for the new functions
 - Make some cosmetics update and improve the documentation. Logic should be OKAY

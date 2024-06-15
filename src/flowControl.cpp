@@ -8,6 +8,7 @@ Notes: x
 
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
+#include "../include/constants.h"
 #include "../include/fetcher.h"
 #include "../include/flowControl.h"
 #include "../include/parser.h"
@@ -93,8 +94,17 @@ namespace Fetcher
                         // Example of using the parsed arguments
                         spdlog::info("Fetching data from {} to {} with timeframe {}", from_date, to_date, timeframe);
 
-                        // Fetch the requested data and write them into the ../data/data.json file
-                        Fetcher::fetchRequestedData(from_date, to_date, timeframe);
+                        // Fetch the requested data
+                        auto data = Fetcher::fetchRequestedData(from_date, to_date, timeframe);
+
+                        // Check if the data was fetched successfully
+                        if (data == nullptr)
+                        {
+                                return Constants::FAILURE;
+                        }
+
+                        // Write the fetched data to a file
+                        Fetcher::writeRequestedData(data, Constants::DEFAULT_DATA_FILE_PATH);
 
                         return Constants::SUCCESS;
                 }

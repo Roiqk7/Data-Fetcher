@@ -15,14 +15,16 @@ namespace Fetcher
 {
         namespace Constants
         {
-                // Program flags
+        // Program flags
                 using Flag = int; // Used for easier readability
                 const Flag SUCCESS = 0; // Used to indicate a successful operation
                 const Flag FAILURE = 1; // Used to indicate a failed operation
                 const Flag SUCCESS_END = 2; // Program must be terminated on purpose
                 const Flag FAILURE_END = 3; // Fatal error, program must be terminated
-
-
+        // File paths
+                using FilePath = std::string; // Used for easier readability
+                const FilePath DEFAULT_DATA_FILE_PATH = "../data/data.json"; // Default file path for the fetched data
+        // URL
                 // Used for easier readability
                 using URL = std::string; // URL data type used in communication with the API
 

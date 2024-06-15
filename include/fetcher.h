@@ -11,12 +11,14 @@ Notes: x
 
 #include <curl/curl.h>
 #include <json/json.h>
+#include <memory>
 #include <string>
 #include "constants.h"
 
 namespace Fetcher
 {
-        void fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe);
+        std::unique_ptr<Json::Value> fetchRequestedData(const std::string& fromDate, const std::string& toDate, const std::string& timeframe);
+        void writeRequestedData(const std::unique_ptr<Json::Value>& root, const Constants::FilePath& filePath);
         size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
         CURL* init_curl(Constants::URL url, std::string& readBuffer);
         CURLcode perform_request(CURL* curl);
