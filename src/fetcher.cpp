@@ -136,4 +136,25 @@ namespace Fetcher
                 curl_easy_cleanup(curl);
                 return res;
         }
+
+        /*
+        Checks the response from FMP API.
+
+        @param root: The Json::Value object containing the fetched data
+
+        @return: The flag to determine if the response is successful
+        */
+        Tools::Flag checkFMP_APIResponse(const std::unique_ptr<Json::Value>& root)
+        {
+                if(root->isMember("Error Message"))
+                {
+                        spdlog::error("Error Message: {}", (*root)["Error Message"].asString());
+                        return Constants::FAILURE;
+                }
+                else if(root->isMember("Note"))
+                {
+                        spdlog::warn("Note: {}", (*root)["Note"].asString());
+                }
+                return Constants::SUCCESS;
+        }
 }

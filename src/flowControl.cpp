@@ -105,6 +105,11 @@ namespace Fetcher
                         {
                                 return Constants::FAILURE;
                         }
+                        // Check if the response from FMP API is successful
+                        else if (Fetcher::checkFMP_APIResponse(data) != Constants::SUCCESS)
+                        {
+                                return Constants::FAILURE;
+                        }
 
                         // Write the fetched data to a file
                         Fetcher::writeRequestedData(data, Tools::getOutputFilePath(vm));

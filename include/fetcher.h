@@ -13,7 +13,7 @@ Notes: x
 #include <json/json.h>
 #include <memory>
 #include <string>
-#include "constants.h"
+#include "tools.h"
 
 namespace Fetcher
 {
@@ -22,6 +22,7 @@ namespace Fetcher
         size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
         CURL* init_curl(Tools::URL url, std::string& readBuffer);
         CURLcode perform_request(CURL* curl);
+        Tools::Flag checkFMP_APIResponse(const std::unique_ptr<Json::Value>& root);
 }
 
 #endif // FETCHER_H
