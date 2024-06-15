@@ -6,10 +6,12 @@ Description: This file contains the definitions of the parser functions.
 Notes: x
 */
 
-#include "../include/parser.h"
 #include <boost/program_options.hpp>
 #include <iostream>
+#include <memory>
 #include <spdlog/spdlog.h>
+#include "../include/constants.h"
+#include "../include/parser.h"
 
 namespace Fetcher
 {
@@ -20,16 +22,17 @@ namespace Fetcher
 
                 @param argc: The number of command line arguments.
                 @param argv: The command line arguments.
+                @param flag: The flag to be set based on the parsed arguments.
 
-                @return: 0 if the arguments are parsed successfully.
+                @return: The variables map containing the parsed arguments.
                 */
-                int parseArguments(int argc, char **argv)
+                std::unique_ptr<boost::program_options::variables_map> parseArguments(int argc, char **argv, Constants::Flag& flag)
                 {
                         auto desc = createOptionsDescription();
-                        boost::program_options::variables_map vm;
+                        auto vm = std::make_unique<boost::program_options::variables_map>();
                         parseCommandLineArguments(argc, argv, desc, vm);
                         processParsedOptions(vm, desc);
-                        return 0;
+                        return vm;
                 }
 
                 /*
@@ -56,22 +59,22 @@ namespace Fetcher
                 @param desc: The options description.
                 @param vm: The variables map.
                 */
-                void parseCommandLineArguments(int argc, char **argv, boost::program_options::options_description& desc, boost::program_options::variables_map& vm)
+                void parseCommandLineArguments(int argc, char **argv, boost::program_options::options_description& desc, std::unique_ptr<boost::program_options::variables_map>& vm)
                 {
                         try
                         {
-                                boost::program_options::store(boost::program_options::parse_command_line(argc, argv, desc), vm);
-                                boost::program_options::notify(vm);
+                                boost::program_options::store(boost::program_options::parse_command_line(argc, argv, desc), *vm);
+                                boost::program_options::notify(*vm);
                         }
                         catch(std::exception& e)
                         {
                                 spdlog::error("Error: {}", e.what());
-                                exit(1);
+                                exit(Constants::FAILURE_END);
                         }
                         catch(...)
                         {
                                 spdlog::error("Unknown error!");
-                                exit(1);
+                                exit(Constants::FAILURE_END);
                         }
                 }
 
@@ -81,12 +84,12 @@ namespace Fetcher
                 @param vm: The variables map.
                 @param desc: The options description.
                 */
-                void processParsedOptions(const boost::program_options::variables_map& vm, const boost::program_options::options_description& desc)
+                void processParsedOptions(const std::unique_ptr<boost::program_options::variables_map>& vm, const boost::program_options::options_description& desc)
                 {
-                        if (vm.count("help"))
+                        if (vm->count("help"))
                         {
                                 std::cout << desc << "\n";
-                                exit(1);
+                                exit(Constants::SUCCESS_END);
                         }
 
                         // Add your logic here based on the parsed arguments

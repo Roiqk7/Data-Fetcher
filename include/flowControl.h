@@ -19,10 +19,10 @@ namespace Fetcher
         {
                 Constants::Flag controlFlow(int argc, char **argv);
                 Constants::Flag runTests(int argc, char **argv);
-                Constants::Flag runProgram(const boost::program_options::variables_map& vm);
+                Constants::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm);
                 Constants::Flag endProgram(const Constants::Flag flag);
                 bool checkFlag(const Constants::Flag& flag);
-                bool checkProgramArguments(const boost::program_options::variables_map& vm);
+                bool checkProgramArguments(const std::unique_ptr<boost::program_options::variables_map>& vm);
         }
 }
 

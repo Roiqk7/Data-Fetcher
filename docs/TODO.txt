@@ -1,2 +1,2 @@
-- Improve main to be more minimalistic
+- Improve the flag system
 - Make some cosmetics update and improve the documentation. Logic should be OKAY

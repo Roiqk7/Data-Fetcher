@@ -26,21 +26,14 @@ namespace Fetcher
                 */
                 Constants::Flag controlFlow(int argc, char **argv)
                 {
-                        // Create an instance of the options description
-                        auto desc = Fetcher::Parser::createOptionsDescription();
+                        // Initialize the flag
+                        Constants::Flag flag;
 
                         // Parse the command line arguments
-                        boost::program_options::variables_map vm;
-                        Fetcher::Parser::parseCommandLineArguments(argc, argv, desc, vm);
-
-                        // Process the parsed options
-                        Fetcher::Parser::processParsedOptions(vm, desc);
-
-                        // Flag to determine if the programme finished successfully
-                        Constants::Flag flag = Constants::SUCCESS;
+                        auto vm = Parser::parseArguments(argc, argv, flag);
 
                         // Check if the --test argument was provided
-                        if (vm.count("test"))
+                        if (vm->count("test"))
                         {
                                 flag = runTests(argc, argv);
                                 if (!checkFlag(flag))
@@ -90,12 +83,12 @@ namespace Fetcher
 
                 @return: The flag to determine if the programme ran successfully.
                 */
-                Constants::Flag runProgram(const boost::program_options::variables_map& vm)
+                Constants::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm)
                 {
                         // Get the start date, end date, and timeframe
-                        std::string from_date = vm.count("from") ? vm["from"].as<std::string>() : vm["f"].as<std::string>();
-                        std::string to_date = vm.count("to") ? vm["to"].as<std::string>() : vm["t"].as<std::string>();
-                        std::string timeframe = vm.count("timeframe") ? vm["timeframe"].as<std::string>() : vm["tf"].as<std::string>();
+                        std::string from_date = vm->count("from") ? (*vm)["from"].as<std::string>() : (*vm)["f"].as<std::string>();
+                        std::string to_date = vm->count("to") ? (*vm)["to"].as<std::string>() : (*vm)["t"].as<std::string>();
+                        std::string timeframe = vm->count("timeframe") ? (*vm)["timeframe"].as<std::string>() : (*vm)["tf"].as<std::string>();
 
                         // Example of using the parsed arguments
                         spdlog::info("Fetching data from {} to {} with timeframe {}", from_date, to_date, timeframe);
@@ -117,6 +110,15 @@ namespace Fetcher
                         {
                                 spdlog::error("The programme failed.");
                         }
+                        else if (flag == Constants::FAILURE_END)
+                        {
+                                spdlog::error("The programme failed and must be terminated.");
+                        }
+                        else if (flag == Constants::SUCCESS_END)
+                        {
+                                spdlog::info("The programme finished successfully and must be terminated.");
+                        }
+                        else
                         spdlog::info("The programme finished successfully.");
 
                         return flag;
@@ -141,9 +143,10 @@ namespace Fetcher
 
                 @return: True if the required arguments are provided, false otherwise.
                 */
-                bool checkProgramArguments(const boost::program_options::variables_map& vm)
+                bool checkProgramArguments(const std::unique_ptr<boost::program_options::variables_map>& vm)
                 {
-                        return (vm.count("from") || vm.count("f")) && (vm.count("to") || vm.count("t")) && (vm.count("timeframe") || vm.count("tf"));
+                        // Note: The program requires the --from, --to, and --timeframe arguments to be provided all at the same time
+                        return (vm->count("from") || vm->count("f")) && (vm->count("to") || vm->count("t")) && (vm->count("timeframe") || vm->count("tf"));
                 }
         }
 }

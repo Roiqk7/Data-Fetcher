@@ -19,6 +19,9 @@ namespace Fetcher
                 using Flag = int; // Used for easier readability
                 const Flag SUCCESS = 0; // Used to indicate a successful operation
                 const Flag FAILURE = 1; // Used to indicate a failed operation
+                const Flag SUCCESS_END = 2; // Program must be terminated on purpose
+                const Flag FAILURE_END = 3; // Fatal error, program must be terminated
+
 
                 // Used for easier readability
                 using URL = std::string; // URL data type used in communication with the API
