@@ -184,7 +184,9 @@ namespace Fetcher
 
         @return: The flag to determine if the response is successful
 
-        Note: Works only with array type JSON objects.
+        Note: Works only with array or object type JSON objects.
+
+        TODO: Separate the cases into smaller functions.
         */
         Tools::Flag checkFMP_APIResponse(const std::unique_ptr<Json::Value>& root)
         {
@@ -203,11 +205,19 @@ namespace Fetcher
                         }
                         return Constants::SUCCESS;
                 }
-                else
+                // Check if root is an object
+                else if (root && root->isObject())
                 {
-                        // Log an error or handle the case where root is not an array
-                        spdlog::error("Expected JSON array in API response.");
-                        return Constants::FAILURE;
+                        // Directly check the object for "Error Message"
+                        if (root->isMember("Error Message"))
+                        {
+                                spdlog::error("Error Message: {}", (*root)["Error Message"].asString());
+                                return Constants::FAILURE;
+                        }
+                        return Constants::SUCCESS;
                 }
+                // Log an error or handle the case where root is not an array
+                spdlog::error("Unexpected Json type was found in the API response.");
+                return Constants::FAILURE;
         }
 }
