@@ -19,7 +19,7 @@ Main function for the module.
         - timeframe or tf: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
         - test: Run unit tests. Use this option without a value.
 
-@return: 0 if the program runs successfully.
+@return: Returns a flag indicating the outcome of the operation.
 */
 int main(int argc, char **argv)
 {
