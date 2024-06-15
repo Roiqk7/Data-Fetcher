@@ -1,6 +1,6 @@
 # Data Fetcher
 
-This code is part of Project Mencator. This particular module is responsible for gathering input data using the [FMP API](https://site.financialmodelingprep.com).
+This code is part of Project Mencator. This particular module is responsible for gathering input data using the [Polygon.io](https://polygon.io).
 
 ## Table of contents
 - [Data Fetcher](#data-fetcher)

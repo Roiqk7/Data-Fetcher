@@ -27,10 +27,10 @@ namespace Fetcher
                 URL hideApiKey(const Tools::URL& url)
                 {
                         Tools::URL hiddenApiKey = url;
-                        size_t pos = hiddenApiKey.find(Constants::API_KEY);
+                        size_t pos = hiddenApiKey.find(Constants::FMP_API_KEY);
                         if (pos != Tools::URL::npos)
                         {
-                                hiddenApiKey.replace(pos, Constants::API_KEY.length(), "********");
+                                hiddenApiKey.replace(pos, Constants::FMP_API_KEY.length(), "********");
                         }
 
                         return hiddenApiKey;
@@ -47,9 +47,9 @@ namespace Fetcher
                 */
                 URL createUrl(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame)
                 {
-                        return Constants::API_URL + Constants::HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH
+                        return Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH
                                 + Constants::SPY + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND
-                                + "to=" + toDate + Constants::AND + Constants::API_KEY_PARAM + Constants::API_KEY;
+                                + "to=" + toDate + Constants::AND + Constants::FMP_FMP_API_KEY_PARAM + Constants::FMP_API_KEY;
                 }
 
                 /*
