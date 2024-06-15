@@ -7,8 +7,10 @@ Notes: x
 */
 
 #include <gtest/gtest.h>
+#include <json/json.h>
 #include <spdlog/spdlog.h>
 #include "../include/constants.h"
+#include "../include/fetcher.h"
 #include "../include/tools.h"
 
 namespace Fetcher
@@ -35,7 +37,9 @@ namespace Fetcher
                         ASSERT_EQ(readContents, expectedContents);
 
                         if (readContents != expectedContents)
+                        {
                                 spdlog::error("Received contents: {}", readContents);
+                        }
                 }
 
                 // Test for hiding the API key in the URL
@@ -62,7 +66,9 @@ namespace Fetcher
                         ASSERT_EQ(hiddenApiKey, expectedUrl);
 
                         if (hiddenApiKey != expectedUrl)
+                        {
                                 spdlog::error("Received URL: {}", hiddenApiKey);
+                        }
                 }
 
                 // Test for writing contents to a file
@@ -88,7 +94,37 @@ namespace Fetcher
                         ASSERT_EQ(readContents, contents);
 
                         if (readContents != contents)
+                        {
                                 spdlog::error("Received contents: {}", readContents);
+                        }
+                }
+
+                // Test for reading Json data from a file
+                TEST(ToolsTest, toolsTest4)
+                {
+                        // Construct the file path dynamically
+                        std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+                        std::string filePath = "../test/" + testName + ".json";
+
+                        // Log
+                        spdlog::info("{} test started. Reading Json data from the file...", testName);
+
+                        // URL to read the expected Json data
+                        Tools::URL url = "https://financialmodelingprep.com/api/v3/historical-chart/4hour/SPY?from=2023-08-10&to=2023-09-10&apikey=" + Constants::FMP_API_KEY;
+
+                        // Fetch the expected Json data
+                        auto expectedJsonData = fetchRequestedData(url);
+
+                        // Read the Json data from the file
+                        Json::Value actualJsonData = readJsonFileContents(filePath);
+
+                        // Assert that the read Json data is equal to the expected Json data
+                        ASSERT_EQ(actualJsonData, *expectedJsonData);
+
+                        if (actualJsonData != *expectedJsonData)
+                        {
+                                spdlog::error("Received Json data: {}", actualJsonData.toStyledString());
+                        }
                 }
         }
 }

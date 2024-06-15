@@ -10,6 +10,7 @@ Notes: x
 #include <fstream>
 #include <gtest/gtest.h>
 #include <json/json.h>
+#include <memory>
 #include <spdlog/spdlog.h>
 #include <sstream>
 #include <string>
@@ -36,12 +37,42 @@ namespace Fetcher
                 auto actualData = Fetcher::fetchRequestedData(url);
 
                 // Read the expected contents from fetcherTest1.json
-                Json::Value expectedData = Tools::readJsonFileContents("fetcherTest1.json");
+                Json::Value expectedData = Tools::readJsonFileContents("../test/fetcherTest1.json");
 
                 // Assert that the fetched data is equal to the expected data
                 ASSERT_EQ(*actualData, expectedData);
 
                 if (*actualData != expectedData)
+                {
                         spdlog::error("Received data: {}", actualData->toStyledString());
+                }
+        }
+
+        // Test for SPY ETF data read and write
+        TEST(FetcherTest, fetcherTest2)
+        {
+                // Construct the file path dynamically
+                std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+                std::string filePath = "../test/" + testName + ".txt";
+
+                // Log
+                spdlog::info("{} test started. Reading and writing SPY ETF data...", testName);
+
+                // Fetch the data
+                Json::Value expectedData = Tools::readJsonFileContents("../test/fetcherTest1.json"); // Note: Assuming previous test passed and wrote some data to fetcherTest1.json
+
+                // Write the expected data to a file
+                Fetcher::writeRequestedData(std::make_unique<Json::Value>(expectedData), filePath);
+
+                // Read the actual contents from fetcherTest2.json
+                Json::Value actualData = Tools::readJsonFileContents(filePath);
+
+                // Assert that the fetched data is equal to the expected data
+                ASSERT_EQ(actualData, expectedData);
+
+                if (actualData != expectedData)
+                {
+                        spdlog::error("Received data: {}", actualData.toStyledString());
+                }
         }
 }
