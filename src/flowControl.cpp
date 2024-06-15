@@ -109,7 +109,7 @@ namespace Fetcher
                                 return Constants::FAILURE;
                         }
                         // Check if the response from FMP API is successful
-                        else if (Fetcher::checkAPIResponse(data) != Constants::SUCCESS)
+                        else if (!checkFlag(Fetcher::checkAPIResponse(data)))
                         {
                                 return Constants::FAILURE;
                         }

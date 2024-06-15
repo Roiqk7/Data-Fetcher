@@ -185,8 +185,6 @@ namespace Fetcher
         @return: The flag to determine if the response is successful
 
         Note: Works only with array or object type JSON objects.
-
-        TODO: Separate the cases into smaller functions.
         */
         Tools::Flag checkAPIResponse(const std::unique_ptr<Json::Value>& root)
         {
