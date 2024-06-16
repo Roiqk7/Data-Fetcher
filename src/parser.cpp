@@ -101,5 +101,17 @@ namespace Fetcher
 
                         spdlog::info("Running with provided arguments.");
                 }
+
+                /*
+                Function to add the arguments to the variables map.
+
+                @param vm: The variables map.
+                @param argument: The argument to be added.
+                @param value: The value to be added.
+                */
+                void addArgumentsToVariablesMap(const std::unique_ptr<boost::program_options::variables_map>& vm, const std::string& argument, const std::string& value)
+                {
+                        vm->insert(std::make_pair(argument, boost::program_options::variable_value(boost::any(value), false)));
+                }
         }
 }

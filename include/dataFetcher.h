@@ -1,0 +1,24 @@
+/*
+Date: 16/06/2024
+
+Description: This is the public entry point for the Fetcher module. It contains the declarations of the functions used to fetch data from an API.
+
+Notes: x
+*/
+
+#ifndef FETCHER_H
+#define FETCHER_H
+
+#include <json/json.h>
+#include <string>
+
+// Project wide namespace
+namespace Fetcher
+{
+        Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& startDate, const std::string& endDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+        Json::Value fetchHistoricalData(const std::string& urlString);
+        Json::Value fetchHistoricalDataFromFMPApi(const std::string& tickerSymbol, const std::string& startDate, const std::string& endDate, const std::string& timeFrame, const std::string& apiKey);
+        // TODO: Json::Value fetchHistoricalDataFromPolygonApi(const std::string& tickerSymbol, const std::string& startDate, const std::string& endDate, const std::string& timeFrame, const std::string& apiKey);
+}
+
+#endif // FETCHER_H

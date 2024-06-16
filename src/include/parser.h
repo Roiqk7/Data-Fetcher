@@ -21,6 +21,7 @@ namespace Fetcher
                 boost::program_options::options_description createOptionsDescription();
                 void parseCommandLineArguments(int argc, char **argv, boost::program_options::options_description& desc, std::unique_ptr<boost::program_options::variables_map>& vm);
                 void processParsedOptions(const std::unique_ptr<boost::program_options::variables_map>& vm, const boost::program_options::options_description& desc);
+                void addArgumentsToVariablesMap(const std::unique_ptr<boost::program_options::variables_map>& vm, const std::string& argument, const std::string& value);
         }
 }
 
