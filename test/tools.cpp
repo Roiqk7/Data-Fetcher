@@ -6,7 +6,7 @@ Description: This file contains the tests for the tools.cpp module.
 Notes: x
 */
 
-#include <boost/program_options.hpp>
+
 #include <gtest/gtest.h>
 #include <json/json.h>
 #include <spdlog/spdlog.h>
