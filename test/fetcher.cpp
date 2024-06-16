@@ -25,7 +25,7 @@ namespace Fetcher
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                std::string filePath = "../test/docs/" + testName + ".json";
+                std::string filePath = "../test/data/" + testName + ".json";
 
                 // Log
                 spdlog::info("{} test started. Fetching SPY ETF data...", testName);
@@ -53,13 +53,13 @@ namespace Fetcher
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                std::string filePath = "../test/docs/" + testName + ".txt";
+                std::string filePath = "../test/data/" + testName + ".txt";
 
                 // Log
                 spdlog::info("{} test started. Reading and writing SPY ETF data...", testName);
 
                 // Fetch the data
-                Json::Value expectedData = Tools::readJsonFileContents("../test/docs/fetcherTest1.json"); // Note: Assuming previous test passed and wrote some data to fetcherTest1.json
+                Json::Value expectedData = Tools::readJsonFileContents("../test/data/fetcherTest1.json"); // Note: Assuming previous test passed and wrote some data to fetcherTest1.json
 
                 // Write the expected data to a file
                 Fetcher::writeRequestedData(std::make_unique<Json::Value>(expectedData), filePath);

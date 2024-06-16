@@ -78,5 +78,6 @@ These functions will allow you, the user, to fetch historical data of a given st
 * `src/`: Contains the source files for the main application.
 * `src/include/`: Contains internally used header files.
 * `test/`: Contains the test files.
+* `test/data/`: Contains files used for testing.
 * `tool/`: Tools used, or offered, by the program.
 * `CMakeLists.txt`: CMake configuration file.

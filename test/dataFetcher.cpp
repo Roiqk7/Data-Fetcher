@@ -23,7 +23,7 @@ namespace Fetcher
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                std::string filePath = "../test/docs/" + testName + ".json";
+                std::string filePath = "../test/data/" + testName + ".json";
 
                 // Log
                 spdlog::info("{} test started. Fetching historical data using the URL...", testName);
@@ -51,7 +51,7 @@ namespace Fetcher
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                std::string filePath = "../test/docs/" + testName + ".json";
+                std::string filePath = "../test/data/" + testName + ".json";
 
                 // Log
                 spdlog::info("{} test started. Fetching historical data using the ticker symbol, from date, to date, time frame, API, and API key...", testName);
