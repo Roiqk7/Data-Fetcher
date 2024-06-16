@@ -57,16 +57,18 @@ Include the library in your C++ project by including the header files:
 
 Then, you can use the functions provided by the library:
 
-<detail>
-        <summary>Declarations</summary>
+<details>
+<summary>Declarations</summary>
 
-        ```cpp
-        Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate,
-                        const std::string& timeFrame, const std::string& api, const std::string& apiKey);
-        Json::Value fetchHistoricalData(const std::string& urlString);
-        Json::Value fetchHistoricalData(const std::string& urlString, const std::string& apiKey);
-        ```
-</detail>
+```cpp
+Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate,
+                const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+Json::Value fetchHistoricalData(const std::string& urlString);
+Json::Value fetchHistoricalData(const std::string& urlString, const std::string& apiKey);
+```
+</details>
+
+These functions will allow you, the user, to fetch historical data of a given stock/etf in a given period of time with a desired time frame. The programme supports the [FMP](https://site.financialmodelingprep.com) and [Polygon.io](https://polygon.io) APIs. The function will return a `Json::Value` object that contains the fetched data. Browse the [documentation](https://github.com/Roiqk7/Data-Fetcher/tree/main/docs) for more information.
 
 ## Project structure
 
