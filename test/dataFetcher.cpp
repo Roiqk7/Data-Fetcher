@@ -45,4 +45,29 @@ namespace Fetcher
                         spdlog::error("Received data: {}", actualData.toStyledString());
                 }
         }
+
+        // Test for fetching historical data using the ticker symbol, from date, to date, time frame, API, and API key
+        TEST(DataFetcherTest, dataFetcherTest2)
+        {
+                // Construct the file path dynamically
+                std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+                std::string filePath = "../test/docs/" + testName + ".json";
+
+                // Log
+                spdlog::info("{} test started. Fetching historical data using the ticker symbol, from date, to date, time frame, API, and API key...", testName);
+
+                // Fetch the data
+                Json::Value actualData = Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-08-20", "4hour", "fmp", Constants::FMP_API_KEY);
+
+                // Read the expected contents from dataFetcherTest2.json
+                Json::Value expectedData = Tools::readJsonFileContents(filePath);
+
+                // Assert that the fetched data is equal to the expected data
+                ASSERT_EQ(actualData, expectedData);
+
+                if (actualData != expectedData)
+                {
+                        spdlog::error("Received data: {}", actualData.toStyledString());
+                }
+        }
 }
