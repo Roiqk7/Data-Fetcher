@@ -10,6 +10,7 @@ Notes: x
 #include <string>
 #include "../include/tools.h"
 #include "../include/dataFetcher.h"
+#include "../src/include/flowControl.h"
 #include "../src/include/inputHandler.h"
 
 namespace Fetcher
@@ -34,16 +35,7 @@ namespace Fetcher
                 // Initialize the processed user input
                 InputHandler::ProcessedUserInput processedUserInput;
 
-                // Process the user input
-                InputHandler::proccessUserInput(rawUserInput, processedUserInput);
-
-                // Run the program
-                FlowControl::controlFlow(processedUserInput);
-
-                // Read the fetched data
-                const Json::Value fetchedData = Tools::readJsonFileContents(Constants::FETCHED_DATA_FILE_PATH);
-
-                return fetchedData;
+                return FlowControl::handleUserRequest(rawUserInput, processedUserInput);
         }
 
         /*
@@ -61,16 +53,7 @@ namespace Fetcher
                 // Initialize the processed user input
                 InputHandler::ProcessedUserInput processedUserInput;
 
-                // Process the user input
-                InputHandler::proccessUserInput(rawUserInput, processedUserInput);
-
-                // Run the program
-                FlowControl::controlFlow(processedUserInput);
-
-                // Read the fetched data
-                const Json::Value fetchedData = Tools::readJsonFileContents(Constants::FETCHED_DATA_FILE_PATH);
-
-                return fetchedData;
+                return FlowControl::handleUserRequest(rawUserInput, processedUserInput);
         }
 
         /*
@@ -89,15 +72,6 @@ namespace Fetcher
                 // Initialize the processed user input
                 InputHandler::ProcessedUserInput processedUserInput;
 
-                // Process the user input
-                InputHandler::proccessUserInput(rawUserInput, processedUserInput);
-
-                // Run the program
-                FlowControl::controlFlow(processedUserInput);
-
-                // Read the fetched data
-                const Json::Value fetchedData = Tools::readJsonFileContents(Constants::FETCHED_DATA_FILE_PATH);
-
-                return fetchedData;
+                return FlowControl::handleUserRequest(rawUserInput, processedUserInput);
         }
 }

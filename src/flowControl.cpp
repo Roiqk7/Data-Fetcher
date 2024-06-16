@@ -19,6 +19,28 @@ namespace Fetcher
         namespace FlowControl
         {
                 /*
+                Handle the user request.
+
+                @param rawUserInput: The raw user input.
+                @param processedUserInput: The processed user input.
+
+                @return: The fetched data.
+                */
+                Json::Value handleUserRequest(const InputHandler::RawUserInput& rawUserInput, InputHandler::ProcessedUserInput& processedUserInput)
+                {
+                        // Process the user input
+                        InputHandler::proccessUserInput(rawUserInput, processedUserInput);
+
+                        // Run the program
+                        FlowControl::controlFlow(processedUserInput);
+
+                        // Read the fetched data
+                        const Json::Value fetchedData = Tools::readJsonFileContents(Constants::FETCHED_DATA_FILE_PATH);
+
+                        return fetchedData;
+                }
+
+                /*
                 Runs the program based on the command line arguments.
 
                 @param argc: The number of command line arguments.
