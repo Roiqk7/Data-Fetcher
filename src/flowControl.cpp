@@ -8,11 +8,11 @@ Notes: x
 
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
+#include "../include/tools.h"
 #include "../src/include/constants.h"
 #include "../src/include/fetcher.h"
 #include "../src/include/flowControl.h"
-#include "../src/include/parser.h"
-#include "../include/tools.h"
+#include "../src/include/inputHandler.h"
 
 namespace Fetcher
 {
@@ -26,19 +26,16 @@ namespace Fetcher
 
                 @return: True if the programme finished successfully, false otherwise.
                 */
-                Tools::Flag controlFlow(int argc, char **argv)
+                Tools::Flag controlFlow(const InputHandler::ProcessedUserInput& processedUserInput)
                 {
                         // Initialize the flag optimistically as success by default
                         Tools::Flag flag(Constants::SUCCESS);
-
-                        // Parse the command line arguments
-                        auto vm = Parser::parseArguments(argc, argv, flag);
 
                         // Handle hardcoded API key
                         handleHardcodeAPIKey();
 
                         // Handle the programme based on the command line arguments
-                        flag = handleProgramme(argc, argv, vm);
+                        flag = handleProgramme(processedUserInput);
 
                         // End the programme
                         return checkFlag(flag);
@@ -53,14 +50,14 @@ namespace Fetcher
 
                 @return: The flag to determine if the programme ran successfully.
                 */
-                Tools::Flag handleProgramme(int argc, char **argv, const std::unique_ptr<boost::program_options::variables_map>& vm)
+                Tools::Flag handleProgramme(const InputHandler::ProcessedUserInput& processedUserInput)
                 {
                         Tools::Flag flag(Constants::SUCCESS);
 
                         // Check if the --test argument was provided
-                        if (vm->count("test"))
+                        if (processedUserInput.test)
                         {
-                                flag = runTests(argc, argv);
+                                flag = runTests();
                                 if (!checkSuccessFlag(flag))
                                 {
                                         // Handle failed tests
@@ -69,9 +66,9 @@ namespace Fetcher
                         }
 
                         // Check if the required arguments for running the program are provided
-                        if (Tools::checkProgramArguments(vm))
+                        if (!processedUserInput.url.empty())
                         {
-                                flag = runProgram(vm);
+                                flag = runProgram(processedUserInput);
                                 if (!checkSuccessFlag(flag))
                                 {
                                         // Handle failed programme
@@ -90,10 +87,10 @@ namespace Fetcher
 
                 @return: The flag to determine if the tests ran successfully.
                 */
-                Tools::Flag runTests(int argc, char **argv)
+                Tools::Flag runTests()
                 {
                         // Initialize Google Test
-                        ::testing::InitGoogleTest(&argc, argv);
+                        ::testing::InitGoogleTest();
 
                         return RUN_ALL_TESTS();
                 }
@@ -105,9 +102,9 @@ namespace Fetcher
 
                 @return: The flag to determine if the programme ran successfully.
                 */
-                Tools::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm)
+                Tools::Flag runProgram(const InputHandler::ProcessedUserInput& processedUserInput)
                 {
-                        Tools::URL url = Tools::getURL(vm);
+                        Tools::URL url = processedUserInput.url;
 
                         // Check if the URL is valid
                         if (!Tools::checkValidURL(url))

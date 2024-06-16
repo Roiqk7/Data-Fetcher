@@ -22,7 +22,7 @@ namespace Fetcher
                 const Tools::Flag SUCCESS_END = 2; // Program must be terminated on purpose
                 const Tools::Flag FAILURE_END = 3; // Fatal error, program must be terminated
         // File paths
-                const Tools::FilePath DEFAULT_DATA_FILE_PATH = "../data/data.json"; // Default file path for the fetched data
+                const Tools::FilePath FETCHED_DATA_FILE_PATH = "../data/data.json"; // Default file path for the fetched data
         // URL
                 // Ticker Symbols
                 const Tools::URL SPY = "SPY"; // SPDR S&P 500 ETF Trust

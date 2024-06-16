@@ -96,7 +96,7 @@ namespace Fetcher
                 else
                 {
                         spdlog::warn("Failed to open file: {}. Writing data to ../data/data.json", filePath);
-                        writeRequestedData(root, Constants::DEFAULT_DATA_FILE_PATH);
+                        writeRequestedData(root, Constants::FETCHED_DATA_FILE_PATH);
                 }
         }
 

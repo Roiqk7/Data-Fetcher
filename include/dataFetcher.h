@@ -15,9 +15,9 @@ Notes: x
 // Project wide namespace
 namespace Fetcher
 {
-        Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& startDate, const std::string& endDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+        Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
         Json::Value fetchHistoricalData(const std::string& urlString);
-        Json::Value fetchHistoricalDataFromFMPApi(const std::string& tickerSymbol, const std::string& startDate, const std::string& endDate, const std::string& timeFrame, const std::string& apiKey);
+        Json::Value fetchHistoricalData(const std::string& urlString, const std::string& apiKey);
         // TODO: Json::Value fetchHistoricalDataFromPolygonApi(const std::string& tickerSymbol, const std::string& startDate, const std::string& endDate, const std::string& timeFrame, const std::string& apiKey);
 }
 

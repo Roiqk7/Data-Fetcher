@@ -9,18 +9,19 @@ Notes: x
 #ifndef FLOWCONTROL_H
 #define FLOWCONTROL_H
 
-
+#include <json/json.h>
 #include <string>
 #include "../src/include/constants.h"
+#include "../src/include/inputHandler.h"
 
 namespace Fetcher
 {
         namespace FlowControl
         {
-                Tools::Flag controlFlow(int argc, char **argv);
-                Tools::Flag handleProgramme(int argc, char **argv, const std::unique_ptr<boost::program_options::variables_map>& vm);
-                Tools::Flag runTests(int argc, char **argv);
-                Tools::Flag runProgram(const std::unique_ptr<boost::program_options::variables_map>& vm);
+                Tools::Flag controlFlow(const InputHandler::ProcessedUserInput& processedUserInput);
+                Tools::Flag handleProgramme(const InputHandler::ProcessedUserInput& processedUserInput);
+                Tools::Flag runTests();
+                Tools::Flag runProgram(const InputHandler::ProcessedUserInput& processedUserInput);
                 Tools::Flag checkFlag(const Tools::Flag flag);
                 bool checkSuccessFlag(const Tools::Flag& flag);
                 void handleHardcodeAPIKey();

@@ -13,8 +13,9 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include <sstream>
 #include <string>
-#include "../src/include/constants.h"
 #include "../include/tools.h"
+#include "../src/include/constants.h"
+#include "../src/include/inputHandler.h"
 
 namespace Fetcher
 {
@@ -59,79 +60,6 @@ namespace Fetcher
                         }
 
                         return hiddenApiKey;
-                }
-
-                /*
-                Create a URL for fetching data from the API
-
-                @param fromDate: The start date in YYYY-MM-DD format.
-                @param toDate: The end date in YYYY-MM-DD format.
-                @param timeframe: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
-
-                @return: The URL for fetching data from the API
-                */
-                URL createUrl(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame)
-                {
-                        return Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH
-                                + Constants::SPY + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND
-                                + "to=" + toDate + Constants::AND + Constants::API_KEY_PARAM + Constants::FMP_API_KEY;
-                }
-
-                /*
-                Gets the URL from the command line arguments
-
-                @param vm: The command line arguments
-
-                @return: The URL for fetching data from the API
-                */
-                URL getURL(const std::unique_ptr<boost::program_options::variables_map>& vm)
-                {
-                        URL url;
-
-                        if (checkFromToTimeFrameArguments(vm))
-                        {
-                                std::string fromDate = vm->count("from") ? (*vm)["from"].as<std::string>() : (*vm)["f"].as<std::string>();
-                                std::string toDate = vm->count("to") ? (*vm)["to"].as<std::string>() : (*vm)["t"].as<std::string>();
-                                std::string timeFrame = vm->count("timeframe") ? (*vm)["timeframe"].as<std::string>() : (*vm)["tf"].as<std::string>();
-                                url = createUrl(fromDate, toDate, timeFrame);
-                        }
-                        else if (checkURLArgument(vm))
-                        {
-                                // Custom URL provided - may cause unintended behaviour
-                                spdlog::warn("Custom URL provided. Be warned that unintended behaviour may occur.");
-                                url = vm->count("url") ? (*vm)["url"].as<std::string>() : (*vm)["u"].as<std::string>();
-                        }
-                        else
-                        {
-                                // Return an empty string if the URL is not provided
-                                return "";
-                        }
-                        return url;
-                }
-
-                /*
-                Check if the URL is valid
-
-                @param url: The URL to be checked
-
-                @return: True if the URL is valid, false otherwise
-                */
-                bool checkValidURL(const URL& url)
-                {
-                        // Note: Change the criteria if necessary
-                        return url.find(Constants::FMP_API_URL) != std::string::npos;
-                }
-
-                /*
-                Get the output file path from the command line arguments
-
-                @param vm: The command line arguments
-
-                @return: The output file path
-                */
-                FilePath getOutputFilePath(const std::unique_ptr<boost::program_options::variables_map>& vm)
-                {
-                        return vm->count("output") ? (*vm)["output"].as<std::string>() : Constants::DEFAULT_DATA_FILE_PATH;
                 }
 
                 /*
@@ -191,44 +119,6 @@ namespace Fetcher
                         }
 
                         file << contents;
-                }
-
-                /*
-                Check if the required arguments for running the programme are provided.
-
-                @param vm: The variables map.
-
-                @return: True if the required arguments are provided, false otherwise.
-                */
-                bool checkProgramArguments(const std::unique_ptr<boost::program_options::variables_map>& vm)
-                {
-                        // Note: The program requires the --from, --to, and --timeframe arguments to be provided all at the same time
-                        return checkFromToTimeFrameArguments(vm) || checkURLArgument(vm);
-                }
-
-                /*
-                Check if the URL argument is provided.
-
-                @param vm: The variables map.
-
-                @return: True if the URL argument is provided, false otherwise.
-                */
-                bool checkURLArgument(const std::unique_ptr<boost::program_options::variables_map>& vm)
-                {
-                        return (vm->count("url") || vm->count("u"));
-                }
-
-                /*
-                Check if the required arguments for the --from, --to and --timeframe arguments are provided.
-
-                @param vm: The variables map.
-
-                @return: True if the required arguments are provided, false otherwise.
-                */
-                bool checkFromToTimeFrameArguments(const std::unique_ptr<boost::program_options::variables_map>& vm)
-                {
-                        // Note: The program requires the --from, --to, and --timeframe arguments to be provided all at the same time
-                        return ((vm->count("from") || vm->count("f")) && (vm->count("to") || vm->count("t")) && (vm->count("timeframe") || vm->count("tf")));
                 }
 
                 /*
