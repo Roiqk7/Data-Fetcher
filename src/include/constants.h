@@ -3,7 +3,7 @@ Date: 12/06/2024
 
 Description: This file contains the constants used in the Fetcher module.
 
-Notes: Global by nature. The difference between constants and globals is that globals are assigned by the user, while constants are predefined.
+Notes: x
 */
 
 #include <string>
@@ -42,7 +42,7 @@ namespace Fetcher
                 const Tools::URL FMP_HISTORICAL_DATA_ENDPOINT = "historical-chart/"; // Add time frame and time period at the end
 
                 // Add the API key at the end of the URL
-                const Tools::URL FMP_API_KEY = "x"; // NOTE: DO NOT SHARE THIS KEY
+                const Tools::URL FMP_API_KEY = "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa"; // NOTE: DO NOT SHARE THIS KEY
         }
 }
 

@@ -8,10 +8,10 @@ Notes: x
 
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
-#include "../include/constants.h"
-#include "../include/fetcher.h"
-#include "../include/flowControl.h"
-#include "../include/parser.h"
+#include "../src/include/constants.h"
+#include "../src/include/fetcher.h"
+#include "../src/include/flowControl.h"
+#include "../src/include/parser.h"
 #include "../include/tools.h"
 
 namespace Fetcher

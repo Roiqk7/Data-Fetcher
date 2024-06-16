@@ -6,7 +6,7 @@ Description: This file contains the main function for this module.
 Notes: x
 */
 
-#include "../include/flowControl.h"
+#include "../src/include/flowControl.h"
 #include "../include/tools.h"
 
 /*

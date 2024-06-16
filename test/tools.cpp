@@ -10,8 +10,8 @@ Notes: x
 #include <gtest/gtest.h>
 #include <json/json.h>
 #include <spdlog/spdlog.h>
-#include "../include/constants.h"
-#include "../include/fetcher.h"
+#include "../src/include/constants.h"
+#include "../src/include/fetcher.h"
 #include "../include/tools.h"
 
 namespace Fetcher
