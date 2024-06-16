@@ -64,6 +64,7 @@ if(BUILD_TESTS)
         add_executable(FetcherTests
                 test/dataFetcher.cpp
                 test/fetcher.cpp
+                test/inputHandler.cpp
                 test/tools.cpp
         )
 

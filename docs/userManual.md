@@ -13,6 +13,8 @@ functions and provide you with examples on how to use them.
 
 ### fetchHistoricalData()
 
+Return a `Json::Value` object that contains the fetched data.
+
 #### Declarations
 
 ```cpp
@@ -30,6 +32,18 @@ Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::stri
 * `toDate` - The end date of the historical data. Example: `2023-09-10`. (YYYY-MM-DD)
 * `timeFrame` - The time frame of the historical data. Example: `4hour`. (Each API supports different time frames)
 * `api` - The API to use for fetching the data. Example: `fml`. (Supported APIs: `fml`, `polygon`)
+
+#### Return value
+
+A `Json::Value` object that contains the fetched data. The type of the `Json::Value` may differ but generally it will be an array.
+
+#### Complexity
+
+The complexity of this function is `O(N)` where `N` is the size of the fetched data.
+
+#### Exceptions
+
+* If the user provided arguments are invalid, the function will throw [std::invalid_argument](https://en.cppreference.com/w/cpp/error/invalid_argument).
 
 #### Examples
 

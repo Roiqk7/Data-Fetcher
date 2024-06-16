@@ -29,6 +29,9 @@ namespace Fetcher
         */
         Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey)
         {
+                // Validate user input
+                InputHandler::userInputValidator({tickerSymbol, fromDate, toDate, timeFrame, api, apiKey}, {"tickerSymbol", "fromDate", "toDate", "timeFrame", "api", "apiKey"});
+
                 // Initialize the raw user input
                 InputHandler::RawUserInput rawUserInput(tickerSymbol, fromDate, toDate, timeFrame, api, apiKey);
 
@@ -47,6 +50,9 @@ namespace Fetcher
         */
         Json::Value fetchHistoricalData(const std::string& urlString)
         {
+                // Validate user input
+                InputHandler::userInputValidator({urlString}, {"urlString"});
+
                 // Initialize the raw user input
                 InputHandler::RawUserInput rawUserInput(urlString);
 
@@ -66,6 +72,9 @@ namespace Fetcher
         */
         Json::Value fetchHistoricalData(const std::string& urlString, const std::string& apiKey)
         {
+                // Validate user input
+                InputHandler::userInputValidator({urlString, apiKey}, {"urlString", "apiKey"});
+
                 // Initialize the raw user input
                 InputHandler::RawUserInput rawUserInput(urlString, apiKey);
 

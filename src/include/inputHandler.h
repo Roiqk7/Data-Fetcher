@@ -58,6 +58,7 @@ namespace Fetcher
                 };
 
         // Functions
+                void userInputValidator(const std::vector<std::string>& args, const std::vector<std::string>& argNames);
                 void proccessUserInput(const RawUserInput& rawUserInput, ProcessedUserInput& processedUserInput);
                 Tools::URL createUrl(const std::string& url);
                 Tools::URL createUrl(const std::string& url, const std::string& apiKey);

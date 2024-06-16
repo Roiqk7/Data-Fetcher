@@ -9,7 +9,9 @@ Notes: x
 #include <algorithm>
 #include <cctype>
 #include <spdlog/spdlog.h>
+#include <stdexcept>
 #include <string>
+#include <vector>
 #include "../include/tools.h"
 #include "../src/include/constants.h"
 #include "../src/include/inputHandler.h"
@@ -47,6 +49,39 @@ namespace Fetcher
                         spdlog::info("Processed user input: URL: {}, Test: {}", Tools::hideApiKey(url), test);
                 }
         // Functions
+                /*
+                Validate the user input.
+
+                @param args: The arguments to validate.
+                @param argNames: The names of the arguments to validate.
+                */
+                void userInputValidator(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
+                {
+                        // Check if any of the arguments are missing
+                        if (args.size() != argNames.size())
+                        {
+                                spdlog::error("Mismatch between number of arguments and number of argument names.");
+                                throw std::invalid_argument("Invalid input. Argument count does not match expected count.");
+                        }
+
+                        // Check if the arguments are empty
+                        for (size_t i = 0; i < args.size(); i++)
+                        {
+                                const std::string& arg = args[i];
+                                if (arg.empty())
+                                {
+                                        spdlog::error("Invalid input. Argument '{}' (position {}) is empty.", argNames[i], i);
+                                        throw std::invalid_argument("Invalid input. Please provide enough information to fetch data.");
+                                }
+                        }
+                }
+
+                /*
+                Process the user input.
+
+                @param rawUserInput: The raw user input.
+                @param processedUserInput: The processed user input.
+                */
                 void proccessUserInput(const RawUserInput& rawUserInput, ProcessedUserInput& processedUserInput)
                 {
                         // Check if the raw input has a URL
@@ -81,7 +116,7 @@ namespace Fetcher
                         }
 
                         // If none of the above conditions are met, throw an error
-                        spdlog::error("Invalid input. Not enough data provided.");
+                        spdlog::error("Invalid input. URL could not be created.");
                         throw std::invalid_argument("Invalid input. Please provide enough information to fetch data.");
                 }
 

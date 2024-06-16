@@ -32,7 +32,8 @@ namespace Fetcher
         */
         std::unique_ptr<Json::Value> fetchRequestedData(const Tools::URL& url)
         {
-                std::string readBuffer; // Buffer to store the fetched data
+                // Buffer to store the fetched data
+                std::string readBuffer;
 
                 // Hide the API key in the log
                 Tools::URL hiddenApiKey = Tools::hideApiKey(url);
