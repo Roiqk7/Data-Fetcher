@@ -89,6 +89,12 @@ namespace Fetcher
                                         throw std::invalid_argument("Invalid input. Please provide a valid URL.");
                                 }
                         }
+
+                        // Verify the API
+                        // TODO
+
+                        // Verify from and to format
+                        // TODO
                 }
 
                 /*

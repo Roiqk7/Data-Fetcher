@@ -196,9 +196,8 @@ namespace Fetcher
                         for (const Json::Value& item : *root)
                         {
                                 // Check each object in the array for "Error Message"
-                                if (item.isMember("Error Message"))
+                                if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(item)))
                                 {
-                                        spdlog::error("Error Message: {}", item["Error Message"].asString());
                                         return Constants::FAILURE;
                                 }
                         }
@@ -208,9 +207,8 @@ namespace Fetcher
                 else if (root && root->isObject())
                 {
                         // Directly check the object for "Error Message"
-                        if (root->isMember("Error Message"))
+                        if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(item)))
                         {
-                                spdlog::error("Error Message: {}", (*root)["Error Message"].asString());
                                 return Constants::FAILURE;
                         }
                         return Constants::SUCCESS;
@@ -218,5 +216,24 @@ namespace Fetcher
                 // Log an error or handle the case where root is not an array
                 spdlog::error("Unexpected Json type was found in the API response.");
                 return Constants::FAILURE;
+        }
+
+        /*
+        Checks the JSON object for "Error Message".
+
+        @param root: The Json::Value object containing the fetched data
+
+        @return: The flag to determine if the response is successful
+        */
+        Tools::Flag checkJsonObjectForErrorMessage(const Json::Value& root)
+        {
+                // Directly check the object for "Error Message"
+                if (root->isMember("Error Message"))
+                {
+                        spdlog::error("Error Message: {}", (*root)["Error Message"].asString());
+                        return Constants::FAILURE;
+                }
+
+                return Constants::SUCCESS;
         }
 }

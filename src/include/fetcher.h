@@ -25,6 +25,7 @@ namespace Fetcher
         CURL* initCurl(Tools::URL url, std::string& readBuffer);
         CURLcode performRequest(CURL* curl);
         Tools::Flag checkAPIResponse(const std::unique_ptr<Json::Value>& root);
+        Tools::Flag checkJsonObjectForErrorMessage(const Json::Value& root);
 }
 
 #endif // FETCHER_H
