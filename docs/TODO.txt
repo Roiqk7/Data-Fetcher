@@ -1,3 +1,4 @@
 - separate functions in inputHandler.cpp into smaller ones.
 - implement polygon for options data
+- add more exceptions to fetcher functions
 - finish and simplify, debug and write more tests
