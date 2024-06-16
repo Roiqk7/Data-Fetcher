@@ -50,4 +50,23 @@ namespace Fetcher
                 // Catch the invalid user input exception
                 ASSERT_THROW(InputHandler::userInputValidator(args, argNames), std::invalid_argument);
         }
+
+        // Test for catching invalid user input in the userInputValidator() function - unsupported URL
+        TEST(InputHandlerTest, userInputValidatorTest3)
+        {
+                // Construct the file path dynamically
+                std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+
+                // Log
+                spdlog::info("{} test started. Catching invalid user input...", testName);
+
+                // Invalid user input - unsupported URL
+                std::vector<std::string> args = {"google.com"};
+
+                // Argument names
+                std::vector<std::string> argNames = {"url"};
+
+                // Catch the invalid user input exception
+                ASSERT_THROW(InputHandler::userInputValidator(args, argNames), std::invalid_argument);
+        }
 }

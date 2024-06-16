@@ -54,6 +54,8 @@ namespace Fetcher
 
                 @param args: The arguments to validate.
                 @param argNames: The names of the arguments to validate.
+
+                TODO Separate into smaller functions
                 */
                 void userInputValidator(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
                 {
@@ -72,6 +74,19 @@ namespace Fetcher
                                 {
                                         spdlog::error("Invalid input. Argument '{}' (position {}) is empty.", argNames[i], i);
                                         throw std::invalid_argument("Invalid input. Please provide enough information to fetch data.");
+                                }
+                        }
+
+                        // Check the URL for the API
+                        if (std::find(argNames.begin(), argNames.end(), "url") != argNames.end())
+                        {
+                                const std::string& url = args[std::find(argNames.begin(), argNames.end(), "url") - argNames.begin()];
+
+                                // Check if the URL is valid
+                                if (url.find(Constants::FMP_API_URL) == std::string::npos && url.find(Constants::POLYGON_API_URL) == std::string::npos)
+                                {
+                                        spdlog::error("Invalid input. URL '{}' is not supported.", url);
+                                        throw std::invalid_argument("Invalid input. Please provide a valid URL.");
                                 }
                         }
                 }

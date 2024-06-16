@@ -36,13 +36,17 @@ namespace Fetcher
                 const Tools::URL API_KEY_PARAM = "apikey=";
         /// FMP API URL Constants - sorted based on the order of use
                 // API URL Constants - sorted based on the order of use
-                const Tools::URL FMP_API_URL = "https://financialmodelingprep.com/api/v3/"; // Add the endpoint and the ticker symbol at the end
+                const Tools::URL FMP_API_URL = "https://financialmodelingprep.com/api/v3/";
 
                 // API Endpoint Constants
                 const Tools::URL FMP_HISTORICAL_DATA_ENDPOINT = "historical-chart/"; // Add time frame and time period at the end
 
                 // Add the API key at the end of the URL
                 const Tools::URL FMP_API_KEY = "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa"; // NOTE: DO NOT SHARE THIS KEY
+        // Polygon API URL Constants - sorted based on the order of use
+                const Tools::URL POLYGON_API_URL = "https://api.polygon.io/";
+
+                const Tools::URL POLYGON_API_KEY = "US3m3PmjA1TXqHpLCl2A9HmH6U5LhPz1"; // NOTE: DO NOT SHARE THIS KEY
         }
 }
 
