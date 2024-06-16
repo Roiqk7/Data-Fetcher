@@ -77,7 +77,7 @@ namespace Fetcher
                                 }
                         }
 
-                        // Check the URL for the API
+                        // Verify the URL
                         if (std::find(argNames.begin(), argNames.end(), "url") != argNames.end())
                         {
                                 const std::string& url = args[std::find(argNames.begin(), argNames.end(), "url") - argNames.begin()];
