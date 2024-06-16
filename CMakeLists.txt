@@ -12,7 +12,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Include the project's headers
 include_directories(${CMAKE_SOURCE_DIR}/include)
-include_directories(${CMAKE_SOURCE_DIR}/src/include)
 
 # Create a library for the core functionality
 add_library(FetcherLib
@@ -23,7 +22,10 @@ add_library(FetcherLib
         tool/tools.cpp
 )
 
-# Add the executable which is main.cpp only
+# Make the FetcherLib headers available to other projects
+target_include_directories(FetcherLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# Add the executable main.cpp
 add_executable(Main main.cpp)
 
 # Link the FetcherLib library with the Main executable
@@ -32,18 +34,18 @@ target_link_libraries(Main FetcherLib)
 # Include external libraries
 # Find and include the CURL library
 find_package(CURL REQUIRED)
-include_directories(${CURL_INCLUDE_DIR})
+target_include_directories(FetcherLib PUBLIC ${CURL_INCLUDE_DIR})
 target_link_libraries(FetcherLib ${CURL_LIBRARIES})
 
 # Find and include the Google test library
 find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
+target_include_directories(FetcherLib PUBLIC ${GTEST_INCLUDE_DIRS})
 target_link_libraries(FetcherLib GTest::GTest GTest::Main)
 
 # Find and include the Jsoncpp library
 find_path(JSONCPP_INCLUDE_DIR json/json.h)
 find_library(JSONCPP_LIBRARY jsoncpp)
-include_directories(${JSONCPP_INCLUDE_DIR})
+target_include_directories(FetcherLib PUBLIC ${JSONCPP_INCLUDE_DIR})
 target_link_libraries(FetcherLib ${JSONCPP_LIBRARY})
 
 # Find and include the spdlog library

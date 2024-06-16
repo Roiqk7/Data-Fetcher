@@ -9,7 +9,7 @@ Notes: x
 #include <json/json.h>
 #include <string>
 #include "../include/tools.h"
-#include "../include/dataFetcher.h"
+#include "../include/dataFetcher/dataFetcher.h"
 #include "../src/include/flowControl.h"
 #include "../src/include/inputHandler.h"
 

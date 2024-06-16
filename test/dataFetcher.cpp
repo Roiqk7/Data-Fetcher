@@ -12,7 +12,7 @@ Notes: x
 #include <json/json.h>
 #include <spdlog/spdlog.h>
 #include <string>
-#include "../include/dataFetcher.h"
+#include "../include/dataFetcher/dataFetcher.h"
 #include "../include/tools.h"
 #include "../src/include/constants.h"
 

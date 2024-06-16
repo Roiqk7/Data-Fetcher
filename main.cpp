@@ -7,7 +7,7 @@ Notes: When deleting this file dont forget to delete the main from CMakeLists.tx
 */
 
 #include <json/json.h>
-#include "include/dataFetcher.h"
+#include <dataFetcher/dataFetcher.h>
 
 int main()
 {
