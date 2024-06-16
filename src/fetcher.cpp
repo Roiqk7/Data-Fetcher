@@ -207,7 +207,7 @@ namespace Fetcher
                 else if (root && root->isObject())
                 {
                         // Directly check the object for "Error Message"
-                        if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(item)))
+                        if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(*root)))
                         {
                                 return Constants::FAILURE;
                         }
@@ -228,9 +228,9 @@ namespace Fetcher
         Tools::Flag checkJsonObjectForErrorMessage(const Json::Value& root)
         {
                 // Directly check the object for "Error Message"
-                if (root->isMember("Error Message"))
+                if (root.isMember("Error Message"))
                 {
-                        spdlog::error("Error Message: {}", (*root)["Error Message"].asString());
+                        spdlog::error("Error Message: {}", (root)["Error Message"].asString());
                         return Constants::FAILURE;
                 }
 
