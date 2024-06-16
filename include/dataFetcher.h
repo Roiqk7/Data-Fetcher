@@ -19,6 +19,7 @@ namespace Fetcher
                 const std::string& timeFrame, const std::string& api, const std::string& apiKey);
         Json::Value fetchHistoricalData(const std::string& urlString);
         Json::Value fetchHistoricalData(const std::string& urlString, const std::string& apiKey);
+        // void runUnitTests();
 }
 
 #endif // FETCHER_H

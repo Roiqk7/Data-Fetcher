@@ -52,6 +52,7 @@ namespace Fetcher
                 public:
                 // Constructors
                         ProcessedUserInput(); // Default constructor.
+                        ProcessedUserInput(bool test); // Constructor.
                 // Functions
                         void logProcessedUserInput() const; // Log the processed user input.
                 };

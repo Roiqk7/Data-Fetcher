@@ -39,6 +39,9 @@ namespace Fetcher
                 ProcessedUserInput::ProcessedUserInput()
                         : url(""), test(false) { }
 
+                ProcessedUserInput::ProcessedUserInput(bool test)
+                        : url(""), test(test) { }
+
                 void ProcessedUserInput::logProcessedUserInput() const
                 {
                         spdlog::info("Processed user input: URL: {}, Test: {}", Tools::hideApiKey(url), test);

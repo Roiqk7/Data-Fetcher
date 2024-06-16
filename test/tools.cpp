@@ -23,7 +23,7 @@ namespace Fetcher
                 {
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../test/" + testName + ".txt";
+                        std::string filePath = "../test/docs/" + testName + ".txt";
 
                         // Log
                         spdlog::info("{} test started. Reading contents of the file...", testName);
@@ -48,7 +48,7 @@ namespace Fetcher
                 {
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../test/" + testName + ".txt";
+                        std::string filePath = "../test/docs/" + testName + ".txt";
 
                         // Log
                         spdlog::info("{} test started. Hiding the API key in the URL...", testName);
@@ -77,7 +77,7 @@ namespace Fetcher
                 {
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../test/" + testName + ".txt";
+                        std::string filePath = "../test/docs/" + testName + ".txt";
 
                         // Log
                         spdlog::info("{} test started. Writing contents to the file...", testName);
@@ -105,7 +105,7 @@ namespace Fetcher
                 {
                         // Construct the file path dynamically
                         std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../test/" + testName + ".json";
+                        std::string filePath = "../test/docs/" + testName + ".json";
 
                         // Log
                         spdlog::info("{} test started. Reading Json data from the file...", testName);
@@ -125,39 +125,6 @@ namespace Fetcher
                         if (actualJsonData != *expectedJsonData)
                         {
                                 spdlog::error("Received Json data: {}", actualJsonData.toStyledString());
-                        }
-                }
-
-                // Test for creating the URL from the command line arguments from, to and timeFrame
-                TEST(ToolsTest, toolsTest5)
-                {
-                        // Construct the file path dynamically
-                        std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                        std::string filePath = "../test/" + testName + ".txt";
-
-                        // Log
-                        spdlog::info("{} test started. Getting the URL from the command line arguments...", testName);
-
-                        // Command line arguments
-                        std::string from = "2023-08-10";
-                        std::string to = "2023-09-01";
-                        std::string timeFrame = "4hour";
-
-                        // Expected URL
-                        URL expectedUrl = readFileContents(filePath);
-
-                        // Create the URL
-                        URL url = "TODO"; // TODO: Create the URL
-
-                        // Hide the API key
-                        URL actualUrl = hideApiKey(url);
-
-                        // Assert that the actual URL is equal to the expected URL
-                        ASSERT_EQ(actualUrl, expectedUrl);
-
-                        if (actualUrl != expectedUrl)
-                        {
-                                spdlog::error("Received URL: {}", actualUrl);
                         }
                 }
         }

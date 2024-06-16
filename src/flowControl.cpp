@@ -92,9 +92,8 @@ namespace Fetcher
                                         return checkFlag(flag);
                                 }
                         }
-
                         // Check if the required arguments for running the program are provided
-                        if (!processedUserInput.url.empty())
+                        else if (!processedUserInput.url.empty())
                         {
                                 flag = runProgram(processedUserInput);
                                 if (!checkSuccessFlag(flag))

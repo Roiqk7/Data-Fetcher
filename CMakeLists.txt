@@ -23,17 +23,11 @@ add_library(FetcherLib
         tool/tools.cpp
 )
 
-# Create a library for the tests
-add_library(FetcherTests
-        test/fetcher.cpp
-        test/tools.cpp
-)
-
 # Add the executable which is main.cpp only
 add_executable(Main main.cpp)
 
 # Link the FetcherLib library with the Main executable
-target_link_libraries(Main FetcherLib FetcherTests)
+target_link_libraries(Main FetcherLib)
 
 # Include external libraries
 # Find and include the CURL library
@@ -41,9 +35,10 @@ find_package(CURL REQUIRED)
 include_directories(${CURL_INCLUDE_DIR})
 target_link_libraries(FetcherLib ${CURL_LIBRARIES})
 
-# Find and include the Google Test package
+# Find and include the Google test library
 find_package(GTest REQUIRED)
-target_link_libraries(FetcherTests GTest::GTest GTest::Main)
+include_directories(${GTEST_INCLUDE_DIRS})
+target_link_libraries(FetcherLib GTest::GTest GTest::Main)
 
 # Find and include the Jsoncpp library
 find_path(JSONCPP_INCLUDE_DIR json/json.h)
@@ -54,3 +49,21 @@ target_link_libraries(FetcherLib ${JSONCPP_LIBRARY})
 # Find and include the spdlog library
 find_package(spdlog REQUIRED)
 target_link_libraries(FetcherLib spdlog::spdlog)
+
+# Option to enable or disable building of tests
+option(BUILD_TESTS "Build the tests" ON)
+
+if(BUILD_TESTS)
+        # Find and include the Google Test package
+        find_package(GTest REQUIRED)
+        include_directories(${GTEST_INCLUDE_DIRS})
+
+        # Create a test executable
+        add_executable(FetcherTests
+                test/fetcher.cpp
+                test/tools.cpp
+        )
+
+        # Link FetcherTests with GTest and FetcherLib
+        target_link_libraries(FetcherTests GTest::GTest GTest::Main FetcherLib)
+endif()

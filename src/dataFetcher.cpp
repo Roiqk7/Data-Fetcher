@@ -74,4 +74,17 @@ namespace Fetcher
 
                 return FlowControl::handleUserRequest(rawUserInput, processedUserInput);
         }
+
+        /*
+        Runs the unit tests for this module.
+        */
+        /*
+        Note: To run tests build the project and run the executable FetcherTests.
+        void runUnitTests()
+        {
+                InputHandler::ProcessedUserInput processedUserInput(true);
+
+                FlowControl::controlFlow(processedUserInput);
+        }
+        */
 }
