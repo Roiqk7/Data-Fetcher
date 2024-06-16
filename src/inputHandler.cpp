@@ -31,20 +31,28 @@ namespace Fetcher
                 RawUserInput::RawUserInput(const std::string& urlString, const std::string& apiKey)
                         : url(urlString), api(""), apiKey(apiKey), tickerSymbol(""), from(""), to(""), timeframe(""), test(false) { }
 
+                void RawUserInput::logRawUserInput() const
+                {
+                        spdlog::info("Raw user input: URL: {}, API: {}, API key: {}, Ticker symbol: {}, From: {}, To: {}, Time frame: {}, Test: {}", Tools::hideApiKey(url), api, !apiKey.empty(), tickerSymbol, from, to, timeframe, test);
+                }
+
                 ProcessedUserInput::ProcessedUserInput()
                         : url(""), test(false) { }
+
+                void ProcessedUserInput::logProcessedUserInput() const
+                {
+                        spdlog::info("Processed user input: URL: {}, Test: {}", Tools::hideApiKey(url), test);
+                }
         // Functions
                 void proccessUserInput(const RawUserInput& rawUserInput, ProcessedUserInput& processedUserInput)
                 {
-                        ProcessedUserInput processedInput;
-
                         // Check if the raw input has a URL
                         if (checkForUrl(rawUserInput))
                         {
                                 // Then check for an API key
                                 if (checkUrlForApiKey(rawUserInput.url))
                                 {
-                                        processedInput.url = rawUserInput.url;
+                                        processedUserInput.url = rawUserInput.url;
                                         return;
                                 }
                                 else
@@ -52,7 +60,7 @@ namespace Fetcher
                                         // Check if the user provided a api key
                                         if (rawUserInput.apiKey != "")
                                         {
-                                                processedInput.url = createUrl(rawUserInput.url, rawUserInput.apiKey);
+                                                processedUserInput.url = createUrl(rawUserInput.url, rawUserInput.apiKey);
                                                 return;
                                         }
                                 }
@@ -64,7 +72,7 @@ namespace Fetcher
                                 // Check if the user provided a ticker, api and api key
                                 if (rawUserInput.tickerSymbol != "" && rawUserInput.api != "" && rawUserInput.apiKey != "")
                                 {
-                                        processedInput.url = createUrl(rawUserInput.tickerSymbol, rawUserInput.from, rawUserInput.to, rawUserInput.timeframe, rawUserInput.api, rawUserInput.apiKey);
+                                        processedUserInput.url = createUrl(rawUserInput.tickerSymbol, rawUserInput.from, rawUserInput.to, rawUserInput.timeframe, rawUserInput.api, rawUserInput.apiKey);
                                         return;
                                 }
                         }

@@ -28,8 +28,14 @@ namespace Fetcher
                 */
                 Json::Value handleUserRequest(const InputHandler::RawUserInput& rawUserInput, InputHandler::ProcessedUserInput& processedUserInput)
                 {
+                        // Log the raw user input
+                        rawUserInput.logRawUserInput();
+
                         // Process the user input
                         InputHandler::proccessUserInput(rawUserInput, processedUserInput);
+
+                        // Log the processed user input
+                        processedUserInput.logProcessedUserInput();
 
                         // Run the program
                         FlowControl::controlFlow(processedUserInput);
@@ -76,7 +82,7 @@ namespace Fetcher
                 {
                         Tools::Flag flag(Constants::SUCCESS);
 
-                        // Check if the --test argument was provided
+                        // Check if the test argument was provided
                         if (processedUserInput.test)
                         {
                                 flag = runTests();
@@ -96,6 +102,11 @@ namespace Fetcher
                                         // Handle failed programme
                                         return checkFlag(flag);
                                 }
+                        }
+                        else
+                        {
+                                spdlog::error("No URL provided. The programme will be terminated.");
+                                return Constants::FAILURE_END;
                         }
 
                         return flag;
@@ -159,22 +170,22 @@ namespace Fetcher
                         switch (flag)
                         {
                                 case Constants::SUCCESS:
-                                        spdlog::info("The programme finished successfully.");
+                                        spdlog::info("Success flag received.");
                                         break;
                                 case Constants::FAILURE:
-                                        spdlog::error("The programme failed.");
+                                        spdlog::error("Failure flag received.");
                                         break;
                                 case Constants::SUCCESS_END:
-                                        spdlog::info("The programme finished successfully and must be terminated.");
+                                        spdlog::info("Success flag received and programme must be terminated.");
                                         exit(Constants::SUCCESS);
                                         break;
                                 case Constants::FAILURE_END:
-                                        spdlog::error("The programme failed and must be terminated.");
+                                        spdlog::error("Failure flag received and programme must be terminated.");
                                         exit(Constants::FAILURE);
                                         break;
                                 default:
                                         spdlog::error("Unknown flag: {}. The programme must be terminated.", flag);
-                                        checkFlag(Constants::FAILURE_END); // Cheeky way to exit the programme
+                                        exit(Constants::FAILURE);
                         }
 
                         return flag;
@@ -205,7 +216,7 @@ namespace Fetcher
                         }
 
                         // The API key is not hard-coded
-                        spdlog::info("The API key is not present in the code.");
+                        spdlog::trace("The API key is not present in the code.");
                 }
         }
 }
