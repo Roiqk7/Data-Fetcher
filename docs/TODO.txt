@@ -1,4 +1,2 @@
-- implement user defined API key and API
 - implement polygon for options data
-
-- finish and simplify, debug and write way more tests
+- finish and simplify, debug and write more tests
