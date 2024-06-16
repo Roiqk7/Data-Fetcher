@@ -11,6 +11,7 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include <string>
 #include "../include/tools.h"
+#include "../src/include/constants.h"
 #include "../src/include/inputHandler.h"
 
 namespace Fetcher
@@ -19,16 +20,7 @@ namespace Fetcher
         {
         // Structs
                 RawUserInput::RawUserInput()
-                {
-                        url = "";
-                        api = "";
-                        apiKey = "";
-                        tickerSymbol = "";
-                        from = "";
-                        to = "";
-                        timeframe = "";
-                        test = false;
-                }
+                        : url(""), api(""), apiKey(""), tickerSymbol(""), from(""), to(""), timeframe(""), test(false) { }
 
                 RawUserInput::RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey)
                         : url(""), api(api), apiKey(apiKey), tickerSymbol(tickerSymbol), from(fromDate), to(toDate), timeframe(timeFrame), test(false) { }
@@ -110,7 +102,7 @@ namespace Fetcher
                 {
                         Tools::URL newUrl;
 
-                        newUrl = url + QUESTION_MARK + Constants::API_KEY_PARAM + apiKey;
+                        newUrl = url + Constants::QUESTION_MARK + Constants::API_KEY_PARAM + apiKey;
 
                         return newUrl;
                 }
@@ -132,16 +124,18 @@ namespace Fetcher
                         Tools::URL url;
 
                         // Lowercase the API
-                        std::transform(api.begin(), api.end(), api.begin(),
+                        std::string lowerApi = api;
+                        std::transform(api.begin(), api.end(), lowerApi.begin(),
                                 [](unsigned char c){ return std::tolower(c); });
 
                         // Determine the URL based on the API
-                        if (api == "fmp")
+                        if (lowerApi == "fmp")
                         {
-                                url = Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + SLASH + tickerSymbol + QUESTION_MARK
-                                        + "from=" + fromDate + AND + "to=" + toDate + AND + Constants::API_KEY_PARAM + apiKey;
+                                url = Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH + tickerSymbol
+                                        + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND + "to=" + toDate + Constants::AND
+                                        + Constants::API_KEY_PARAM + apiKey;
                         }
-                        else if (api == "polygon")
+                        else if (lowerApi == "polygon")
                         {
                                 url = "TODO"; // TODO: Implement Polygon API
                         }

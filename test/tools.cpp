@@ -147,7 +147,7 @@ namespace Fetcher
                         URL expectedUrl = readFileContents(filePath);
 
                         // Create the URL
-                        URL url = createUrl(from, to, timeFrame);
+                        URL url = "TODO"; // TODO: Create the URL
 
                         // Hide the API key
                         URL actualUrl = hideApiKey(url);

@@ -10,7 +10,7 @@ Notes: x
 #define INPUTHANDLER_H
 
 #include <string>
-#include "../include/tools.h"
+#include "../../include/tools.h"
 
 namespace Fetcher
 {
@@ -36,7 +36,7 @@ namespace Fetcher
                         RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
                         RawUserInput(const std::string& urlString);
                         RawUserInput(const std::string& urlString, const std::string& apiKey);
-                }
+                };
 
                 /*
                 Stores processed user input.
@@ -44,9 +44,10 @@ namespace Fetcher
                 struct ProcessedUserInput
                 {
                 public:
+                        ProcessedUserInput();
                         Tools::URL url; // The URL to fetch data from.
                         bool test; // Run unit tests.
-                }
+                };
 
         // Functions
                 void proccessUserInput(const RawUserInput& rawUserInput, ProcessedUserInput& processedUserInput);
@@ -56,7 +57,7 @@ namespace Fetcher
                 bool checkForUrl(const RawUserInput& rawInput);
                 bool checkFromToTimeFrame(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame);
                 bool checkUrlForApiKey(const Tools::URL& url);
-
+        }
 }
 
 

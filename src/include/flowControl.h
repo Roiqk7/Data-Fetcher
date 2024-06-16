@@ -18,7 +18,7 @@ namespace Fetcher
 {
         namespace FlowControl
         {
-                Json::Value handleUserRequest(const RawUserInput& rawUserInput, ProcessedUserInput& processedUserInput);
+                Json::Value handleUserRequest(const InputHandler::RawUserInput& rawUserInput, InputHandler::ProcessedUserInput& processedUserInput);
                 Tools::Flag controlFlow(const InputHandler::ProcessedUserInput& processedUserInput);
                 Tools::Flag handleProgramme(const InputHandler::ProcessedUserInput& processedUserInput);
                 Tools::Flag runTests();

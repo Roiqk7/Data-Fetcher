@@ -128,19 +128,8 @@ namespace Fetcher
                 {
                         Tools::URL url = processedUserInput.url;
 
-                        // Check if the URL is valid
-                        if (!Tools::checkValidURL(url))
-                        {
-                                // There is no reason to continue if the URL is invalid
-                                spdlog::error("Invalid URL: {}. The programme must be terminated.", url);
-
-                                // Note: Update if the criteria for a valid URL changes
-                                spdlog::info("Note: Valid URL is considered to contain: {}", Constants::FMP_API_URL);
-                                return Constants::FAILURE_END;
-                        }
-
                         // Fetch the requested data
-                        auto data = Fetcher::fetchRequestedData(Tools::getURL(vm));
+                        auto data = Fetcher::fetchRequestedData(processedUserInput.url);
 
                         // Check if the data was fetched successfully
                         if (data == nullptr)
@@ -154,7 +143,7 @@ namespace Fetcher
                         }
 
                         // Write the fetched data to a file
-                        Fetcher::writeRequestedData(data, Tools::getOutputFilePath(vm));
+                        Fetcher::writeRequestedData(data, Constants::FETCHED_DATA_FILE_PATH);
 
                         return Constants::SUCCESS;
                 }

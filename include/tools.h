@@ -16,21 +16,18 @@ Notes: x
 
 namespace Fetcher
 {
+        namespace InputHandler
+        {
+                struct RawUserInput; // Forward declaration
+        }
         namespace Tools
         {
         // Typedefs
                 using Flag = int; // Defines the flag data type
                 using FilePath = std::string; // File path data type
                 using URL = std::string; // URL data type used in communication with the API
-        // Functions
-                bool checkProgramArguments(const InputHandler::RawUserInput& rawInput);
-                bool checkURLArgument(const InputHandler::RawUserInput& rawInput);
-                bool checkFromToTimeFrameArguments(const InputHandler::RawUserInput& rawInput);
+        // Functions;
                 URL hideApiKey(const URL& url);
-                URL createUrl(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame);
-                URL getURL(const InputHandler::RawUserInput& rawInput);
-                bool checkValidURL(const URL& url);
-                FilePath getOutputFilePath(const InputHandler::RawUserInput& rawInput);
                 std::string readFileContents(const FilePath& filePath);
                 Json::Value readJsonFileContents(const FilePath& filePath);
                 void writeFileContents(const FilePath& filePath, const std::string& contents);

@@ -7,7 +7,7 @@ Notes: x
 */
 
 #include <string>
-#include "../include/tools.h"
+#include "../../include/tools.h"
 
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
@@ -47,4 +47,4 @@ namespace Fetcher
 }
 
 
-#endif // CONSTANTS_H
+#endif // !CONSTANTS_H
