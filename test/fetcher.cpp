@@ -25,7 +25,7 @@ namespace Fetcher
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
-                std::string filePath = "../test/docs/" + testName + ".txt";
+                std::string filePath = "../test/docs/" + testName + ".json";
 
                 // Log
                 spdlog::info("{} test started. Fetching SPY ETF data...", testName);
@@ -37,7 +37,7 @@ namespace Fetcher
                 auto actualData = Fetcher::fetchRequestedData(url);
 
                 // Read the expected contents from fetcherTest1.json
-                Json::Value expectedData = Tools::readJsonFileContents("../test/docs/fetcherTest1.json");
+                Json::Value expectedData = Tools::readJsonFileContents(filePath);
 
                 // Assert that the fetched data is equal to the expected data
                 ASSERT_EQ(*actualData, expectedData);

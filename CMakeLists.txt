@@ -60,6 +60,7 @@ if(BUILD_TESTS)
 
         # Create a test executable
         add_executable(FetcherTests
+                test/dataFetcher.cpp
                 test/fetcher.cpp
                 test/tools.cpp
         )
