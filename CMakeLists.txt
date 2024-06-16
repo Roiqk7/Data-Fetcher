@@ -16,6 +16,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 # Create a library for the core functionality
 add_library(FetcherLib
         src/dataFetcher.cpp
+        src/exceptions.cpp
         src/fetcher.cpp
         src/flowControl.cpp
         src/inputHandler.cpp

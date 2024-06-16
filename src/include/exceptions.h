@@ -6,7 +6,7 @@ Description: This file contains declarations of custom exceptions used in the pr
 Notes: x
 */
 
-#ifndef EXCEPTION_H
-#define EXCEPTION_H
+#ifndef EXCEPTIONS_H
+#define EXCEPTIONS_H
 
-#endif // !EXCEPTION_H
+#endif // !EXCEPTIONS_H
