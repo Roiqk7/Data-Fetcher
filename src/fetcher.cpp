@@ -122,8 +122,8 @@ namespace Fetcher
                 // Check if the request was successful
                 if(res != CURLE_OK)
                 {
-                        spdlog::error("Failed to fetch data: {}", curl_easy_strerror(res));
-                        return Constants::FAILURE_END;
+                        spdlog::error(std::string(curl_easy_strerror(res)));
+                        throw Exceptions::HTTPRequestFailed(std::string(curl_easy_strerror(res)));
                 }
 
                 // Log the raw response data

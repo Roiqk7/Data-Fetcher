@@ -105,8 +105,8 @@ namespace Fetcher
                         }
                         else
                         {
-                                spdlog::error("No URL provided. The programme will be terminated.");
-                                return Constants::FAILURE_END;
+                                spdlog::error("No URL provided.");
+                                throw std::invalid_argument("No URL provided.");
                         }
 
                         return flag;

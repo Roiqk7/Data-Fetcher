@@ -41,6 +41,9 @@ namespace Fetcher
                 ProcessedUserInput::ProcessedUserInput()
                         : url(""), test(false) { }
 
+                ProcessedUserInput::ProcessedUserInput(const Tools::URL& url)
+                        : url(url), test(false) { }
+
                 ProcessedUserInput::ProcessedUserInput(bool test)
                         : url(""), test(test) { }
 
