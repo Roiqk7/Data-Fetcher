@@ -71,7 +71,7 @@ namespace Fetcher
                 bool checkUrlForApiKey(const Tools::URL& url);
                 bool checkMissingArguments(const std::vector<std::string>& args, const std::vector<std::string>& argNames);
                 bool checkEmptyArguments(const std::vector<std::string>& args);
-                bool checkValidUrl(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
+                bool checkValidUrl(const std::vector<std::string>& args, const std::vector<std::string>& argNames);
                 bool checkValidApi(const std::vector<std::string>& args, const std::vector<std::string>& argNames);
                 bool checkValidDateFormat(const std::vector<std::string>& args, const std::vector<std::string>& argNames);
                 bool validateDate(const std::string& date);

@@ -14,7 +14,7 @@ Notes: x
 namespace Fetcher
 {
         // Test for catching invalid user input in the userInputValidator() function - empty argument
-        TEST(InputHandlerTest, userInputValidatorTest)
+        TEST(InputHandlerTest, inputHandler1)
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
@@ -33,7 +33,7 @@ namespace Fetcher
         }
 
         // Test for catching invalid user input in the userInputValidator() function - missing argument
-        TEST(InputHandlerTest, userInputValidatorTest2)
+        TEST(InputHandlerTest, inputHandler2)
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
@@ -52,7 +52,7 @@ namespace Fetcher
         }
 
         // Test for catching invalid user input in the userInputValidator() function - unsupported URL
-        TEST(InputHandlerTest, userInputValidatorTest3)
+        TEST(InputHandlerTest, inputHandler3)
         {
                 // Construct the file path dynamically
                 std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
@@ -68,5 +68,43 @@ namespace Fetcher
 
                 // Catch the invalid user input exception
                 ASSERT_THROW(InputHandler::userInputValidator(args, argNames), std::invalid_argument);
+        }
+
+        // Check date validation - incorrect length
+        TEST(InputHandlerTest, inputHandler4)
+        {
+                // Construct the file path dynamically
+                std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+
+                // Log
+                spdlog::info("{} test started. Checking for invalid date input...", testName);
+
+                // Invalid date format
+                std::vector<std::string> args = {"2000-1-1", "2000-01-01"};
+
+                // Argument names
+                std::vector<std::string> argNames = {"from", "to"};
+
+                // Catch the invalid user input exception
+                ASSERT_THROW(InputHandler::checkValidDateFormat(args, argNames), std::invalid_argument);
+        }
+
+        // Check date validation - incorrect day date
+        TEST(InputHandlerTest, inputHandler5)
+        {
+                // Construct the file path dynamically
+                std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+
+                // Log
+                spdlog::info("{} test started. Checking for invalid date input...", testName);
+
+                // Invalid date format
+                std::vector<std::string> args = {"2000-01-32", "2000-01-00"};
+
+                // Argument names
+                std::vector<std::string> argNames = {"from", "to"};
+
+                // Catch the invalid user input exception
+                ASSERT_THROW(InputHandler::checkValidDateFormat(args, argNames), std::invalid_argument);
         }
 }

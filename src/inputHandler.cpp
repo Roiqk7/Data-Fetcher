@@ -91,7 +91,7 @@ namespace Fetcher
                         }
 
                         // Verify from and to format
-                        if (!checkValidDateFormats(args, argNames))
+                        if (!checkValidDateFormat(args, argNames))
                         {
                                 spdlog::error("Invalid input. Date format is not valid.");
                                 throw std::invalid_argument("Invalid input. Please provide a valid date format.");
@@ -292,6 +292,8 @@ namespace Fetcher
                                         throw std::invalid_argument("Invalid input. Please provide a valid URL. Valid URL needs to link to a supported API.");
                                 }
                         }
+
+                        return true;
                 }
 
                 /*
@@ -316,6 +318,8 @@ namespace Fetcher
                                         throw std::invalid_argument("Invalid input. Please provide a valid API. Valid API arguments are 'fmp' and 'polygon'.");
                                 }
                         }
+
+                        return true;
                 }
 
                 /*
@@ -341,6 +345,8 @@ namespace Fetcher
                                         throw std::invalid_argument("Invalid input. Please provide a valid date format.");
                                 }
                         }
+
+                        return true;
                 }
 
                 /*
@@ -355,7 +361,7 @@ namespace Fetcher
                         // Check length
                         if (date.length() != 10)
                         {
-                                spdlog::error("Invalid input. Date format is not valid.");
+                                spdlog::error("Invalid input. Date format is not valid. Accepted format is YYYY-MM-DD.");
                                 throw std::invalid_argument("Invalid input. Please provide a valid date format. Date format needs to be in YYYY-MM-DD format.");
                         }
 
@@ -372,14 +378,14 @@ namespace Fetcher
                         int day = std::stoi(date.substr(8, 2));
 
                         // Validate year, month, day
-                        if (year < 1000 || year > 9999)
+                        if (year < 1800 || year > 2100)
                         {
-                                spdlog::error("Invalid year. Year must be between 1000 and 9999.");
+                                spdlog::error("Invalid year. {} is not a valid year.", year);
                                 throw std::invalid_argument("Invalid year. Please provide a valid year.");
                         }
                         if (month < 1 || month > 12)
                         {
-                                spdlog::error("Invalid month. Month must be between 01 and 12.");
+                                spdlog::error("Invalid month. {} is not a valid month.", month);
                                 throw std::invalid_argument("Invalid month. Please provide a valid month.");
                         }
 
