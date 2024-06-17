@@ -49,7 +49,7 @@ make
 
 ## Usage
 
-Include the library in your C++ project by including the header files:
+Include the library in your C++ project by including the header file:
 
 ```cpp
 #include <dataFetcher/dataFetcher.h>
@@ -69,6 +69,12 @@ Json::Value fetchHistoricalData(const std::string& urlString, const std::string&
 </details>
 
 These functions will allow you, the user, to fetch historical data of a given stock/etf in a given period of time with a desired time frame. The programme supports the [FMP](https://site.financialmodelingprep.com) and [Polygon.io](https://polygon.io) APIs. The function will return a `Json::Value` object that contains the fetched data. Browse the [documentation](https://github.com/Roiqk7/Data-Fetcher/tree/main/docs) for more information.
+
+If you need to run the tests, you can do so by running the following command:
+
+```bash
+./FetcherTests
+```
 
 ## Project structure
 
