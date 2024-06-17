@@ -77,23 +77,25 @@ namespace Fetcher
                         }
 
                         // Verify the URL
-                        if (std::find(argNames.begin(), argNames.end(), "url") != argNames.end())
+                        if (!checkValidUrl(args, argNames))
                         {
-                                const std::string& url = args[std::find(argNames.begin(), argNames.end(), "url") - argNames.begin()];
-
-                                // Check if the URL is valid
-                                if (url.find(Constants::FMP_API_URL) == std::string::npos && url.find(Constants::POLYGON_API_URL) == std::string::npos)
-                                {
-                                        spdlog::error("Invalid input. URL '{}' is not supported.", url);
-                                        throw std::invalid_argument("Invalid input. Please provide a valid URL.");
-                                }
+                                spdlog::error("Invalid input. URL '{}' is not supported.", args[std::find(argNames.begin(), argNames.end(), "url") - argNames.begin()]);
+                                throw std::invalid_argument("Invalid input. Please provide a valid URL.");
                         }
 
                         // Verify the API
-                        // TODO
+                        if (!checkValidApi(args, argNames))
+                        {
+                                spdlog::error("Invalid input. API '{}' is not supported.", args[std::find(argNames.begin(), argNames.end(), "api") - argNames.begin()]);
+                                throw std::invalid_argument("Invalid input. Please provide a valid API.");
+                        }
 
                         // Verify from and to format
-                        // TODO
+                        if (!checkValidDateFormats(args, argNames))
+                        {
+                                spdlog::error("Invalid input. Date format is not valid.");
+                                throw std::invalid_argument("Invalid input. Please provide a valid date format.");
+                        }
                 }
 
                 /*
@@ -266,6 +268,131 @@ namespace Fetcher
                 bool checkEmptyArguments(const std::vector<std::string>& args)
                 {
                         return std::any_of(args.begin(), args.end(), [](const std::string& arg){ return arg == ""; });
+                }
+
+                /*
+                Check if the URL is valid.
+
+                @param args: The arguments to check.
+                @param argNames: The names of the arguments to check.
+
+                @return: True if the URL is valid, false otherwise.
+                */
+                bool checkValidUrl(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
+                {
+                        // Check if the URL argument is even demanded
+                        if (std::find(argNames.begin(), argNames.end(), "url") != argNames.end())
+                        {
+                                const std::string& url = args[std::find(argNames.begin(), argNames.end(), "url") - argNames.begin()];
+
+                                // Check if the URL is valid
+                                if (url.find(Constants::FMP_API_URL) == std::string::npos && url.find(Constants::POLYGON_API_URL) == std::string::npos)
+                                {
+                                        spdlog::error("Invalid input. URL '{}' is not supported.", url);
+                                        throw std::invalid_argument("Invalid input. Please provide a valid URL. Valid URL needs to link to a supported API.");
+                                }
+                        }
+                }
+
+                /*
+                Check if the API is valid.
+
+                @param args: The arguments to check.
+                @param argNames: The names of the arguments to check.
+
+                @return: True if the API is valid, false otherwise.
+                */
+                bool checkValidApi(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
+                {
+                        // Check if the API argument is even demanded
+                        if (std::find(argNames.begin(), argNames.end(), "api") != argNames.end())
+                        {
+                                const std::string& api = args[std::find(argNames.begin(), argNames.end(), "api") - argNames.begin()];
+
+                                // Check if the API is valid
+                                if (api != "fmp" && api != "polygon")
+                                {
+                                        spdlog::error("Invalid input. API '{}' is not supported.", api);
+                                        throw std::invalid_argument("Invalid input. Please provide a valid API. Valid API arguments are 'fmp' and 'polygon'.");
+                                }
+                        }
+                }
+
+                /*
+                Check if the date formats are valid.
+
+                @param args: The arguments to check.
+                @param argNames: The names of the arguments to check.
+
+                @return: True if the date formats are valid, false otherwise.
+                */
+                bool checkValidDateFormat(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
+                {
+                        // Check if the from and to arguments are even demanded
+                        if (std::find(argNames.begin(), argNames.end(), "from") != argNames.end() &&
+                                std::find(argNames.begin(), argNames.end(), "to") != argNames.end())
+                        {
+                                const std::string& fromDate = args[std::find(argNames.begin(), argNames.end(), "from") - argNames.begin()];
+                                const std::string& toDate = args[std::find(argNames.begin(), argNames.end(), "to") - argNames.begin()];
+
+                                if (!validateDate(fromDate) || !validateDate(toDate))
+                                {
+                                        spdlog::error("Invalid input. Date format is not valid.");
+                                        throw std::invalid_argument("Invalid input. Please provide a valid date format.");
+                                }
+                        }
+                }
+
+                /*
+                Validate the date.
+
+                @param date: The date to validate.
+
+                @return: True if the date is valid, false otherwise.
+                */
+                bool validateDate(const std::string& date)
+                {
+                        // Check length
+                        if (date.length() != 10)
+                        {
+                                spdlog::error("Invalid input. Date format is not valid.");
+                                throw std::invalid_argument("Invalid input. Please provide a valid date format. Date format needs to be in YYYY-MM-DD format.");
+                        }
+
+                        // Check format (positions of '-')
+                        if (date[4] != '-' || date[7] != '-')
+                        {
+                                spdlog::error("Invalid input. Date format is incorrect.");
+                                throw std::invalid_argument("Invalid input. Date format needs to be in YYYY-MM-DD format.");
+                        }
+
+                        // Extract year, month, day
+                        int year = std::stoi(date.substr(0, 4));
+                        int month = std::stoi(date.substr(5, 2));
+                        int day = std::stoi(date.substr(8, 2));
+
+                        // Validate year, month, day
+                        if (year < 1000 || year > 9999)
+                        {
+                                spdlog::error("Invalid year. Year must be between 1000 and 9999.");
+                                throw std::invalid_argument("Invalid year. Please provide a valid year.");
+                        }
+                        if (month < 1 || month > 12)
+                        {
+                                spdlog::error("Invalid month. Month must be between 01 and 12.");
+                                throw std::invalid_argument("Invalid month. Please provide a valid month.");
+                        }
+
+                        // Validate day based on month and leap year
+                        auto isLeapYear = [](int y) { return (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)); };
+                        int daysInMonth[] = {31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                        if (day < 1 || day > daysInMonth[month - 1])
+                        {
+                                spdlog::error("Invalid day. Day is not valid for the given month and year.");
+                                throw std::invalid_argument("Invalid day. Please provide a valid day.");
+                        }
+
+                        return true;
                 }
         }
 }
