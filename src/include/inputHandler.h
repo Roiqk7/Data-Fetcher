@@ -34,7 +34,8 @@ namespace Fetcher
                 public:
                 // Constructors
                         RawUserInput();
-                        RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+                        RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate,
+                                const std::string& timeFrame, const std::string& api, const std::string& apiKey);
                         RawUserInput(const std::string& urlString);
                         RawUserInput(const std::string& urlString, const std::string& apiKey);
                 // Functions
@@ -62,7 +63,8 @@ namespace Fetcher
                 void proccessUserInput(const RawUserInput& rawUserInput, ProcessedUserInput& processedUserInput);
                 Tools::URL createUrl(const std::string& url);
                 Tools::URL createUrl(const std::string& url, const std::string& apiKey);
-                Tools::URL createUrl(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+                Tools::URL createUrl(const std::string& tickerSymbol, const std::string& fromDate,
+                        const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
                 bool checkForUrl(const RawUserInput& rawInput);
                 bool checkFromToTimeFrame(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame);
                 bool checkUrlForApiKey(const Tools::URL& url);

@@ -10,6 +10,7 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include "../include/tools.h"
 #include "../src/include/constants.h"
+#include "../src/include/exceptions.h"
 #include "../src/include/fetcher.h"
 #include "../src/include/flowControl.h"
 #include "../src/include/inputHandler.h"
@@ -136,6 +137,7 @@ namespace Fetcher
                 */
                 Tools::Flag runProgram(const InputHandler::ProcessedUserInput& processedUserInput)
                 {
+                        std::string errorMessageBuffer;
                         Tools::URL url = processedUserInput.url;
 
                         // Fetch the requested data
@@ -144,12 +146,14 @@ namespace Fetcher
                         // Check if the data was fetched successfully
                         if (data == nullptr)
                         {
-                                return Constants::FAILURE;
+                                spdlog::error("Failed to fetch the requested data.");
+                                throw Exceptions::FailedToFetchRequestedData("Failed to fetch the requested data.");
                         }
                         // Check if the response from FMP API is successful
-                        else if (!checkSuccessFlag(Fetcher::checkAPIResponse(data)))
+                        else if (!checkSuccessFlag(Fetcher::checkAPIResponseForError(data, errorMessageBuffer)))
                         {
-                                return Constants::FAILURE;
+                                spdlog::error("Error in the API response found. {}", errorMessageBuffer);
+                                throw Exceptions::ApiResponseError(errorMessageBuffer);
                         }
 
                         // Write the fetched data to a file

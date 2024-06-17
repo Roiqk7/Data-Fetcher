@@ -15,6 +15,7 @@ Notes: x
 #include <sstream>
 #include <string>
 #include "../src/include/constants.h"
+#include "../src/include/exceptions.h"
 #include "../src/include/fetcher.h"
 #include "../src/include/flowControl.h"
 #include "../include/tools.h"
@@ -42,7 +43,8 @@ namespace Fetcher
                 // Fetch the data and check if the request was successful
                 if(!FlowControl::checkSuccessFlag(handleRequest(url, readBuffer)))
                 {
-                        return nullptr;
+                        spdlog::error("HTTP request failed.");
+                        throw Exceptions::HTTPRequestFailed("HTTP request failed.");
                 }
 
                 // Parse the fetched data
@@ -70,8 +72,8 @@ namespace Fetcher
                 if (!parsingSuccessful)
                 {
                         // If parsing fails, log the error and return an empty Json::Value
-                        spdlog::error("Failed to parse JSON: {}", errs);
-                        return Json::Value(); // Return an empty Json::Value object
+                        spdlog::error("Failed to parse Json: {}", errs);
+                        throw Exceptions::FailedToParseRequestedData("Failed to parse requested Json data.");
                 }
 
                 return root; // Return the parsed JSON data
@@ -187,7 +189,7 @@ namespace Fetcher
 
         Note: Works only with array or object type JSON objects.
         */
-        Tools::Flag checkAPIResponse(const std::unique_ptr<Json::Value>& root)
+        Tools::Flag checkAPIResponseForError(const std::unique_ptr<Json::Value>& root, std::string& errorMessageBuffer)
         {
                 // Check if root is an array
                 if (root && root->isArray())
@@ -196,7 +198,7 @@ namespace Fetcher
                         for (const Json::Value& item : *root)
                         {
                                 // Check each object in the array for "Error Message"
-                                if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(item)))
+                                if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(item, errorMessageBuffer)))
                                 {
                                         return Constants::FAILURE;
                                 }
@@ -207,15 +209,16 @@ namespace Fetcher
                 else if (root && root->isObject())
                 {
                         // Directly check the object for "Error Message"
-                        if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(*root)))
+                        if (!FlowControl::checkSuccessFlag(checkJsonObjectForErrorMessage(*root, errorMessageBuffer)))
                         {
                                 return Constants::FAILURE;
                         }
                         return Constants::SUCCESS;
                 }
+
                 // Log an error or handle the case where root is not an array
                 spdlog::error("Unexpected Json type was found in the API response.");
-                return Constants::FAILURE;
+                throw Exceptions::UnexpectedJsonType("Unexpected Json type was found in the API response.");
         }
 
         /*
@@ -225,11 +228,12 @@ namespace Fetcher
 
         @return: The flag to determine if the response is successful
         */
-        Tools::Flag checkJsonObjectForErrorMessage(const Json::Value& root)
+        Tools::Flag checkJsonObjectForErrorMessage(const Json::Value& root, std::string& errorMessageBuffer)
         {
                 // Directly check the object for "Error Message"
                 if (root.isMember("Error Message"))
                 {
+                        errorMessageBuffer = root["Error Message"].asString();
                         spdlog::error("Error Message: {}", (root)["Error Message"].asString());
                         return Constants::FAILURE;
                 }

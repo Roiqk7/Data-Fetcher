@@ -4,6 +4,20 @@ In this short document I will explain how to use this library to fetch the desir
 I assume you have already read the [README](https://github.com/Roiqk7/Data-Fetcher/blob/main/README.md) file and have
 installed the library. provided with this library. If you haven't, please do so before continuing.
 
+## Table of contents
+- [Welcome to Data Fetcher!](#welcome-to-data-fetcher)
+  - [Table of contents](#table-of-contents)
+  - [Documentation](#documentation)
+  - [Functions defined in header \<dataFetcher/dataFetcher.h\>](#functions-defined-in-header-datafetcherdatafetcherh)
+    - [fetchHistoricalData()](#fetchhistoricaldata)
+      - [Declarations](#declarations)
+      - [Parameters](#parameters)
+      - [Return value](#return-value)
+      - [Complexity](#complexity)
+      - [Exceptions](#exceptions)
+      - [Examples](#examples)
+  - [Exceptions](#exceptions-1)
+
 ## Documentation
 
 After including the library in your project, you can start using the provided functions. I will now go over all the various
@@ -43,7 +57,14 @@ The complexity of this function is `O(N)` where `N` is the size of the fetched d
 
 #### Exceptions
 
-* If the user provided arguments are invalid, the function will throw [std::invalid_argument](https://en.cppreference.com/w/cpp/error/invalid_argument).
+The function's behavior in response to various errors is as follows:
+
+- Throws [std::invalid_argument](https://en.cppreference.com/w/cpp/error/invalid_argument) for invalid user-provided arguments.
+- Throws Fetcher::Exceptions::HTTPRequestFailed for HTTP request failures.
+- Throws Fetcher::Exceptions::FailedToParseRequestedData if the fetched data cannot be parsed.
+- Triggers Fetcher::Exceptions::ApiResponseError for all errors thrown by the API.
+- Throws Fetcher::Exceptions::FailedToFetchRequestedData when fetching of the requested data fails.
+- Triggers Fetcher::Exceptions::UnexpectedJsonType for unexpected Json types in the fetched data.
 
 #### Examples
 
@@ -58,3 +79,7 @@ Fetcher::fetchHistoricalData("https://financialmodelingprep.com/api/v3/historica
 // Example using ticker symbol, from date, to date, time frame, API and API key
 Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-09-10", "4hour", "fml", "YOUR_API_KEY");
 ```
+
+## Exceptions
+
+TODO
