@@ -12,6 +12,6 @@ Notes: When deleting this file dont forget to delete the main from CMakeLists.tx
 int main()
 {
         // Fetch historical data
-        Fetcher::fetchHistoricalData("AAPL", "2021-01-01", "2021-01-05", "", "fmp", "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa");
+        Fetcher::fetchHistoricalData("AAPL", "2021-01-01", "2021-01-05", "4hour", "fmp", "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa");
         return 0;
 }
