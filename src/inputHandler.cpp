@@ -63,21 +63,17 @@ namespace Fetcher
                 void userInputValidator(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
                 {
                         // Check if any of the arguments are missing
-                        if (args.size() != argNames.size())
+                        if (checkMissingArguments(args, argNames))
                         {
                                 spdlog::error("Mismatch between number of arguments and number of argument names.");
                                 throw std::invalid_argument("Invalid input. Argument count does not match expected count.");
                         }
 
                         // Check if the arguments are empty
-                        for (size_t i = 0; i < args.size(); i++)
+                        if (checkEmptyArguments(args))
                         {
-                                const std::string& arg = args[i];
-                                if (arg.empty())
-                                {
-                                        spdlog::error("Invalid input. Argument '{}' (position {}) is empty.", argNames[i], i);
-                                        throw std::invalid_argument("Invalid input. Please provide enough information to fetch data.");
-                                }
+                                spdlog::error("Invalid input. One or more arguments are empty.");
+                                throw std::invalid_argument("Invalid input. Please provide all the required arguments.");
                         }
 
                         // Verify the URL
@@ -245,6 +241,31 @@ namespace Fetcher
                 bool checkFromToTimeFrame(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame)
                 {
                         return fromDate != "" && toDate != "" && timeFrame != "";
+                }
+
+                /*
+                Check if any of the arguments are missing.
+
+                @param args: The arguments to check.
+                @param argNames: The names of the arguments to check.
+
+                @return: True if any of the arguments are missing, false otherwise.
+                */
+                bool checkMissingArguments(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
+                {
+                        return args.size() != argNames.size();
+                }
+
+                /*
+                Check if any of the arguments are empty.
+
+                @param args: The arguments to check.
+
+                @return: True if any of the arguments are empty, false otherwise.
+                */
+                bool checkEmptyArguments(const std::vector<std::string>& args)
+                {
+                        return std::any_of(args.begin(), args.end(), [](const std::string& arg){ return arg == ""; });
                 }
         }
 }

@@ -69,6 +69,8 @@ namespace Fetcher
                 bool checkForUrl(const RawUserInput& rawInput);
                 bool checkFromToTimeFrame(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame);
                 bool checkUrlForApiKey(const Tools::URL& url);
+                bool checkMissingArguments(const std::vector<std::string>& args, const std::vector<std::string>& argNames);
+                bool checkEmptyArguments(const std::vector<std::string>& args);
         }
 }
 
