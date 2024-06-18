@@ -42,7 +42,7 @@ namespace Fetcher
                 const Tools::URL FMP_API_KEY_PARAM = "apikey=";
 
                 // Add the API key at the end of the URL
-                const Tools::URL FMP_API_KEY = "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa"; // NOTE: DO NOT SHARE THIS KEY
+                const Tools::URL FMP_API_KEY = "API_KEY"; // NOTE: DO NOT SHARE THIS KEY
         // Polygon API URL Constants - sorted based on the order of use
                 // url for the API
                 const Tools::URL POLYGON_API_URL = "https://api.polygon.io/";
@@ -54,7 +54,7 @@ namespace Fetcher
                 const Tools::URL POLYGON_HISTORICAL_DATA_ENDPOINT = "v2/aggs/ticker/";
 
                 // API key
-                const Tools::URL POLYGON_API_KEY = "US3m3PmjA1TXqHpLCl2A9HmH6U5LhPz1"; // NOTE: DO NOT SHARE THIS KEY
+                const Tools::URL POLYGON_API_KEY = "API_KEY"; // NOTE: DO NOT SHARE THIS KEY
         }
 }
 

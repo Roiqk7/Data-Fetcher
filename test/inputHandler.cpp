@@ -10,6 +10,7 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include <string>
 #include "../include/tools.h"
+#include "../src/include/constants.h"
 #include "../src/include/inputHandler.h"
 
 namespace Fetcher
@@ -24,7 +25,7 @@ namespace Fetcher
                 spdlog::info("{} test started. Catching invalid user input...", testName);
 
                 // Invalid user input - empty time frame argument (invalid eg. in this case: Fetcher::fetchHistoricalData("AAPL", "2021-01-01", "2021-01-05", "", "fmp", "API_KEY");)
-                std::vector<std::string> args = {"AAPL", "2021-01-01", "2021-01-05", "", "fmp", "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa"};
+                std::vector<std::string> args = {"AAPL", "2021-01-01", "2021-01-05", "", "fmp", Constants::FMP_API_KEY};
 
                 // Argument names
                 std::vector<std::string> argNames = {"tickerSymbol", "fromDate", "toDate", "timeFrame", "api", "apiKey"};
@@ -43,7 +44,7 @@ namespace Fetcher
                 spdlog::info("{} test started. Catching invalid user input...", testName);
 
                 // Invalid user input - missing time frame argument (invalid eg. in this case: Fetcher::fetchHistoricalData("AAPL", "2021-01-01", "2021-01-05", "fmp", "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa");)
-                std::vector<std::string> args = {"AAPL", "2021-01-01", "2021-01-05", "fmp", "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa"};
+                std::vector<std::string> args = {"AAPL", "2021-01-01", "2021-01-05", "fmp", Constants::FMP_API_KEY};
 
                 // Argument names
                 std::vector<std::string> argNames = {"tickerSymbol", "fromDate", "toDate", "timeFrame", "api", "apiKey"};

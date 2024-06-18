@@ -12,6 +12,6 @@ Notes: When deleting this file dont forget to delete the main from CMakeLists.tx
 int main()
 {
         // Fetch historical data
-        Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-08-11", "4", "hour", "polygon", "US3m3PmjA1TXqHpLCl2A9HmH6U5LhPz1");
+        Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-08-11", "4", "hour", "polygon", "API_KEY");
         return 0;
 }
