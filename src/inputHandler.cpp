@@ -27,6 +27,9 @@ namespace Fetcher
                 RawUserInput::RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey)
                         : url(""), api(api), apiKey(apiKey), tickerSymbol(tickerSymbol), from(fromDate), to(toDate), timeFrame(timeFrame), test(false) { }
 
+                RawUserInput::RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& multiplier, const std::string& timeFrame, const std::string& api, const std::string& apiKey)
+                        : url(""), api(api), apiKey(apiKey), tickerSymbol(tickerSymbol), from(fromDate), to(toDate), multiplier(multiplier), timeFrame(timeFrame), test(false) { }
+
                 RawUserInput::RawUserInput(const std::string& urlString)
                         : url(urlString), api(""), apiKey(""), tickerSymbol(""), from(""), to(""), timeFrame(""), test(false) { }
 
@@ -132,8 +135,18 @@ namespace Fetcher
                                 // Check if the user provided a ticker, api and api key
                                 if (rawUserInput.tickerSymbol != "" && rawUserInput.api != "" && rawUserInput.apiKey != "")
                                 {
-                                        processedUserInput.url = createUrl(rawUserInput.tickerSymbol, rawUserInput.from, rawUserInput.to, rawUserInput.timeFrame, rawUserInput.api, rawUserInput.apiKey);
-                                        return;
+                                        // Check for the multiplier
+                                        if (rawUserInput.multiplier != "")
+                                        {
+                                                // If the multiplier is provided, create a URL with the ticker, from, to, multiplier, time frame, API, and API key
+                                                processedUserInput.url = createUrl(rawUserInput.tickerSymbol, rawUserInput.from, rawUserInput.to, rawUserInput.multiplier, rawUserInput.timeFrame, rawUserInput.api, rawUserInput.apiKey);
+                                                return;
+                                        }
+                                        else
+                                        {
+                                                processedUserInput.url = createUrl(rawUserInput.tickerSymbol, rawUserInput.from, rawUserInput.to, rawUserInput.timeFrame, rawUserInput.api, rawUserInput.apiKey);
+                                                return;
+                                        }
                                 }
                         }
 
@@ -199,14 +212,71 @@ namespace Fetcher
                         // Determine the URL based on the API
                         if (lowerApi == "fmp")
                         {
+                                // Eg. https://financialmodelingprep.com/api/v3/historical-chart/4hour/SPY?from=2023-08-10&to=2023-09-10&apikey=vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa
                                 url = Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH + tickerSymbol
                                         + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND + "to=" + toDate + Constants::AND
                                         + Constants::FMP_API_KEY_PARAM + apiKey;
                         }
                         else if (lowerApi == "polygon")
                         {
-                                url = "TODO"; // TODO: Implement Polygon API
+                                // Eg. https://api.polygon.io/v2/aggs/ticker/SPY/range/4/hour/2023-01-09/2023-01-10?adjusted=true&sort=asc&apiKey=US3m3PmjA1TXqHpLCl2A9HmH6U5LhPz1
+                                url = Constants::POLYGON_API_URL + Constants::POLYGON_HISTORICAL_DATA_ENDPOINT + tickerSymbol + "range" + Constants::SLASH + timeFrame
+                                + Constants::SLASH + fromDate + Constants::SLASH + toDate + Constants::QUESTION_MARK + "adjusted=true&sort=asc"
+                                        + Constants::AND + Constants::POLYGON_API_KEY_PARAM + apiKey;
                         }
+                        else
+                        {
+                                spdlog::error("Invalid input. API '{}' is not supported.", api);
+                                throw std::invalid_argument("Invalid input. Please provide a valid API. Valid API arguments are 'fmp' and 'polygon'.");
+                        }
+
+                        return url;
+                }
+
+                /*
+                Create a URL based on the ticker symbol, from date, to date, multiplier, time frame, API, and API key.
+
+                @param tickerSymbol: The ticker symbol to fetch data for.
+                @param fromDate: The start date in YYYY-MM-DD format.
+                @param toDate: The end date in YYYY-MM-DD format.
+                @param multiplier: The multiplier for the time frame.
+                @param timeFrame: The time frame for the operation.
+                @param api: The API to use.
+                @param apiKey: The API key to use.
+
+                @return: The URL to fetch data from.
+                */
+                Tools::URL createUrl(const std::string& tickerSymbol, const std::string& fromDate,
+                        const std::string& toDate, const std::string& multiplier, const std::string& timeFrame,
+                        const std::string& api, const std::string& apiKey)
+                {
+                        Tools::URL url;
+
+                        // Lowercase the API
+                        std::string lowerApi = api;
+                        std::transform(api.begin(), api.end(), lowerApi.begin(),
+                                [](unsigned char c){ return std::tolower(c); });
+
+                        // New timeFrame
+                        std::string newTimeFrame;
+
+                        // We update the timeFrame based on the api
+                        if (lowerApi == "fmp")
+                        {
+                                newTimeFrame = multiplier + timeFrame;
+                        }
+                        else if (lowerApi == "polygon")
+                        {
+                                newTimeFrame = multiplier + Constants::SLASH + timeFrame;
+                        }
+                        else
+                        {
+                                spdlog::error("Invalid input. API '{}' is not supported.", api);
+                                throw std::invalid_argument("Invalid input. Please provide a valid API. Valid API arguments are 'fmp' and 'polygon'.");
+                        }
+
+                        // We then call the createUrl function with the new timeFrame
+                        url = createUrl(tickerSymbol, fromDate, toDate, newTimeFrame, api, apiKey);
 
                         return url;
                 }

@@ -29,8 +29,8 @@ namespace Fetcher
                         std::string tickerSymbol; // The ticker symbol to fetch data for.
                         std::string from; // The start date in YYYY-MM-DD format.
                         std::string to; // The end date in YYYY-MM-DD format.
-                        std::string timeFrame; // The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
                         std::string multiplier; // The multiplier for the time frame.
+                        std::string timeFrame; // The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
                         bool test; // Run unit tests.
                 public:
                 // Constructors
@@ -69,6 +69,9 @@ namespace Fetcher
                 Tools::URL createUrl(const std::string& url, const std::string& apiKey);
                 Tools::URL createUrl(const std::string& tickerSymbol, const std::string& fromDate,
                         const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+                Tools::URL createUrl(const std::string& tickerSymbol, const std::string& fromDate,
+                        const std::string& toDate, const std::string& multiplier, const std::string& timeFrame,
+                        const std::string& api, const std::string& apiKey);
                 bool checkForUrl(const RawUserInput& rawInput);
                 bool checkFromToTimeFrame(const std::string& fromDate, const std::string& toDate, const std::string& timeFrame);
                 bool checkUrlForApiKey(const Tools::URL& url);

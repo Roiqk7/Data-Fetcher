@@ -50,6 +50,9 @@ namespace Fetcher
                 // API key param
                 const Tools::URL POLYGON_API_KEY_PARAM = "apiKey=";
 
+                // API endpoint constants
+                const Tools::URL POLYGON_HISTORICAL_DATA_ENDPOINT = "v2/aggs/ticker/";
+
                 // API key
                 const Tools::URL POLYGON_API_KEY = "US3m3PmjA1TXqHpLCl2A9HmH6U5LhPz1"; // NOTE: DO NOT SHARE THIS KEY
         }
