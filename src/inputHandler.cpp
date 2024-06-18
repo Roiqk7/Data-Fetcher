@@ -57,8 +57,6 @@ namespace Fetcher
 
                 @param args: The arguments to validate.
                 @param argNames: The names of the arguments to validate.
-
-                TODO Separate into smaller functions
                 */
                 void userInputValidator(const std::vector<std::string>& args, const std::vector<std::string>& argNames)
                 {
@@ -106,20 +104,22 @@ namespace Fetcher
                 */
                 void proccessUserInput(const RawUserInput& rawUserInput, ProcessedUserInput& processedUserInput)
                 {
-                        // Check if the raw input has a URL
+                        // Check if the raw input contains an URL
                         if (checkForUrl(rawUserInput))
                         {
-                                // Then check for an API key
+                                // Then check if the URL contains ap API key
                                 if (checkUrlForApiKey(rawUserInput.url))
                                 {
+                                        // If it does, use the URL as is
                                         processedUserInput.url = rawUserInput.url;
                                         return;
                                 }
+                                // If it doesn't, check if the user provided an API key on its own
                                 else
                                 {
-                                        // Check if the user provided a api key
                                         if (rawUserInput.apiKey != "")
                                         {
+                                                // If they did, create a new URL with the provided URL and API key
                                                 processedUserInput.url = createUrl(rawUserInput.url, rawUserInput.apiKey);
                                                 return;
                                         }

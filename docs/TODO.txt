@@ -1,3 +1,2 @@
-- separate functions in inputHandler.cpp into smaller ones.
-- implement polygon for options data
+- implement polygon API (including for options data)
 - finish and simplify, debug and write more tests
