@@ -1,0 +1,1 @@
+https://api.polygon.io/v2/aggs/ticker/SPY/range/4/hour/2023-01-09/2023-01-10?adjusted=true&sort=asc&apiKey=apiKey

@@ -213,15 +213,19 @@ namespace Fetcher
                         if (lowerApi == "fmp")
                         {
                                 // Eg. https://financialmodelingprep.com/api/v3/historical-chart/4hour/SPY?from=2023-08-10&to=2023-09-10&apikey=vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa
-                                url = Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH + tickerSymbol
-                                        + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND + "to=" + toDate + Constants::AND
+                                url = Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT
+                                        + timeFrame + Constants::SLASH + tickerSymbol
+                                        + Constants::QUESTION_MARK + "from=" + fromDate
+                                        + Constants::AND + "to=" + toDate + Constants::AND
                                         + Constants::FMP_API_KEY_PARAM + apiKey;
                         }
                         else if (lowerApi == "polygon")
                         {
                                 // Eg. https://api.polygon.io/v2/aggs/ticker/SPY/range/4/hour/2023-01-09/2023-01-10?adjusted=true&sort=asc&apiKey=US3m3PmjA1TXqHpLCl2A9HmH6U5LhPz1
-                                url = Constants::POLYGON_API_URL + Constants::POLYGON_HISTORICAL_DATA_ENDPOINT + tickerSymbol + "range" + Constants::SLASH + timeFrame
-                                + Constants::SLASH + fromDate + Constants::SLASH + toDate + Constants::QUESTION_MARK + "adjusted=true&sort=asc"
+                                url = Constants::POLYGON_API_URL + Constants::POLYGON_HISTORICAL_DATA_ENDPOINT
+                                        + tickerSymbol + Constants::SLASH + "range" + Constants::SLASH
+                                        + timeFrame + Constants::SLASH + fromDate + Constants::SLASH
+                                        + toDate + Constants::QUESTION_MARK + "adjusted=true&sort=asc"
                                         + Constants::AND + Constants::POLYGON_API_KEY_PARAM + apiKey;
                         }
                         else

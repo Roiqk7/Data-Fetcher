@@ -9,6 +9,7 @@ Notes: x
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
 #include <string>
+#include "../include/tools.h"
 #include "../src/include/inputHandler.h"
 
 namespace Fetcher
@@ -106,5 +107,25 @@ namespace Fetcher
 
                 // Catch the invalid user input exception
                 ASSERT_THROW(InputHandler::checkValidDateFormat(args, argNames), std::invalid_argument);
+        }
+
+        // Correct url created using Polygons API
+        TEST(InputHandlerTest, inputHandler6)
+        {
+                // Construct the file path dynamically
+                std::string testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+                std::string filePath = "../test/data/" + testName + ".txt";
+
+                // Log
+                spdlog::info("{} test started. Checking for valid Polygon URL creation...", testName);
+
+                // Expected URL
+                Tools::URL expectedURLs = Tools::readFileContents(filePath);
+
+                // Actual URL
+                Tools::URL actualURL = InputHandler::createUrl("SPY", "2023-01-09", "2023-01-10", "4", "hour", "polygon", "apiKey");
+
+                // Assert that the actual URL is equal to the expected URL
+                ASSERT_EQ(actualURL, expectedURLs);
         }
 }
