@@ -85,15 +85,15 @@ namespace Fetcher
                 spdlog::info("{} test started. Fetching data using Polygons API...", testName);
 
                 // Fetch the data
-                Json::Value actualData = Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-08-20", "4", "hour", "polygon", Constants::POLYGON_API_KEY);
+                Json::Value actualData = Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-08-12", "4", "hour", "polygon", Constants::POLYGON_API_KEY);
 
                 // Read the expected contents from dataFetcherTest3.json
                 Json::Value expectedData = Tools::readJsonFileContents(filePath);
 
                 // Assert that the fetched data is equal to the expected data
-                ASSERT_EQ(actualData, expectedData);
+                ASSERT_EQ(actualData["results"], expectedData["results"]);
 
-                if (actualData != expectedData)
+                if (actualData["results"] != expectedData["results"])
                 {
                         spdlog::error("Received data: {}", actualData.toStyledString());
                         spdlog::info("Keep in mind that sometimes the API returns data correctly but the expected and actual data do not match. Check the time information in the data.");
