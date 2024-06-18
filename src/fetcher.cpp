@@ -27,7 +27,7 @@ namespace Fetcher
 
         @param fromDate: The start date in YYYY-MM-DD format.
         @param toDate: The end date in YYYY-MM-DD format.
-        @param timeframe: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
+        @param timeFrame: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
 
         @return: A unique pointer to the Json::Value object containing the fetched data.
         */

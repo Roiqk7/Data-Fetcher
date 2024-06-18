@@ -29,13 +29,16 @@ namespace Fetcher
                         std::string tickerSymbol; // The ticker symbol to fetch data for.
                         std::string from; // The start date in YYYY-MM-DD format.
                         std::string to; // The end date in YYYY-MM-DD format.
-                        std::string timeframe; // The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
+                        std::string timeFrame; // The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
+                        std::string multiplier; // The multiplier for the time frame.
                         bool test; // Run unit tests.
                 public:
                 // Constructors
                         RawUserInput();
                         RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate,
                                 const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+                        RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate,
+                                const std::string& multiplier, const std::string& timeFrame, const std::string& api, const std::string& apiKey);
                         RawUserInput(const std::string& urlString);
                         RawUserInput(const std::string& urlString, const std::string& apiKey);
                 // Functions

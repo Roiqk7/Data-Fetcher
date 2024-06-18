@@ -22,20 +22,20 @@ namespace Fetcher
         {
         // Structs
                 RawUserInput::RawUserInput()
-                        : url(""), api(""), apiKey(""), tickerSymbol(""), from(""), to(""), timeframe(""), test(false) { }
+                        : url(""), api(""), apiKey(""), tickerSymbol(""), from(""), to(""), timeFrame(""), test(false) { }
 
                 RawUserInput::RawUserInput(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey)
-                        : url(""), api(api), apiKey(apiKey), tickerSymbol(tickerSymbol), from(fromDate), to(toDate), timeframe(timeFrame), test(false) { }
+                        : url(""), api(api), apiKey(apiKey), tickerSymbol(tickerSymbol), from(fromDate), to(toDate), timeFrame(timeFrame), test(false) { }
 
                 RawUserInput::RawUserInput(const std::string& urlString)
-                        : url(urlString), api(""), apiKey(""), tickerSymbol(""), from(""), to(""), timeframe(""), test(false) { }
+                        : url(urlString), api(""), apiKey(""), tickerSymbol(""), from(""), to(""), timeFrame(""), test(false) { }
 
                 RawUserInput::RawUserInput(const std::string& urlString, const std::string& apiKey)
-                        : url(urlString), api(""), apiKey(apiKey), tickerSymbol(""), from(""), to(""), timeframe(""), test(false) { }
+                        : url(urlString), api(""), apiKey(apiKey), tickerSymbol(""), from(""), to(""), timeFrame(""), test(false) { }
 
                 void RawUserInput::logRawUserInput() const
                 {
-                        spdlog::info("Raw user input: URL: {}, API: {}, API key: {}, Ticker symbol: {}, From: {}, To: {}, Time frame: {}, Test: {}", Tools::hideApiKey(url), api, !apiKey.empty(), tickerSymbol, from, to, timeframe, test);
+                        spdlog::info("Raw user input: URL: {}, API: {}, API key: {}, Ticker symbol: {}, From: {}, To: {}, Time frame: {}, Test: {}", Tools::hideApiKey(url), api, !apiKey.empty(), tickerSymbol, from, to, timeFrame, test);
                 }
 
                 ProcessedUserInput::ProcessedUserInput()
@@ -127,12 +127,12 @@ namespace Fetcher
                         }
 
                         // Check if the from, to, and time frame are not empty
-                        if (checkFromToTimeFrame(rawUserInput.from, rawUserInput.to, rawUserInput.timeframe))
+                        if (checkFromToTimeFrame(rawUserInput.from, rawUserInput.to, rawUserInput.timeFrame))
                         {
                                 // Check if the user provided a ticker, api and api key
                                 if (rawUserInput.tickerSymbol != "" && rawUserInput.api != "" && rawUserInput.apiKey != "")
                                 {
-                                        processedUserInput.url = createUrl(rawUserInput.tickerSymbol, rawUserInput.from, rawUserInput.to, rawUserInput.timeframe, rawUserInput.api, rawUserInput.apiKey);
+                                        processedUserInput.url = createUrl(rawUserInput.tickerSymbol, rawUserInput.from, rawUserInput.to, rawUserInput.timeFrame, rawUserInput.api, rawUserInput.apiKey);
                                         return;
                                 }
                         }

@@ -32,7 +32,7 @@ namespace Fetcher
                 const Tools::URL QUESTION_MARK = "?"; // Used to begin the query string
                 const Tools::URL AND = "&"; // Used to separate the URL components
         /// FMP API URL Constants - sorted based on the order of use
-                // API URL Constants - sorted based on the order of use
+                // URL for the API
                 const Tools::URL FMP_API_URL = "https://financialmodelingprep.com/api/v3/";
 
                 // API Endpoint Constants
@@ -44,8 +44,13 @@ namespace Fetcher
                 // Add the API key at the end of the URL
                 const Tools::URL FMP_API_KEY = "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa"; // NOTE: DO NOT SHARE THIS KEY
         // Polygon API URL Constants - sorted based on the order of use
+                // url for the API
                 const Tools::URL POLYGON_API_URL = "https://api.polygon.io/";
 
+                // API key param
+                const Tools::URL POLYGON_API_KEY_PARAM = "apiKey=";
+
+                // API key
                 const Tools::URL POLYGON_API_KEY = "US3m3PmjA1TXqHpLCl2A9HmH6U5LhPz1"; // NOTE: DO NOT SHARE THIS KEY
         }
 }
