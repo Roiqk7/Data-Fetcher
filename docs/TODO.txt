@@ -1,2 +1,3 @@
 - implement polygon API (including for options data)
+- tests for polygon API and related functions
 - finish and simplify, debug and write more tests
