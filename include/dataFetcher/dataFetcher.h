@@ -17,6 +17,9 @@ namespace Fetcher
 {
         Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate,
                 const std::string& timeFrame, const std::string& api, const std::string& apiKey);
+        Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate,
+                const std::string& multiplier, const std::string& timeFrame, const std::string& api,
+                const std::string& apiKey);
         Json::Value fetchHistoricalData(const std::string& urlString);
         Json::Value fetchHistoricalData(const std::string& urlString, const std::string& apiKey);
         // void runUnitTests();

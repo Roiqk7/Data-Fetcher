@@ -21,7 +21,7 @@ namespace Fetcher
         @param tickerSymbol: The ticker symbol to fetch data for.
         @param fromDate: The start date in YYYY-MM-DD format.
         @param toDate: The end date in YYYY-MM-DD format.
-        @param timeFrame: The time frame for the operation (1min, 5min, 15min, 30min, 1hour, 4hour).
+        @param timeFrame: The time frame for the operation.
         @param api: The API to use. (fmp or polygon)
         @param apiKey: The API key to use.
 
@@ -30,10 +30,41 @@ namespace Fetcher
         Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate, const std::string& toDate, const std::string& timeFrame, const std::string& api, const std::string& apiKey)
         {
                 // Validate user input
-                InputHandler::userInputValidator({tickerSymbol, fromDate, toDate, timeFrame, api, apiKey}, {"tickerSymbol", "fromDate", "toDate", "timeFrame", "api", "apiKey"});
+                InputHandler::userInputValidator({tickerSymbol, fromDate, toDate, timeFrame, api, apiKey},
+                        {"tickerSymbol", "fromDate", "toDate", "timeFrame", "api", "apiKey"});
 
                 // Initialize the raw user input
                 InputHandler::RawUserInput rawUserInput(tickerSymbol, fromDate, toDate, timeFrame, api, apiKey);
+
+                // Initialize the processed user input
+                InputHandler::ProcessedUserInput processedUserInput;
+
+                return FlowControl::handleUserRequest(rawUserInput, processedUserInput);
+        }
+
+        /*
+        Fetches historical data from an API.
+
+        @param tickerSymbol: The ticker symbol to fetch data for.
+        @param fromDate: The start date in YYYY-MM-DD format.
+        @param toDate: The end date in YYYY-MM-DD format.
+        @param multiplier: The multiplier for the time frame.
+        @param timeFrame: The time frame for the operation.
+        @param api: The API to use. (fmp or polygon)
+        @param apiKey: The API key to use.
+
+        @return: The fetched historical data.
+        */
+        Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::string& fromDate,
+                const std::string& toDate, const std::string& multiplier, const std::string& timeFrame,
+                const std::string& api, const std::string& apiKey)
+        {
+                // Validate user input
+                InputHandler::userInputValidator({tickerSymbol, fromDate, toDate, multiplier, timeFrame, api, apiKey},
+                        {"tickerSymbol", "from", "to", "multiplier", "timeFrame", "api", "apiKey"});
+
+                // Initialize the raw user input
+                InputHandler::RawUserInput rawUserInput(tickerSymbol, fromDate, toDate, multiplier, timeFrame, api, apiKey);
 
                 // Initialize the processed user input
                 InputHandler::ProcessedUserInput processedUserInput;
