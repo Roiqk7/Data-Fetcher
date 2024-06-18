@@ -170,7 +170,7 @@ namespace Fetcher
                 {
                         Tools::URL newUrl;
 
-                        newUrl = url + Constants::QUESTION_MARK + Constants::API_KEY_PARAM + apiKey;
+                        newUrl = url + Constants::QUESTION_MARK + Constants::FMP_API_KEY_PARAM + apiKey;
 
                         return newUrl;
                 }
@@ -201,7 +201,7 @@ namespace Fetcher
                         {
                                 url = Constants::FMP_API_URL + Constants::FMP_HISTORICAL_DATA_ENDPOINT + timeFrame + Constants::SLASH + tickerSymbol
                                         + Constants::QUESTION_MARK + "from=" + fromDate + Constants::AND + "to=" + toDate + Constants::AND
-                                        + Constants::API_KEY_PARAM + apiKey;
+                                        + Constants::FMP_API_KEY_PARAM + apiKey;
                         }
                         else if (lowerApi == "polygon")
                         {

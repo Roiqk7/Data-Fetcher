@@ -31,15 +31,15 @@ namespace Fetcher
                 const Tools::URL SLASH = "/"; // Used to separate the URL components
                 const Tools::URL QUESTION_MARK = "?"; // Used to begin the query string
                 const Tools::URL AND = "&"; // Used to separate the URL components
-
-                // URL Parameters
-                const Tools::URL API_KEY_PARAM = "apikey=";
         /// FMP API URL Constants - sorted based on the order of use
                 // API URL Constants - sorted based on the order of use
                 const Tools::URL FMP_API_URL = "https://financialmodelingprep.com/api/v3/";
 
                 // API Endpoint Constants
                 const Tools::URL FMP_HISTORICAL_DATA_ENDPOINT = "historical-chart/"; // Add time frame and time period at the end
+
+                // URL Parameters
+                const Tools::URL FMP_API_KEY_PARAM = "apikey=";
 
                 // Add the API key at the end of the URL
                 const Tools::URL FMP_API_KEY = "vKoDVGFjjGHf5uWq3O0ztQ0w6CfMfxIa"; // NOTE: DO NOT SHARE THIS KEY

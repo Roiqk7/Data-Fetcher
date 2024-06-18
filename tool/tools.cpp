@@ -39,7 +39,7 @@ namespace Fetcher
                                         return std::tolower(c);
                                 }
                         );
-                        std::string apiKeyIndicator = Constants::API_KEY_PARAM;
+                        std::string apiKeyIndicator = Constants::FMP_API_KEY_PARAM;
                         size_t pos = lowerCaseUrl.find(apiKeyIndicator);
                         if (pos != std::string::npos)
                         {
