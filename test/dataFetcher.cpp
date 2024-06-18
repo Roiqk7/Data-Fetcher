@@ -54,10 +54,12 @@ namespace Fetcher
                 std::string filePath = "../test/data/" + testName + ".json";
 
                 // Log
-                spdlog::info("{} test started. Fetching historical data using the ticker symbol, from date, to date, time frame, API, and API key...", testName);
+                spdlog::info("{} test started. Fetching historical data using the ticker symbol,
+                        from date, to date, time frame, API, and API key...", testName);
 
                 // Fetch the data
-                Json::Value actualData = Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-08-20", "4hour", "fmp", Constants::FMP_API_KEY);
+                Json::Value actualData = Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-08-20",
+                        "4hour", "fmp", Constants::FMP_API_KEY);
 
                 // Read the expected contents from dataFetcherTest2.json
                 Json::Value expectedData = Tools::readJsonFileContents(filePath);
@@ -68,6 +70,8 @@ namespace Fetcher
                 if (actualData != expectedData)
                 {
                         spdlog::error("Received data: {}", actualData.toStyledString());
+                        spdlog::info("Keep in mind that sometimes the API returns data correctly but the
+                                expected and actual data do not match. Check the time information in the data.");
                 }
         }
 }
