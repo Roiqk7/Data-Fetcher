@@ -13,6 +13,7 @@ This code is part of Project Mencator. This particular module is responsible for
 ## Dependencies
 
 * [C++17](https://en.cppreference.com/w/cpp/17)
+* [Homebrew](https://brew.sh/)
 * [CMake](https://cmake.org/)
 * [CURL](https://curl.se/)
 * [GTest](https://github.com/google/googletest)
