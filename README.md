@@ -26,7 +26,7 @@ The dependencies can be installed using `dependencies.sh` which is located in th
 ./dependencies.sh
 ```
 
-**Note:** If you `zsh: permission denied: ./dependencies.sh` then run:
+**Note:** If you encounter `zsh: permission denied: ./dependencies.sh` then run:
 
 ```bash
 chmod +x dependencies.sh
@@ -48,7 +48,7 @@ Then, you can build the project by navigating to the project directory and execu
 ./build.sh
 ```
 
-**Note:** If you `zsh: permission denied: ./build.sh` then run:
+**Note:** If you encounter `zsh: permission denied: ./build.sh` then run:
 
 ```bash
 chmod +x build.sh
