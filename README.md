@@ -1,6 +1,6 @@
 # Data Fetcher
 
-This code is part of Project Mencator. This particular module is responsible for gathering input data using the [FMP](https://site.financialmodelingprep.com) and [Polygon.io](https://polygon.io).
+This code is part of Project Mencator. This particular module is responsible for gathering input data using the [FMP](https://site.financialmodelingprep.com) and [Polygon.io](https://polygon.io). Keep in mind that this project is intended for MacOS users. If you would like to implement this project to a different operating system, feel free to fork the repository and make the necessary changes.
 
 ## Table of contents
 - [Data Fetcher](#data-fetcher)
@@ -56,7 +56,7 @@ chmod +x build.sh
 
 This will make the file executable. Now you can run the file and build the project.
 
-**Note:** You do not have to build the project if you only want to use the library. You can include the header file in your project and use the functions provided by the library. Building the project is only necessary if you want to run the tests. But in order for the tests to run, you need to add your API keys into `src/include/constants.h`.
+**Note:** You do not have to build the project if you only want to use it as a library. Building the project is only necessary if you want to run the tests or want to contribute. In order for the tests to run, you need to add your API keys into `src/include/constants.h`.
 
 ## Usage
 
