@@ -38,14 +38,21 @@ After installing the dependencies, you can clone the repository:
 git clone https://github.com/Roiqk7/Data-Fetcher.git
 ```
 
-Then, you can build the project by navigating to the project directory and running the following commands:
+Then, you can build the project by navigating to the project directory and executing the `build.sh` file:
 
 ```bash
-mkdir build &&
-cd build &&
-cmake .. &&
-make
+./build.sh
 ```
+
+**Note:** If you `zsh: permission denied: ./build.sh` then run:
+
+```bash
+chmod +x build.sh
+```
+
+This will make the file executable. Now you can run the file and build the project.
+
+**Note:** You do not have to build the project if you only want to use the library. You can include the header file in your project and use the functions provided by the library. Building the project is only necessary if you want to run the tests. But in order for the tests to run, you need to add your API keys into `src/include/constants.h`.
 
 ## Usage
 
