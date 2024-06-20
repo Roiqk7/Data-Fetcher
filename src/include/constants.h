@@ -3,7 +3,7 @@ Date: 12/06/2024
 
 Description: This file contains the constants used in the Fetcher module.
 
-Notes: x
+Notes: Add your API keys to FMP_API_KEY for the Financial Modeling Prep API and POLYGON_API_KEY for the Polygon API.
 */
 
 #include <string>
