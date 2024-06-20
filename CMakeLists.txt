@@ -23,8 +23,14 @@ add_library(FetcherLib
         tool/tools.cpp
 )
 
+# Set the C++ standard for the FetcherLib target
+target_compile_features(FetcherLib PUBLIC cxx_std_17)
+
 # Make the FetcherLib headers available to other projects
+# Include the public headers
 target_include_directories(FetcherLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+# Include the private headers
+target_include_directories(FetcherLib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/include)
 
 # Include external libraries
 # Find and include the CURL library
