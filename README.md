@@ -26,10 +26,10 @@ The dependencies can be installed using `dependencies.sh` which is located in th
 ./dependencies.sh
 ```
 
-**Note:** If you `zsh: permission denied: ./build.sh` then run:
+**Note:** If you `zsh: permission denied: ./dependencies.sh` then run:
 
 ```bash
-chmod +x build.sh
+chmod +x dependencies.sh
 ```
 
 This will make the file executable. Now you can run the file and install all the dependencies.
