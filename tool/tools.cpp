@@ -13,7 +13,7 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include <sstream>
 #include <string>
-#include "../include/tools.h"
+#include "tools.h"
 #include "../src/include/constants.h"
 #include "../src/include/inputHandler.h"
 

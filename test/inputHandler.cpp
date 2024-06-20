@@ -9,7 +9,7 @@ Notes: x
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
 #include <string>
-#include "../include/tools.h"
+#include "tools.h"
 #include "../src/include/constants.h"
 #include "../src/include/inputHandler.h"
 

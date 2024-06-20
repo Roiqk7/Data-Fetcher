@@ -8,7 +8,7 @@ Notes: x
 
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
-#include "../include/tools.h"
+#include "tools.h"
 #include "../src/include/constants.h"
 #include "../src/include/exceptions.h"
 #include "../src/include/fetcher.h"

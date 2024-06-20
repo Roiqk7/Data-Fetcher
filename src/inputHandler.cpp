@@ -12,7 +12,7 @@ Notes: x
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include "../include/tools.h"
+#include "tools.h"
 #include "../src/include/constants.h"
 #include "../src/include/inputHandler.h"
 

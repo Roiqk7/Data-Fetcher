@@ -10,7 +10,7 @@ Notes: x
 #define INPUTHANDLER_H
 
 #include <string>
-#include "../../include/tools.h"
+#include "tools.h"
 
 namespace Fetcher
 {
