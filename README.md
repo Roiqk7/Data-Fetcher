@@ -19,16 +19,19 @@ This code is part of Project Mencator. This particular module is responsible for
 * [Json Cpp](https://github.com/open-source-parsers/jsoncpp)
 * [spdlog](https://github.com/gabime/spdlog)
 
-Installation of the dependencies on MacOS using Homebrew:
+The dependencies can be installed using `dependencies.sh` which is located in the root directory of the project. You can run the script by executing the following command:
 
 ```bash
-brew install boost &&
-brew install cmake &&
-brew install curl &&
-brew install googletest &&
-brew install jsoncpp &&
-brew install spdlog
+./dependencies.sh
 ```
+
+**Note:** If you `zsh: permission denied: ./build.sh` then run:
+
+```bash
+chmod +x build.sh
+```
+
+This will make the file executable. Now you can run the file and install all the dependencies.
 
 ## Installation
 
