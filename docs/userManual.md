@@ -16,7 +16,12 @@ installed the library. provided with this library. If you haven't, please do so 
       - [Complexity](#complexity)
       - [Exceptions](#exceptions)
       - [Examples](#examples)
-  - [Exceptions](#exceptions-1)
+  - [Exceptions defined in header "src/include/exceptions.h"](#exceptions-defined-in-header-srcincludeexceptionsh)
+    - [HTTPRequestFailed](#httprequestfailed)
+    - [FailedToParseRequestedData](#failedtoparserequesteddata)
+    - [FailedToFetchRequestedData](#failedtofetchrequesteddata)
+    - [ApiResponseError](#apiresponseerror)
+    - [UnexpectedJsonType](#unexpectedjsontype)
 
 ## Documentation
 
@@ -39,7 +44,7 @@ Json::Value fetchHistoricalData(const std::string& tickerSymbol, const std::stri
 
 #### Parameters
 
-* `urlString` - The URL of the API endpoint. Example: `https://financialmodelingprep.com/api/v3/historical-chart/4hour/SPY?from=2023-08-10&to=2023-09-10&apikey=YOUR_API_KEY`.
+* `urlString` - The URL of the API endpoint. Example: `https://financialmodelingprep.com/api/v3/historical-chart/4hour/SPY?from=2023-08-10&to=2023-09-10&apikey=YOUR_API_KEY`. **Note:** You can also leave out API key parameter and provide it separately.
 * `apiKey` - The API key to access the API. Example: `YOUR_API_KEY`.
 * `tickerSymbol` - The symbol of the stock/ETF. Example: `SPY`.
 * `fromDate` - The start date of the historical data. Example: `2023-08-10`. (YYYY-MM-DD)
@@ -80,6 +85,26 @@ Fetcher::fetchHistoricalData("https://financialmodelingprep.com/api/v3/historica
 Fetcher::fetchHistoricalData("SPY", "2023-08-10", "2023-09-10", "4hour", "fml", "YOUR_API_KEY");
 ```
 
-## Exceptions
+## Exceptions defined in header "src/include/exceptions.h"
 
-TODO
+This section documents the exceptions defined in `src/include/exceptions.h`. These exceptions are designed to handle various error conditions that can occur during the fetching process.
+
+### HTTPRequestFailed
+
+This exception is thrown when an HTTP request fails to complete successfully. It could be due to network issues, server errors, or invalid URLs.
+
+### FailedToParseRequestedData
+
+Thrown when the program encounters an error while trying to parse data. This could happen if the data format is not as expected, or if the data is corrupted.
+
+### FailedToFetchRequestedData
+
+This exception is raised when the application is unable to fetch the requested data. This could be due to issues with the data source, such as unavailability or access restrictions.
+
+### ApiResponseError
+
+Raised when an API response indicates an error. This exception is used to handle error responses from APIs, including those with error codes and messages.
+
+### UnexpectedJsonType
+
+This exception is thrown when the type of a JSON element does not match the expected type. It is useful for catching type mismatches during JSON parsing.
