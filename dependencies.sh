@@ -18,4 +18,4 @@ install_homebrew()
 install_homebrew
 
 # Install dependencies
-brew install boost cmake curl googletest jsoncpp spdlog
+brew install cmake curl googletest jsoncpp spdlog
