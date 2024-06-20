@@ -3,7 +3,7 @@ Date: 16/06/2024
 
 Description: Used as an entry point when developing and debugging the programme.
 
-Notes: When deleting this file dont forget to delete the main from CMakeLists.txt
+Notes:
 */
 
 #include <json/json.h>
