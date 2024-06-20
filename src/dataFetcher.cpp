@@ -6,12 +6,12 @@ Description: Defines the public functions for this library.
 Notes: x
 */
 
+#include <dataFetcher/dataFetcher.h>
 #include <json/json.h>
 #include <string>
 #include "tools.h"
-#include "dataFetcher/dataFetcher.h"
-#include "../src/include/flowControl.h"
-#include "../src/include/inputHandler.h"
+#include "flowControl.h"
+#include "inputHandler.h"
 
 namespace Fetcher
 {

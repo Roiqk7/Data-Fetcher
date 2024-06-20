@@ -13,8 +13,8 @@ Notes: x
 #include <string>
 #include <vector>
 #include "tools.h"
-#include "../src/include/constants.h"
-#include "../src/include/inputHandler.h"
+#include "constants.h"
+#include "inputHandler.h"
 
 namespace Fetcher
 {

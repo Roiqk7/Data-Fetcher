@@ -7,14 +7,14 @@ Notes: x
 */
 
 #include <curl/curl.h>
+#include <dataFetcher/dataFetcher.h>
 #include <fstream>
 #include <gtest/gtest.h>
 #include <json/json.h>
 #include <spdlog/spdlog.h>
 #include <string>
 #include "tools.h"
-#include "../src/include/constants.h"
-#include "dataFetcher/dataFetcher.h"
+#include "constants.h"
 
 namespace Fetcher
 {

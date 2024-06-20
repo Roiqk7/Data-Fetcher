@@ -14,10 +14,10 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include <sstream>
 #include <string>
-#include "../src/include/constants.h"
-#include "../src/include/exceptions.h"
-#include "../src/include/fetcher.h"
-#include "../src/include/flowControl.h"
+#include "constants.h"
+#include "exceptions.h"
+#include "fetcher.h"
+#include "flowControl.h"
 #include "tools.h"
 
 namespace Fetcher

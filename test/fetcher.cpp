@@ -14,8 +14,8 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include <sstream>
 #include <string>
-#include "../src/include/constants.h"
-#include "../src/include/fetcher.h"
+#include "constants.h"
+#include "fetcher.h"
 #include "tools.h"
 
 namespace Fetcher

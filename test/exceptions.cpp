@@ -12,10 +12,10 @@ Notes: x
 #include <spdlog/spdlog.h>
 #include <string>
 #include "tools.h"
-#include "../src/include/exceptions.h"
-#include "../src/include/fetcher.h"
-#include "../src/include/flowControl.h"
-#include "../src/include/inputHandler.h"
+#include "exceptions.h"
+#include "fetcher.h"
+#include "flowControl.h"
+#include "inputHandler.h"
 
 namespace Fetcher
 {

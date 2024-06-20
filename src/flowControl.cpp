@@ -9,11 +9,11 @@ Notes: x
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
 #include "tools.h"
-#include "../src/include/constants.h"
-#include "../src/include/exceptions.h"
-#include "../src/include/fetcher.h"
-#include "../src/include/flowControl.h"
-#include "../src/include/inputHandler.h"
+#include "constants.h"
+#include "exceptions.h"
+#include "fetcher.h"
+#include "flowControl.h"
+#include "inputHandler.h"
 
 namespace Fetcher
 {

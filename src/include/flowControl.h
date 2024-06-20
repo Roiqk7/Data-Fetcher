@@ -11,8 +11,8 @@ Notes: x
 
 #include <json/json.h>
 #include <string>
-#include "../src/include/constants.h"
-#include "../src/include/inputHandler.h"
+#include "constants.h"
+#include "inputHandler.h"
 
 namespace Fetcher
 {

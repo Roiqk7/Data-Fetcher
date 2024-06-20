@@ -14,8 +14,8 @@ Notes: x
 #include <sstream>
 #include <string>
 #include "tools.h"
-#include "../src/include/constants.h"
-#include "../src/include/inputHandler.h"
+#include "constants.h"
+#include "inputHandler.h"
 
 namespace Fetcher
 {
