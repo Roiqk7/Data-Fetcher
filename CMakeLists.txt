@@ -59,7 +59,8 @@ option(BUILD_TESTS "Build the tests" ON)
 if(BUILD_TESTS)
         # Find and include the Google Test package
         find_package(GTest REQUIRED)
-        include_directories(${GTEST_INCLUDE_DIRS})
+        # Include the GTest and project header files
+        include_directories(${GTEST_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src/include)
 
         # Create a test executable
         add_executable(FetcherTests
