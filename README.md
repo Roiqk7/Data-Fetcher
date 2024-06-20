@@ -26,7 +26,10 @@ The dependencies can be installed using `dependencies.sh` which is located in th
 ./dependencies.sh
 ```
 
-**Note:** If you encounter `zsh: permission denied: ./dependencies.sh` then run:
+<details>
+<summary>zsh: permission denied: ./dependencies.sh</summary>
+
+To fix this error run:
 
 ```bash
 chmod +x dependencies.sh
@@ -34,27 +37,57 @@ chmod +x dependencies.sh
 
 This will make the file executable. Now you can run the file and install all the dependencies.
 
+</details>
+
 ## Installation
 
-After installing the dependencies, you can clone the repository:
+First, clone the repository:
 
 ```bash
 git clone https://github.com/Roiqk7/Data-Fetcher.git
 ```
 
-Then, you can build the project by navigating to the project directory and executing the `build.sh` file:
+Afterwards navigate to the project directory:
+
+```bash
+cd Data-Fetcher
+```
+
+Then install the dependencies by running the `dependencies.sh` file:
+
+```bash
+./dependencies.sh
+```
+
+<details>
+<summary>zsh: permission denied: ./dependencies.sh</summary>
+
+To fix this error run:
+
+```bash
+chmod +x dependencies.sh
+```
+
+This will make the file executable. Now you can run the file and install all the dependencies.
+
+</details>
+
+Now you can build the project by executing the `build.sh` file:
 
 ```bash
 ./build.sh
 ```
 
-**Note:** If you encounter `zsh: permission denied: ./build.sh` then run:
+<details>
+<summary>zsh: permission denied: ./build.sh</summary>
 
 ```bash
 chmod +x build.sh
 ```
 
 This will make the file executable. Now you can run the file and build the project.
+
+</details>
 
 **Note:** You do not have to build the project if you only want to use it as a library. Building the project is only necessary if you want to run the tests or want to contribute. In order for the tests to run, you need to add your API keys into `src/include/constants.h`.
 
