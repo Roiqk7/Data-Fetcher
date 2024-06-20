@@ -14,6 +14,13 @@ install_homebrew()
         fi
 }
 
+# Function to install dependencies using Homebrew
+install_dependencies()
+{
+        echo "Installing dependencies..."
+        brew install cmake curl googletest jsoncpp spdlog
+}
+
 # Detect operating system using uname
 OS=$(uname -s)
 
@@ -22,7 +29,7 @@ if [ "$OS" = "Darwin" ]; then
         install_homebrew
 
         # Install dependencies
-        brew install cmake curl googletest jsoncpp spdlog
+        install_dependencies
 else
-        echo "This script is intended for MacOS users. For Linux or other Unix-like systems, please install the dependencies using your package manager."
+        echo "[Error] This script is intended for macOS users. For Linux or other Unix-like systems, please install the dependencies using your package manager."
 fi
