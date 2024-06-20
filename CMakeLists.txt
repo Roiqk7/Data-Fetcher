@@ -26,12 +26,6 @@ add_library(FetcherLib
 # Make the FetcherLib headers available to other projects
 target_include_directories(FetcherLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# Add the executable main.cpp
-add_executable(Main main.cpp)
-
-# Link the FetcherLib library with the Main executable
-target_link_libraries(Main FetcherLib)
-
 # Include external libraries
 # Find and include the CURL library
 find_package(CURL REQUIRED)
