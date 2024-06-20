@@ -41,7 +41,7 @@ namespace Fetcher
                 spdlog::info("URL: {}", hiddenApiKey);
 
                 // Fetch the data and check if the request was successful
-                if(!FlowControl::checkSuccessFlag(handleRequest(url, readBuffer)))
+                if (!FlowControl::checkSuccessFlag(handleRequest(url, readBuffer)))
                 {
                         spdlog::error("HTTP request failed.");
                         throw Exceptions::HTTPRequestFailed("HTTP request failed.");
@@ -88,7 +88,7 @@ namespace Fetcher
         void writeRequestedData(const std::unique_ptr<Json::Value>& root, const Tools::FilePath& filePath)
         {
                 std::ofstream file(filePath);
-                if(file.is_open())
+                if (file.is_open())
                 {
                         Json::StreamWriterBuilder builder;
                         const std::unique_ptr<Json::StreamWriter> writer(builder.newStreamWriter());
@@ -120,7 +120,7 @@ namespace Fetcher
                 CURLcode res = performRequest(curl);
 
                 // Check if the request was successful
-                if(res != CURLE_OK)
+                if (res != CURLE_OK)
                 {
                         spdlog::error(std::string(curl_easy_strerror(res)));
                         throw Exceptions::HTTPRequestFailed(std::string(curl_easy_strerror(res)));
@@ -156,7 +156,7 @@ namespace Fetcher
         CURL* initCurl(Tools::URL url, std::string& readBuffer)
         {
                 CURL* curl = curl_easy_init();
-                if(curl)
+                if (curl)
                 {
                         // Set the URL and callback function
                         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
