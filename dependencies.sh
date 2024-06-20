@@ -17,7 +17,7 @@ install_homebrew()
 # Function to install dependencies using Homebrew
 install_dependencies()
 {
-        echo "Installing dependencies..."
+        echo "Installing dependencies using Homebrew..."
         brew install cmake curl googletest jsoncpp spdlog
 }
 
