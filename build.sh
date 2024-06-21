@@ -3,6 +3,9 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
+# Save the current directory
+original_dir=$(pwd)
+
 # Create a build directory if it doesn't exist
 if [ ! -d "build" ]; then
         echo "Creating build directory..."
@@ -25,8 +28,6 @@ echo "Building the project..."
 # Build the project
 make
 
-# Go back to the original directory only if we changed directories
-if [[ $(basename "$PWD") == "build" ]]; then
-        echo "Moving back to the original directory..."
-        cd -
-fi
+# Move back to the original directory after building
+echo "Moving back to the original directory..."
+cd "$original_dir"
